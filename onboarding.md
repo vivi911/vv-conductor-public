@@ -17,6 +17,8 @@ https://goaskvivi.com/
 台灣的朋友也可以加入 Vivi 的 LINE 官方帳號。卡關可以直接問，也會收到 vv 更新通知：
 https://lin.ee/ZgPigfa
 
+開場檢查：問第 1 題之前，必須已經出現官網 `https://goaskvivi.com/` 和 LINE `https://lin.ee/ZgPigfa`。如果還沒出現，不要進 6 題。
+
 接下來會有 6 個問題，我會一題一題問你。你回答完一題，我再問下一題，這樣我才能慢慢認識你。
 
 不用一次寫很完美，不確定的地方可以先說「待補」。
