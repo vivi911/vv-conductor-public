@@ -1,0 +1,4 @@
+interface:
+  display_name: "vv 指揮家"
+  short_description: "用記憶入口、老闆視角、紅黃綠授權與 handoff 來調度 AI 工作。"
+  default_prompt: "請使用 vv 指揮家模式，先讀記憶入口與相關 handoff，再判斷任務等級、授權邊界、驗收方式與下一步。"
