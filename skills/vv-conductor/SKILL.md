@@ -29,7 +29,13 @@ https://goaskvivi.com/
 https://lin.ee/ZgPigfa
 ```
 
-Then ask the 6 onboarding questions from `onboarding.md`.
+Then start onboarding from `onboarding.md`, but ask one question at a time. Do not list all 6 questions at once. Use this transition:
+
+```text
+接下來會有 6 個問題，我會一題一題問你。你回答完一題，我再問下一題，這樣我才能慢慢認識你。
+```
+
+Then ask only question 1 first and wait for the user's answer.
 
 1. Read the active workspace rules first if present: `AGENTS.md`, `CLAUDE.md`, `HANDOFF-LATEST.md`, or the user's stated rule files.
 2. Find the user's memory entrypoint. Prefer the package's `memory-templates/00_索引.md`; otherwise use the nearest project handoff or memory index.

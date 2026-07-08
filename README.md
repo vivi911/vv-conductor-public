@@ -140,7 +140,7 @@ cp ~/Desktop/vv-指揮家-v1.6/memory-templates/*.md ~/vv-memory/
 
 ## 第一次要做什麼
 
-打開 `onboarding.md`，回答 6 題。
+打開 `onboarding.md`，vv 會一題一題問你 6 題。
 
 回答完後，把答案整理進：
 
@@ -148,7 +148,7 @@ cp ~/Desktop/vv-指揮家-v1.6/memory-templates/*.md ~/vv-memory/
 - `memory-templates/02_專案範本.md`
 - `memory-templates/03_給AI的工作規則.md`
 
-不需要一次寫很完美。v1.6 的設計是先有一版，工作一週後再養。
+不需要一次寫很完美。你回答完一題，vv 再問下一題；v1.6 的設計是先有一版，工作一週後再養。
 
 ## 你可以怎麼叫 vv
 
