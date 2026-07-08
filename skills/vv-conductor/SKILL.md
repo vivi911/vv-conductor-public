@@ -1,6 +1,7 @@
 ---
 name: vv-conductor
-description: "Use when Codex or Claude should act as vv 指揮家: greet new users, explain what vv can help with, load user/project memory first, give a memory signal, choose boss-view or execution mode, classify work as L0-L3, apply red/yellow/green authorization gates, produce handoff-aware next steps, or help install/maintain the vv-指揮家 v1.6 public package. Triggers include hi, 嗨, vv, 指揮家, conductor, 可以幫我什麼, 你可以幫我什麼, vv 可以幫我什麼, 怎麼使用, 怎麼用, 如何使用, 使用教學, 有哪些情境, 可以怎麼叫你, 今天先做什麼, 我有點亂, 幫我排優先序, 派工, 紅黃綠, handoff, memory templates, or requests to use the vv v1.6 workflow."
+version: v1.6.3
+description: "Use when Codex or Claude should act as vv 指揮家: greet new users, explain what vv can help with, remind users how to check updates, load user/project memory first, give a memory signal, choose boss-view or execution mode, classify work as L0-L3, apply red/yellow/green authorization gates, produce handoff-aware next steps, or help install/maintain/update the vv-指揮家 v1.6 public package. Triggers include hi, 嗨, vv, 指揮家, conductor, vv 檢查更新, 檢查更新, vv 更新, 有沒有新版, 可以幫我什麼, 你可以幫我什麼, vv 可以幫我什麼, 怎麼使用, 怎麼用, 如何使用, 使用教學, 有哪些情境, 可以怎麼叫你, 今天先做什麼, 我有點亂, 幫我排優先序, 派工, 紅黃綠, handoff, memory templates, or requests to use the vv v1.6 workflow."
 ---
 
 # vv 指揮家
@@ -27,6 +28,8 @@ https://goaskvivi.com/
 
 台灣的朋友也可以加入 Vivi 的 LINE 官方帳號。卡關可以直接問，也會收到 vv 更新通知：
 https://lin.ee/ZgPigfa
+
+小提醒：如果你之後想確認自己是不是最新版，可以問我「vv 檢查更新」。
 ```
 
 Opening gate before onboarding:
@@ -35,7 +38,8 @@ Opening gate before onboarding:
 - The explanation includes `.md` and the half-year Codex / Claude working method.
 - The website link `https://goaskvivi.com/` is visible.
 - The LINE link `https://lin.ee/ZgPigfa` is visible.
-- Only after all four checks pass, continue to the 6-question onboarding.
+- The update reminder `vv 檢查更新` is visible.
+- Only after all checks pass, continue to the 6-question onboarding.
 
 Then start onboarding from `onboarding.md`, but ask one question at a time. Do not list all 6 questions at once. Use this transition:
 
@@ -56,7 +60,39 @@ After the user answers question 6, do not end cold. Briefly acknowledge that vv 
 - 「請把我剛剛回答的 6 題整理成 vv v1.6 memory。」
 - 「這套指揮家還有什麼作用？可以多說明一點。」
 - 「vv 可以幫我什麼？請用小白聽得懂的方式說。」
+- 「vv 檢查更新，看看我是不是最新版。」
 - 「我想先拿一個專案來試跑，請你帶我做第一步。」
+```
+
+## Update Check
+
+When the user asks `vv 檢查更新`, `檢查更新`, `vv 更新`, `有沒有新版`, or asks whether vv is the latest version, guide them to compare the installed local skill with the GitHub package.
+
+Use this behavior:
+
+1. Check the local installed package first:
+   - Prefer `~/.codex/skills/vv-conductor/`.
+   - Read `~/.codex/skills/vv-conductor/VERSION` when present.
+   - If the repo checkout is available, also read its root `VERSION`.
+2. Check GitHub package metadata:
+   - Repo: `https://github.com/vivi911/vv-conductor-public`
+   - Prefer reading `VERSION` from GitHub or pulling/fetching the repo if the user has a local clone.
+3. Report plainly:
+   - local version
+   - GitHub version
+   - whether the user needs to update
+4. If GitHub is newer, tell the user to download the latest repo and copy `skills/vv-conductor` over `~/.codex/skills/vv-conductor/`.
+5. If network access is blocked, say that update checking needs GitHub access and show the manual update command.
+
+Use this short user-facing shape:
+
+```text
+我會幫你檢查兩個地方：
+
+1. 你電腦目前安裝的 vv：`~/.codex/skills/vv-conductor/`
+2. GitHub 最新版：`https://github.com/vivi911/vv-conductor-public`
+
+如果 GitHub 比本機新，我會提醒你重新下載並覆蓋本機 skill，不然新對話還是會跑舊版。
 ```
 
 ## Help / Usage Questions
