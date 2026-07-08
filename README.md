@@ -53,6 +53,33 @@ v1.6 是「AI 先認識你，再照安全規則做事」。
 - 想用 Claude、Codex 或其他 AI 幫忙拆任務、寫文件、寫 code、驗收成果。
 - 不想每次都重新解釋自己的背景、規則、禁區。
 
+## Codex / Claude 怎麼用
+
+這包 Codex 和 Claude 都能用，但使用方式不太一樣。
+
+### Codex：適合裝成正式 skill
+
+如果你主要用 Codex，建議把 `skills/vv-conductor/` 安裝到 `~/.codex/skills/`。這樣 Codex 比較像有一個固定的 vv 按鈕：你打 `hi`、`vv`、`指揮家`，它就會自動讀這套規則，進入指揮家模式。
+
+Codex 適合拿來做：
+
+- 讀 repo、改檔案、跑測試。
+- 判斷紅黃綠授權，知道哪些事可以自動做、哪些事要先問你。
+- 接手 `HANDOFF-LATEST.md`，不用每次重新交代專案進度。
+- 把一個工程或文件任務拆成可驗收的步驟。
+
+### Claude：適合當規則包讀進去
+
+如果你主要用 Claude，可以把 `指揮家.md`、`vv-老闆視角.md`、`onboarding.md` 和 `memory-templates/` 放進 Claude Project knowledge，或在對話開頭請 Claude 先讀這些檔案。
+
+Claude 適合拿來做：
+
+- 幫你整理想法、寫文案、寫簡報、做策略推演。
+- 用老闆視角幫你排優先順序。
+- 依照你的 memory 和規則，延續同一套工作習慣。
+
+簡單說：Codex 比較像「會動手施工的工作台」，Claude 比較像「會陪你想清楚的策略室」。vv 指揮家就是讓兩邊都照同一套工作規則跑。
+
 ## Codex 正式 Skill 安裝方式
 
 如果你要讓 Codex 真正自動辨識、可觸發、可長期維護，請安裝 `vv-conductor` skill：
