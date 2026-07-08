@@ -115,6 +115,12 @@ vv-指揮家-v1.6/
         └── references/
 ```
 
+## 找 Vivi
+
+台灣的朋友，加入 Vivi 的 LINE 官方帳號，
+卡關可以直接問、也會收到 vv 更新通知：
+https://lin.ee/ZgPigfa
+
 ## 這包現在分三層
 
 ### 1. 人看的公開文件
