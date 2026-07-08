@@ -172,6 +172,9 @@ vv-指揮家-v1.6/
 
 ## 找 Vivi
 
+想認識 Vivi 老師和 GoAskVivi 的 AI 工作方法，可以先看官網：
+https://goaskvivi.com/
+
 台灣的朋友，加入 Vivi 的 LINE 官方帳號，
 卡關可以直接問、也會收到 vv 更新通知：
 https://lin.ee/ZgPigfa
