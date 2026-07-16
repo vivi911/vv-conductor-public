@@ -24,25 +24,27 @@
 - `memory templates`
 - `用 vv v1.6 工作流`
 
-## Codex 安裝方式
+## 安裝方式
 
-把 skill 資料夾複製到 Codex skills 目錄：
+Codex 和 Claude 讀 skill 的機制相同，`skills/vv-conductor/` 資料夾原封不動複製過去即可，內容不需要改。差別只有目標目錄。
+
+Codex：
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R ~/Desktop/vv-指揮家-v1.6/skills/vv-conductor ~/.codex/skills/
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/
 ```
 
-重開 Codex 後，`vv-conductor` 會成為可觸發 skill。
+Claude：
 
-## Claude 使用方式
+```bash
+mkdir -p ~/.claude/skills
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/
+```
 
-Claude 若沒有同一套 skill 安裝機制，就把以下檔案放到 Claude 會讀的規則或專案知識中：
+重開之後，`vv-conductor` 會成為可觸發 skill。兩邊都裝也不會互相影響。
 
-- `skills/vv-conductor/SKILL.md`
-- `skills/vv-conductor/references/vv-conductor-reference.md`
-- `skills/vv-conductor/references/memory-template-guide.md`
-- `skills/vv-conductor/references/package-maintenance.md`
+如果你用的 AI 工具沒有 skill 目錄機制，退而求其次：把 `SKILL.md` 和 `references/` 底下的檔案放進該工具的規則或專案知識裡，並在對話開頭請它先讀。
 
 ## 維護規則
 

@@ -5,8 +5,9 @@ Use this reference when updating, packaging, validating, or installing `vv-指�
 ## Public Package Layout
 
 ```text
-vv-指揮家-v1.6/
+vv-conductor-public/
 ├── README.md
+├── VERSION
 ├── skill-index.md
 ├── 指揮家.md
 ├── vv-老闆視角.md
@@ -15,20 +16,26 @@ vv-指揮家-v1.6/
 └── skills/
     └── vv-conductor/
         ├── SKILL.md
+        ├── VERSION
         ├── agents/openai.yaml
         └── references/
 ```
 
 ## Install Target
 
-For Codex auto-discovery, copy the skill folder:
+Codex and Claude share the same skill-discovery mechanism; the `vv-conductor` folder is copied verbatim and its contents need no per-tool changes. Only the target directory differs.
 
 ```bash
 mkdir -p ~/.codex/skills
 cp -R <本包路徑>/skills/vv-conductor ~/.codex/skills/
 ```
 
-For Claude or another agent, copy the package docs into its configured skill or rule directory according to that tool's conventions.
+```bash
+mkdir -p ~/.claude/skills
+cp -R <本包路徑>/skills/vv-conductor ~/.claude/skills/
+```
+
+Both may be installed side by side. For any other agent without a skill directory, copy the package docs into its configured rule or project-knowledge area according to that tool's conventions.
 
 ## Validation
 

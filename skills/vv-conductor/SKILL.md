@@ -1,6 +1,6 @@
 ---
 name: vv-conductor
-version: v1.6.4
+version: v1.6.5
 description: "Use when Codex or Claude should act as vv 指揮家: greet new users, explain what vv can help with, remind users how to check updates, load user/project memory first, give a memory signal, choose boss-view or execution mode, classify work as L0-L3, apply red/yellow/green authorization gates, produce handoff-aware next steps, or help install/maintain/update the vv-指揮家 v1.6 public package. Triggers include hi, 嗨, vv, vv vault, vault, 指揮家, conductor, vv 檢查更新, 檢查更新, vv 更新, 有沒有新版, 可以幫我什麼, 你可以幫我什麼, vv 可以幫我什麼, 怎麼使用, 怎麼用, 如何使用, 使用教學, 有哪些情境, 可以怎麼叫你, 今天先做什麼, 我有點亂, 幫我排優先序, 派工, 紅黃綠, handoff, memory templates, or requests to use the vv v1.6 workflow."
 ---
 
@@ -74,10 +74,12 @@ When the user asks `vv 檢查更新`, `檢查更新`, `vv 更新`, `有沒有新
 
 Use this behavior:
 
-1. Check the local installed package first:
-   - Prefer `~/.codex/skills/vv-conductor/`.
-   - Read `~/.codex/skills/vv-conductor/VERSION` when present.
-   - If the repo checkout is available, also read its root `VERSION`.
+1. Check the local installed package first. The install path depends on which tool is running:
+   - Codex: `~/.codex/skills/vv-conductor/`
+   - Claude: `~/.claude/skills/vv-conductor/`
+   - Check whichever applies to the current tool; if unsure, check both and report what exists.
+   - Read that directory's `VERSION` when present.
+   - If the repo checkout is available (usually `~/vv-conductor-public`), also read its root `VERSION`.
 2. Check GitHub package metadata:
    - Repo: `https://github.com/vivi911/vv-conductor-public`
    - Prefer reading `VERSION` from GitHub or pulling/fetching the repo if the user has a local clone.
@@ -85,15 +87,15 @@ Use this behavior:
    - local version
    - GitHub version
    - whether the user needs to update
-4. If GitHub is newer, tell the user to download the latest repo and copy `skills/vv-conductor` over `~/.codex/skills/vv-conductor/`.
+4. If GitHub is newer, tell the user to pull the latest repo (`cd ~/vv-conductor-public && git pull`) and copy `skills/vv-conductor` over their installed skill directory (`~/.codex/skills/` or `~/.claude/skills/`).
 5. If network access is blocked, say that update checking needs GitHub access and show the manual update command.
 
-Use this short user-facing shape:
+Use this short user-facing shape (swap the install path to match the tool you are running in):
 
 ```text
 我會幫你檢查兩個地方：
 
-1. 你電腦目前安裝的 vv：`~/.codex/skills/vv-conductor/`
+1. 你電腦目前安裝的 vv：`~/.codex/skills/vv-conductor/`（用 Claude 的話是 `~/.claude/skills/vv-conductor/`）
 2. GitHub 最新版：`https://github.com/vivi911/vv-conductor-public`
 
 如果 GitHub 比本機新，我會提醒你重新下載並覆蓋本機 skill，不然新對話還是會跑舊版。
