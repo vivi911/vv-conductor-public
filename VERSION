@@ -1,5 +1,7 @@
-version: v1.6.4
+version: v1.6.5
 release_date: 2026-07-16
 repo: https://github.com/vivi911/vv-conductor-public
-installed_skill_path: ~/.codex/skills/vv-conductor/
+local_repo_path: ~/vv-conductor-public
+installed_skill_path_codex: ~/.codex/skills/vv-conductor/
+installed_skill_path_claude: ~/.claude/skills/vv-conductor/
 update_check_phrase: vv 檢查更新
