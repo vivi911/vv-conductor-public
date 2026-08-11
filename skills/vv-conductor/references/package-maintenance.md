@@ -1,6 +1,6 @@
 # Package Maintenance
 
-Use this reference when updating, packaging, validating, or installing `vv-指揮家-v1.6`.
+Use this reference when updating, packaging, validating, or installing the `AI 陪跑教練` public package (`vv-conductor`).
 
 ## Public Package Layout
 
@@ -19,11 +19,15 @@ vv-conductor-public/
         ├── VERSION
         ├── agents/openai.yaml
         └── references/
+            ├── beginner-safety-start.md
+            ├── memory-template-guide.md
+            ├── package-maintenance.md
+            └── vv-conductor-reference.md
 ```
 
 ## Install Target
 
-Codex and Claude share the same skill-discovery mechanism; the `vv-conductor` folder is copied verbatim and its contents need no per-tool changes. Only the target directory differs.
+Codex and Claude Code can both install the same `vv-conductor` folder. Only the target directory differs.
 
 ```bash
 mkdir -p ~/.codex/skills
@@ -62,4 +66,3 @@ UID, access token, API key, secret command, project id, customer name, private p
 ```
 
 Concept words like `token`, `secret`, or `rotate key` are acceptable when describing safety rules, but actual values or command strings are not.
-
