@@ -1,18 +1,21 @@
 # skill-index
 
-這份檔案是 `vv-指揮家-v1.6` 的 skill 入口索引。
+這份檔案是「AI 陪跑教練」公開包的 skill 入口索引。技術名稱保留 `vv-conductor`，讓既有安裝與觸發方式繼續可用。
 
 ## 目前正式 skill
 
 | Skill | 路徑 | 用途 |
 |---|---|---|
-| vv-conductor | `skills/vv-conductor/SKILL.md` | 讓 Codex/Claude 以 vv 指揮家模式工作：先讀記憶、回記憶訊號、判斷老闆視角或執行模式、套紅黃綠授權、做驗收與 handoff |
+| vv-conductor | `skills/vv-conductor/SKILL.md` | 讓 Codex／Claude Code 先陪新手安全完成第一個任務，再接上記憶、派工、紅黃綠授權、驗收與 handoff |
 
 ## 什麼時候會觸發
 
 使用者說到以下任一類型時，應使用 `vv-conductor`：
 
 - `vv`
+- `AI 陪跑教練`
+- `陪跑教練`
+- `開工手冊`
 - `指揮家`
 - `conductor`
 - `派工`
@@ -26,7 +29,7 @@
 
 ## 安裝方式
 
-Codex 和 Claude 讀 skill 的機制相同，`skills/vv-conductor/` 資料夾原封不動複製過去即可，內容不需要改。差別只有目標目錄。
+Codex 和 Claude Code 都可安裝同一份 `skills/vv-conductor/` 資料夾。差別只有目標目錄。
 
 Codex：
 
@@ -35,7 +38,7 @@ mkdir -p ~/.codex/skills
 cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/
 ```
 
-Claude：
+Claude Code：
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -52,4 +55,3 @@ cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/
 - 詳細規則放 `references/`。
 - 改完 `SKILL.md` 要跑 validator。
 - 對外分享前要掃敏感資訊。
-

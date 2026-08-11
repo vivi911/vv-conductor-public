@@ -1,18 +1,18 @@
-# vv 指揮家 v1.6.5
+# AI 陪跑教練（vv）v1.6.6
 
-> Vivi 老師把 7 個月、每天 10 小時以上的 AI 協作實戰踩坑，整理成一套給普通人也能用的 AI 工作管理方法。
+> 第一次先陪你安全完成一個小任務；之後再接上記憶、派工與驗收。
 
 這是一套給「人 + AI」一起工作的公開包。
 
 ## Vivi 老師是誰
 
-Vivi 老師是 GoAskVivi 的創作者，長期用 Codex、Claude 和各種 AI 工具一起做真實專案：寫文件、拆任務、做網站、改流程、整理知識、驗收成果。
+Vivi 老師是 GoAskVivi 的創作者，長期用 Codex、Claude Code 和各種 AI 工具一起做真實專案：寫文件、拆任務、做網站、改流程、整理知識、驗收成果。
 
-## 為什麼有 vv 指揮家
+## 為什麼有 AI 陪跑教練
 
 過去 7 個月，Vivi 老師幾乎每天花 10 小時以上跟 AI 一起工作——寫文件、拆任務、做網站、改流程、上線驗收。中間踩過大量的坑：AI 亂改檔案、忘記你是誰、自己上線出事、把小事做成大工程、嘴上說「完成了」其實根本沒驗證。
 
-vv 指揮家就是把這 7 個月、每天 10 小時以上的踩坑經驗，蒸餾成一套規則。
+AI 陪跑教練就是把這 7 個月、每天 10 小時以上的踩坑經驗，蒸餾成一套規則。原本獨立的「開工手冊」已整合成第一次使用的安全開工流程，背後仍由 vv 指揮家負責記憶、派工與驗收。
 
 它的目標很單純：讓一個剛開始用 AI 的小白，也能像旁邊坐了一個開車教練。你握方向盤（做決定），AI 負責開（做事），vv 幫你看路、提醒、必要時踩剎車——指揮 AI 往你要的方向走，不會讓它亂跑、亂闖、亂出事。
 
@@ -32,15 +32,15 @@ https://lin.ee/ZgPigfa
 
 它不是一個需要你看懂程式碼的工具，而是一組 `.md` 檔案。`.md` 就是 Markdown 文件，白話說，就是 AI 看得懂、你也看得懂的工作說明書。
 
-這套 vv 指揮家不是單純教你「怎麼問 AI」，而是教你怎麼管理 AI：怎麼讓 AI 記得你、怎麼接住專案進度、怎麼知道哪些事可以自動做、哪些事一定要先問你。
+這套 AI 陪跑教練不是單純教你「怎麼問 AI」。第一次使用時，它會先問你想做什麼、講清楚真正風險、把任務縮成安全的第一版；等你完成第一件事後，再由你決定要不要建立長期記憶。
 
-下載這包之後，你不是得到一個普通聊天提示詞，而是得到一套管理 AI 的規則、記憶模板、開機流程和角色分工。它的目標是讓 Codex 或 Claude 不只是回答問題，而是能陪你把事情排好、拆開、驗收，並且知道哪些事不能亂做。
+下載這包之後，你不是得到一個普通聊天提示詞，而是一套給 Codex 或 Claude Code 使用的安全開工、記憶、派工和驗收規則。
 
 你可以叫它 `vv`。平常開一個新對話框，打 `vv` 或 `vv vault`，它就會啟動一整套管理 AI 的規則：先看你是誰、現在有哪些事在跑，再判斷這件事可以自動做，還是要先停下問你。（`vv vault` 會特別提醒它先把你的記憶庫讀進來再做事。）
 
 它有全域記憶，這個記憶庫就叫 **Vault**。你可以把自己的背景、專案狀態、工作禁區寫進 `memory-templates/`（也就是你的 Vault），讓 AI 記得你是誰、專案做到哪、之前跟你協作過什麼、哪些事不能亂碰。
 
-一般 AI 像失憶症，每次開新對話都要你重講一遍自己是誰；Vault 就是讓 AI「記得你」的那個地方。你只要寫一次，之後每次打 `hi`、`vv` 或 `vv vault`，它都會先讀 Vault，接著你上次的進度繼續。
+一般 AI 像失憶症，每次開新對話都要你重講一遍自己是誰；Vault 就是讓 AI「記得你」的那個地方。Vault 是進階的長期陪跑功能，不是第一次開工前的考卷。建立後，每次打 `hi`、`vv` 或 `vv vault`，它會先讀 Vault，再接著上次的進度繼續。
 
 它也有開機規則。以後你打開新對話，只要打 `hi`，vv 就會先抓最新事件和進度接著聊，不用每次重新交代「我是誰、上次做到哪、這個案子卡在哪」。
 
@@ -57,8 +57,9 @@ https://lin.ee/ZgPigfa
 1. `README.md`：你現在看的這份，先搞懂整包怎麼用。
 2. `指揮家.md`：AI 的主規則，負責判斷任務、派工、授權、驗收。
 3. `vv-老闆視角.md`：每天或每次開工時，讓 AI 先用老闆視角幫你排序。
-4. `onboarding.md`：第一次使用時，回答 7 題，建立你的 memory。
+4. `skills/vv-conductor/references/beginner-safety-start.md`：第一次使用時的安全開工流程。
 5. `memory-templates/`：把你的背景、專案、工作規則寫成 AI 看得懂的檔案。
+6. `onboarding.md`：想讓 AI 長期記得你時，再用 7 題建立 memory。
 
 ## 平常對話怎麼用 vv（記這三個就夠）
 
@@ -66,8 +67,8 @@ https://lin.ee/ZgPigfa
 
 | 你打什麼 | vv 會做什麼 | 什麼時候用 |
 |---|---|---|
-| `hi` | 先讀你的 Vault，接回上次進度繼續聊；第一次來會帶你建 Vault | 每天開工、接續昨天 |
-| `vv` | 叫出指揮家規則，開始判斷任務、派工、把關 | 要它幫你做一件事 |
+| `hi` | 第一次先問你想做什麼並安全開工；有 Vault 時接回上次進度 | 第一次開始、每天開工 |
+| `vv` | 叫出 AI 陪跑教練，開始判斷任務、派工、把關 | 要它幫你做一件事 |
 | `vv vault` | 跟 `vv` 一樣，但特別提醒它「先把記憶庫讀進來再做事」 | 想確定它有記得你才動手 |
 
 叫醒之後，直接講你要幹嘛就行，例如：
@@ -92,13 +93,13 @@ vv 這件事能不能自動跑，還是要我拍板？
 一句話：
 
 v1.5 是「AI 做事前的安全規則」。
-v1.6 是「AI 先認識你，再照安全規則做事」。
+v1.6.6 是「先安全完成第一件事，再決定要不要讓 AI 長期認識你」。
 
 ## 這包適合誰
 
 - 創業者、主管、顧問、自由工作者。
 - 手上很多案子，常常忘記哪個做到哪。
-- 想用 Claude、Codex 或其他 AI 幫忙拆任務、寫文件、寫 code、驗收成果。
+- 想用 Claude Code、Codex 或其他 AI 幫忙拆任務、寫文件、寫 code、驗收成果。
 - 不想每次都重新解釋自己的背景、規則、禁區。
 
 ## 先把這包下載到電腦
@@ -121,9 +122,9 @@ git clone https://github.com/vivi911/vv-conductor-public.git ~/vv-conductor-publ
 ls ~/vv-conductor-public
 ```
 
-## Codex / Claude 怎麼用
+## Codex / Claude Code 怎麼用
 
-這包 Codex 和 Claude 都能用，而且**安裝方式完全一樣** —— 兩邊讀 skill 的機制是同一套，只是放的資料夾名字不同。
+這包 Codex 和 Claude Code 都能用。安裝的是同一份 `vv-conductor` skill，只是放的資料夾名字不同。
 
 差別不在能不能裝，而在你會拿它們做什麼。
 
@@ -136,17 +137,17 @@ Codex 適合拿來做：
 - 接手 `HANDOFF-LATEST.md`，不用每次重新交代專案進度。
 - 把一個工程或文件任務拆成可驗收的步驟。
 
-### Claude：比較像會陪你想清楚的策略室
+### Claude Code：比較像會陪你想清楚的策略室
 
-Claude 適合拿來做：
+Claude Code 適合拿來做：
 
 - 幫你整理想法、寫文案、寫簡報、做策略推演。
 - 用老闆視角幫你排優先順序。
 - 依照你的 memory 和規則，延續同一套工作習慣。
 
-vv 指揮家就是讓兩邊都照同一套工作規則跑。你兩邊都裝也完全沒問題，它們各自讀自己的資料夾，不會打架。
+AI 陪跑教練就是讓兩邊都照同一套工作規則跑。你兩邊都裝也完全沒問題，它們各自讀自己的資料夾，不會打架。
 
-## 正式 Skill 安裝方式（Codex / Claude 二選一或都裝）
+## 正式 Skill 安裝方式（Codex / Claude Code 二選一或都裝）
 
 安裝之後，vv 才會變成一個固定的按鈕：你打 `hi`、`vv`、`指揮家`，它就自動讀這套規則，不用每次貼檔案。
 
@@ -159,7 +160,7 @@ mkdir -p ~/.codex/skills
 cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/
 ```
 
-### 如果你用 Claude
+### 如果你用 Claude Code
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -168,20 +169,20 @@ cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/
 
 兩邊都用的話，兩段都貼，各裝各的不會打架。
 
-裝完**重開** Codex 或 Claude，當你說 `vv`、`指揮家`、`今天先做什麼`、`派工`、`紅黃綠`、`handoff`，它就會觸發這個 skill。
+裝完**重開** Codex 或 Claude Code，當你說 `hi`、`AI 陪跑教練`、`開工手冊`、`vv`、`指揮家`、`今天先做什麼`、`派工`、`紅黃綠` 或 `handoff`，它就會觸發這個 skill。
 
 想確認有沒有裝好，貼這句（有列出檔案就是成功）：
 
 ```bash
 ls ~/.codex/skills/vv-conductor    # 你用 Codex 的話
-ls ~/.claude/skills/vv-conductor   # 你用 Claude 的話
+ls ~/.claude/skills/vv-conductor   # 你用 Claude Code 的話
 ```
 
 ## 檢查更新
 
 vv 不會在背景偷偷自己更新，因為它只是一組 `.md` 規則檔，不是 App。
 
-但你可以請 Codex 或 Claude 幫你檢查 GitHub 上有沒有新版：
+但你可以請 Codex 或 Claude Code 幫你檢查 GitHub 上有沒有新版：
 
 ```text
 vv 檢查更新
@@ -190,7 +191,7 @@ vv 檢查更新
 它會比對本機安裝版和 GitHub 公開包：
 
 - GitHub 公開包：`https://github.com/vivi911/vv-conductor-public`
-- 本機安裝的 skill：Codex 是 `~/.codex/skills/vv-conductor/`，Claude 是 `~/.claude/skills/vv-conductor/`
+- 本機安裝的 skill：Codex 是 `~/.codex/skills/vv-conductor/`，Claude Code 是 `~/.claude/skills/vv-conductor/`
 - 版本檔：repo 根目錄的 `VERSION`，以及安裝後那個資料夾裡的 `VERSION`
 
 如果 GitHub 有新版，就要重新下載 repo，並覆蓋本機 skill。只看 GitHub 有更新還不夠，因為 AI 真正讀的是你電腦裡那個資料夾。
@@ -205,10 +206,10 @@ cd ~/vv-conductor-public && git pull
 
 ```bash
 cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/    # 你用 Codex 的話
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/   # 你用 Claude 的話
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/   # 你用 Claude Code 的話
 ```
 
-AI 實際讀的是 `~/.codex/skills/vv-conductor/`（Claude 是 `~/.claude/skills/vv-conductor/`）裡的檔案。只把 repo 拉成最新、沒有覆蓋本機 skill 的話，新對話還是會一直跑舊版。
+AI 實際讀的是 `~/.codex/skills/vv-conductor/`（Claude Code 是 `~/.claude/skills/vv-conductor/`）裡的檔案。只把 repo 拉成最新、沒有覆蓋本機 skill 的話，新對話還是會一直跑舊版。
 
 如果你不確定自己是不是最新版，直接問：
 
@@ -234,12 +235,26 @@ cp ~/vv-conductor-public/memory-templates/*.md ~/vv-memory/
 之後在 AI 對話框開頭貼：
 
 ```text
-請先讀 ~/指揮家.md，再讀 ~/vv-memory/00_索引.md，進入 vv 指揮家模式。
+請先讀 ~/指揮家.md，進入 AI 陪跑教練模式。第一次先陪我安全完成一個小任務；我同意建立長期記憶後，再讀 ~/vv-memory/00_索引.md。
 ```
 
 ## 第一次要做什麼
 
-打開 `onboarding.md`，vv 會一題一題問你 7 題。
+安裝後開一個新對話，只要打：
+
+```text
+hi
+```
+
+AI 陪跑教練會先問：「你現在最想請 Codex 或 Claude Code 幫你做什麼？」接著幫你講清楚風險、縮成安全的第一版，不會先丟 7 題考卷。
+
+完成第一個安全任務後，如果你希望它下次記得你的背景、進度和工作禁區，再回：
+
+```text
+幫我建立 Vault。
+```
+
+這時它才會打開 `onboarding.md`，一題一題問你 7 題。
 
 回答完後，把答案整理進：
 
@@ -269,7 +284,7 @@ vv 檢查更新
 vv 可以幫我什麼？
 你可以幫我什麼？
 vv 怎麼使用？
-怎麼用這套指揮家？
+怎麼用這套 AI 陪跑教練？
 有哪些情境可以用？
 我現在有點亂，vv 你建議我怎麼開始？
 ```
@@ -280,7 +295,7 @@ vv 怎麼使用？
 
 ### 1. 新對話開場：直接打 `hi`
 
-以後你打開一個新的 Codex 或 Claude 對話，不用從頭解釋自己是誰。你可以先打：
+以後你打開一個新的 Codex 或 Claude Code 對話，可以先打：
 
 ```text
 hi
@@ -288,7 +303,7 @@ hi
 
 vv 會先去抓你的全域記憶入口，例如 Vault、`memory-templates/`、專案 `HANDOFF-LATEST.md`，找出你最近在做什麼、哪些專案還沒收尾、哪些地方需要你拍板。
 
-如果你是第一次拉下這包、還沒建立 Vault，打 `hi` 不會報錯——vv 會先自我介紹、講一下 Vivi 老師為什麼做這套、給你官網和聯絡方式，再用 7 題帶你建立第一版 Vault。
+如果你是第一次拉下這包、還沒建立 Vault，打 `hi` 不會報錯——AI 陪跑教練會先自我介紹，再問你想做什麼，陪你安全完成第一個小任務。只有你想要長期記憶時，才會再用 7 題建立第一版 Vault。
 
 如果記憶有接上，它會接著最新進度跟你聊。如果你本來有記憶、這次卻讀不到，它會明講「我現在讀不到記憶」，不會假裝知道。
 
@@ -347,6 +362,7 @@ vv-conductor-public/
         │   └── openai.yaml
         └── references/
             ├── memory-template-guide.md
+            ├── beginner-safety-start.md
             ├── package-maintenance.md
             └── vv-conductor-reference.md
 ```

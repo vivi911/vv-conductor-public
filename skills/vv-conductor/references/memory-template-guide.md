@@ -60,14 +60,14 @@ Capture persistent behavior rules:
 
 ## Onboarding Flow
 
-Ask or process six answers:
+Only use this after the user's first safe task or plan, and only when they want persistent memory. Ask or process seven answers, one at a time:
 
 1. Who are you?
-2. What are your top three projects?
+2. What tasks or projects do you want AI to help with?
 3. What must AI never do on its own?
-4. How should AI talk to you?
-5. What tools do you use?
-6. What observable result would prove this AI system is useful?
+4. What should the coach call you, and do you want to rename vv?
+5. How should AI talk to you?
+6. What tools do you use?
+7. What observable result would prove this AI system is useful?
 
 Mark unknowns as `待補`; never invent missing facts.
-
