@@ -11,13 +11,13 @@ vv-conductor-public/
 ├── skill-index.md
 ├── 指揮家.md
 ├── vv-老闆視角.md
-├── onboarding.md
-├── memory-templates/
 └── skills/
     └── vv-conductor/
         ├── SKILL.md
         ├── VERSION
+        ├── onboarding.md
         ├── agents/openai.yaml
+        ├── memory-templates/
         └── references/
             ├── beginner-safety-start.md
             ├── memory-template-guide.md

@@ -1,4 +1,4 @@
-# AI 陪跑教練（vv）v1.6.6
+# AI 陪跑教練（vv）vv-pack-1.6.6
 
 > 第一次先陪你安全完成一個小任務；之後再接上記憶、派工與驗收。
 
@@ -38,7 +38,7 @@ https://lin.ee/ZgPigfa
 
 你可以叫它 `vv`。平常開一個新對話框，打 `vv` 或 `vv vault`，它就會啟動一整套管理 AI 的規則：先看你是誰、現在有哪些事在跑，再判斷這件事可以自動做，還是要先停下問你。（`vv vault` 會特別提醒它先把你的記憶庫讀進來再做事。）
 
-它有全域記憶，這個記憶庫就叫 **Vault**。你可以把自己的背景、專案狀態、工作禁區寫進 `memory-templates/`（也就是你的 Vault），讓 AI 記得你是誰、專案做到哪、之前跟你協作過什麼、哪些事不能亂碰。
+它有全域記憶，這個記憶庫就叫 **Vault**。你可以把自己的背景、專案狀態、工作禁區寫進 `~/vv-memory/`（也就是你的 Vault），讓 AI 記得你是誰、專案做到哪、之前跟你協作過什麼、哪些事不能亂碰。
 
 一般 AI 像失憶症，每次開新對話都要你重講一遍自己是誰；Vault 就是讓 AI「記得你」的那個地方。Vault 是進階的長期陪跑功能，不是第一次開工前的考卷。建立後，每次打 `hi`、`vv` 或 `vv vault`，它會先讀 Vault，再接著上次的進度繼續。
 
@@ -58,8 +58,8 @@ https://lin.ee/ZgPigfa
 2. `指揮家.md`：AI 的主規則，負責判斷任務、派工、授權、驗收。
 3. `vv-老闆視角.md`：每天或每次開工時，讓 AI 先用老闆視角幫你排序。
 4. `skills/vv-conductor/references/beginner-safety-start.md`：第一次使用時的安全開工流程。
-5. `memory-templates/`：把你的背景、專案、工作規則寫成 AI 看得懂的檔案。
-6. `onboarding.md`：想讓 AI 長期記得你時，再用 7 題建立 memory。
+5. `skills/vv-conductor/memory-templates/`：把你的背景、專案、工作規則寫成 AI 看得懂的檔案。
+6. `skills/vv-conductor/onboarding.md`：想讓 AI 長期記得你時，再用 7 題建立 memory。
 
 ## 平常對話怎麼用 vv（記這三個就夠）
 
@@ -93,7 +93,7 @@ vv 這件事能不能自動跑，還是要我拍板？
 一句話：
 
 v1.5 是「AI 做事前的安全規則」。
-v1.6.6 是「先安全完成第一件事，再決定要不要讓 AI 長期認識你」。
+vv-pack-1.6.6 是「先安全完成第一件事，再決定要不要讓 AI 長期認識你」。
 
 ## 這包適合誰
 
@@ -225,11 +225,11 @@ vv 檢查更新
 cp ~/vv-conductor-public/指揮家.md ~/指揮家.md
 ```
 
-再把 `memory-templates/` 複製到你固定放 AI 記憶的地方。
+再把 `skills/vv-conductor/memory-templates/` 複製到你固定放 AI 記憶的地方。
 
 ```bash
 mkdir -p ~/vv-memory
-cp ~/vv-conductor-public/memory-templates/*.md ~/vv-memory/
+cp ~/vv-conductor-public/skills/vv-conductor/memory-templates/*.md ~/vv-memory/
 ```
 
 之後在 AI 對話框開頭貼：
@@ -258,9 +258,9 @@ AI 陪跑教練會先問：「你現在最想請 Codex 或 Claude Code 幫你做
 
 回答完後，把答案整理進：
 
-- `memory-templates/01_我是誰.md`
-- `memory-templates/02_專案範本.md`
-- `memory-templates/03_給AI的工作規則.md`
+- `~/vv-memory/01_我是誰.md`
+- `~/vv-memory/02_專案範本.md`
+- `~/vv-memory/03_給AI的工作規則.md`
 
 不需要一次寫很完美。你回答完一題，vv 再問下一題；v1.6 的設計是先有一版，工作一週後再養。
 
@@ -301,7 +301,7 @@ vv 怎麼使用？
 hi
 ```
 
-vv 會先去抓你的全域記憶入口，例如 Vault、`memory-templates/`、專案 `HANDOFF-LATEST.md`，找出你最近在做什麼、哪些專案還沒收尾、哪些地方需要你拍板。
+vv 會先去抓你的全域記憶入口，例如 Vault、`~/vv-memory/`、專案 `HANDOFF-LATEST.md`，找出你最近在做什麼、哪些專案還沒收尾、哪些地方需要你拍板。
 
 如果你是第一次拉下這包、還沒建立 Vault，打 `hi` 不會報錯——AI 陪跑教練會先自我介紹，再問你想做什麼，陪你安全完成第一個小任務。只有你想要長期記憶時，才會再用 7 題建立第一版 Vault。
 
@@ -348,24 +348,26 @@ vv-conductor-public/
 ├── skill-index.md
 ├── 指揮家.md
 ├── vv-老闆視角.md
-├── onboarding.md
-├── memory-templates/
-│   ├── 00_索引.md
-│   ├── 01_我是誰.md
-│   ├── 02_專案範本.md
-│   └── 03_給AI的工作規則.md
 └── skills/
     └── vv-conductor/
         ├── SKILL.md
         ├── VERSION
+        ├── onboarding.md
         ├── agents/
         │   └── openai.yaml
+        ├── memory-templates/
+        │   ├── 00_索引.md
+        │   ├── 01_我是誰.md
+        │   ├── 02_專案範本.md
+        │   └── 03_給AI的工作規則.md
         └── references/
             ├── memory-template-guide.md
             ├── beginner-safety-start.md
             ├── package-maintenance.md
             └── vv-conductor-reference.md
 ```
+
+`onboarding.md` 和 `memory-templates/` 都放在 skill 資料夾裡面，這樣你安裝之後 AI 才找得到它們。安裝指令只複製 `skills/vv-conductor`，放在外面的東西不會被帶過去。
 
 ## 這包現在分三層
 
@@ -375,19 +377,21 @@ vv-conductor-public/
 - `VERSION`
 - `指揮家.md`
 - `vv-老闆視角.md`
-- `onboarding.md`
 
-### 2. 記憶模板
+### 2. 記憶模板（空白原稿，跟著 skill 一起安裝）
 
-- `memory-templates/00_索引.md`
-- `memory-templates/01_我是誰.md`
-- `memory-templates/02_專案範本.md`
-- `memory-templates/03_給AI的工作規則.md`
+- `skills/vv-conductor/memory-templates/00_索引.md`
+- `skills/vv-conductor/memory-templates/01_我是誰.md`
+- `skills/vv-conductor/memory-templates/02_專案範本.md`
+- `skills/vv-conductor/memory-templates/03_給AI的工作規則.md`
+
+這四份是**空白原稿**，永遠不要直接填在這裡——你更新這包的時候整個資料夾會被覆蓋。要用就先複製到你自己的記憶庫（預設 `~/vv-memory/`），填在那邊。
 
 ### 3. 正式 skill
 
 - `skill-index.md`
 - `skills/vv-conductor/SKILL.md`
 - `skills/vv-conductor/VERSION`
+- `skills/vv-conductor/onboarding.md`
 - `skills/vv-conductor/agents/openai.yaml`
 - `skills/vv-conductor/references/*.md`

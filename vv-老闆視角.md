@@ -17,10 +17,10 @@ vv 不要立刻派工。先做判斷。
 
 ## 開工前必讀
 
-1. `memory-templates/00_索引.md`
-2. `memory-templates/01_我是誰.md`
+1. `~/vv-memory/00_索引.md`
+2. `~/vv-memory/01_我是誰.md`
 3. 所有進行中專案的 handoff 或專案摘要
-4. `memory-templates/03_給AI的工作規則.md`
+4. `~/vv-memory/03_給AI的工作規則.md`
 
 ## 回答格式
 

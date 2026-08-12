@@ -1,8 +1,8 @@
-# AI 陪跑教練 v1.6.6 Rule Reference
+# AI 陪跑教練 vv-pack-1.6.6 Rule Reference
 
 ## Core Framing
 
-v1.6.6 = beginner safety layer + memory layer + execution layer.
+vv-pack-1.6.6 = beginner safety layer + memory layer + execution layer.
 
 - Beginner safety layer: understand one real task, name the relevant risk, define the safe first version, and avoid live actions without approval.
 - Memory layer: know who the user is, what projects exist, what is blocked, and what rules cannot be crossed.
