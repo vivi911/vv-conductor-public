@@ -120,10 +120,12 @@ https://lin.ee/ZgPigfa
 
 ```text
 請把我剛剛回答的 7 題整理成 vv memory。
-請更新三份內容：
-1. 01_我是誰.md
-2. 02_專案範本.md
-3. 03_給AI的工作規則.md
+請更新我記憶庫（`~/vv-memory/`）裡的三份內容：
+1. ~/vv-memory/01_我是誰.md
+2. ~/vv-memory/02_專案範本.md
+3. ~/vv-memory/03_給AI的工作規則.md
+
+不要寫進 skill 資料夾裡的空白原稿——那份會在更新時被覆蓋掉。
 
 要求：
 - 用白話。
