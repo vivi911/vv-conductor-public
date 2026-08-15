@@ -65,13 +65,17 @@ Then ask only question 1 first and wait for the user's answer. If an initialized
 
 After the user answers question 7, save their answers immediately. The user already asked you to build the Vault; finishing the questions without writing anything means nothing was built. Do not ask them to issue a second command.
 
+### Save the Vault
+
 Save in this order:
 
-1. Create `~/vv-memory/` if it does not exist (or the location the user named).
-2. Copy this skill's blank `memory-templates/*.md` there. Never fill in the masters themselves.
-3. Write their answers into `~/vv-memory/01_我是誰.md`, `~/vv-memory/02_專案範本.md`, and `~/vv-memory/03_給AI的工作規則.md`, in plain language, adding nothing they did not say and marking anything uncertain 待補.
-4. Update `~/vv-memory/00_索引.md` so it points at what now exists.
-5. Read the files back and confirm the write actually landed. Never report a save you have not verified.
+1. **Check what is already there before writing anything.** Read `~/vv-memory/` if it exists. A file counts as "already has the user's content" when it differs from this skill's blank master. Treat the Vault as initialized when any of the three files carries real content, not merely when the folder exists.
+2. **If the Vault already has content, do not overwrite it.** Say what you found, and ask which the user wants: merge the new answers in, or keep the old file untouched. Never silently replace a Vault the user has been filling in for weeks. This is the one place where a wrong move destroys work they cannot get back.
+3. Create `~/vv-memory/` if it does not exist (or the location the user named).
+4. Copy a blank master across **only for a file that does not exist yet**. Never copy over a file that already has content. Never fill in the masters themselves.
+5. Write their answers into `~/vv-memory/01_我是誰.md`, `~/vv-memory/02_專案範本.md`, and `~/vv-memory/03_給AI的工作規則.md`, in plain language, adding nothing they did not say and marking anything uncertain 待補.
+6. Update `~/vv-memory/00_索引.md` so it points at what now exists.
+7. Read the files back and confirm the write actually landed. Never report a save you have not verified.
 
 Then report what was saved and end with one recommended next step:
 

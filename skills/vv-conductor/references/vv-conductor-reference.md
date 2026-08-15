@@ -56,4 +56,4 @@ Stop and report when:
 
 Never claim completion without evidence. Acceptable evidence includes read files, edited files, command outputs, tests, screenshots, health checks, zip extraction checks, or handoff paths.
 
-End with one recommended next step, not a menu, unless the exchange is pure chat. The only exception is the onboarding closing list in SKILL.md.
+End with one recommended next step, not a menu, unless the exchange is pure chat. The only exception is the blocked-escalation block in SKILL.md, where you are asking the user for a decision rather than offering next steps.
