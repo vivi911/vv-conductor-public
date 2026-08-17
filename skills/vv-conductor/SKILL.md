@@ -69,13 +69,23 @@ After the user answers question 7, save their answers immediately. The user alre
 
 Save in this order:
 
-1. **Check what is already there before writing anything.** Read `~/vv-memory/` if it exists. A file counts as "already has the user's content" when it differs from this skill's blank master. Treat the Vault as initialized when any of the three files carries real content, not merely when the folder exists.
-2. **If the Vault already has content, do not overwrite it.** Say what you found, and ask which the user wants: merge the new answers in, or keep the old file untouched. Never silently replace a Vault the user has been filling in for weeks. This is the one place where a wrong move destroys work they cannot get back.
-3. Create `~/vv-memory/` if it does not exist (or the location the user named).
+1. **Check what is already there before writing anything.** Read `~/vv-memory/` if it exists. A file counts as "already has the user's content" when it differs from this skill's blank master. Treat the Vault as initialized when **any** of these is true: one of the three files carries real content, `~/vv-memory/00_索引.md` differs from the blank master, or the folder contains any file this package did not ship. Folder-exists alone is not initialization, and checking only `01`-`03` will miss a user who has been keeping notes in their own files.
+2. **If the Vault already has content, stop and ask before writing anything.** Say which files already have content, then offer exactly two choices and wait:
+
+   - **保留** — write nothing at all. Not one file, not one line. Report what you left alone and stop. This branch ends here.
+   - **合併** — follow the merge rules in step 5.
+
+   Never silently replace a Vault the user has been filling in for weeks. This is the one place where a wrong move destroys work they cannot get back.
+
+3. Create `~/vv-memory/` if it does not exist (or the location the user named). If the user named a custom location, use it for every step below; never mix it with the default path.
 4. Copy a blank master across **only for a file that does not exist yet**. Never copy over a file that already has content. Never fill in the masters themselves.
-5. Write their answers into `~/vv-memory/01_我是誰.md`, `~/vv-memory/02_專案範本.md`, and `~/vv-memory/03_給AI的工作規則.md`, in plain language, adding nothing they did not say and marking anything uncertain 待補.
-6. Update `~/vv-memory/00_索引.md` so it points at what now exists.
-7. Read the files back and confirm the write actually landed. Never report a save you have not verified.
+5. Write their answers in plain language, adding nothing they did not say and marking anything uncertain 待補.
+
+   - **Fresh Vault** — write `~/vv-memory/01_我是誰.md` and `~/vv-memory/03_給AI的工作規則.md`. For each project the user mentioned, create a separate file under `~/vv-memory/專案/<短名>.md`, copied from this skill's blank project master. One project per file: never write a second project over the first, and never leave everything in the master itself.
+   - **Merging into an existing Vault** — copy the current file to `<name>.bak-YYYY-MM-DD` first. Add new content; never delete or rewrite a line the user already had, including sections this package does not recognise. When new and old disagree, keep both and mark the conflict rather than picking one. Touch only the files that actually need new content.
+
+6. Update `~/vv-memory/00_索引.md` so it points at what now exists: one row per file under `~/vv-memory/專案/`, plus any files the user added themselves. An unlisted file is a file vv will not find later.
+7. Read the files back and confirm two things: the new content landed, **and every piece of the user's earlier content is still present**. Verifying only the new write is how data loss gets reported as success. If anything is missing, restore from the `.bak` file and tell the user.
 
 Then report what was saved and end with one recommended next step:
 
@@ -245,7 +255,7 @@ If old memory conflicts with the current user instruction, follow the current in
 
 ### Cross-session continuity
 
-At the start of a new conversation run three checks: read `~/vv-memory/00_索引.md` and `~/vv-memory/01_我是誰.md` (never this skill's blank `memory-templates/`), read the project's `HANDOFF-LATEST.md` if the user is inside a project, then open proactively:
+At the start of a new conversation run three checks: read `~/vv-memory/00_索引.md` and `~/vv-memory/01_我是誰.md` (never this skill's blank masters), read the project's `HANDOFF-LATEST.md` if the user is inside a project, then open proactively:
 
 ```text
 你回來了，上次我們做到 XX，下一步是 YY，要繼續嗎？
@@ -575,7 +585,7 @@ For work over ~30 minutes, use a scheduler or background job rather than grindin
 | Variant | When | Shape |
 |---|---|---|
 | 🟢 產出迭代 | producing something new (copy, reports, creative, courses, research) | 5-8 self-run rounds, each verified by a helper wearing the target reader's eyes; exit when the must-pass list is all green |
-| 🟡 上線關卡 | shipping a change | one round: pre-flight → stop for approval → release → post-flight → any fail triggers rollback |
+| 🟡 上線關卡 | shipping a change | one round: pre-flight → stop for approval → release → post-flight → any fail means recommend rollback and wait for the user's word |
 | 🔵 驗證迭代 | polishing conversation quality, response tone, bot logic, teaching material | 5-8 rounds, helper wears reader + judge, tracked by pass rate plus must-pass items |
 | ⚠️ 人工拍板短迴圈 | visual, UI, design, taste | change → preview → show the user → user feedback, until they say ship. Never self-iterate. |
 | 🟣 文字＋視覺混合 | automatic text check plus human visual check | AI verifies text → render → show the user → user approves to exit |

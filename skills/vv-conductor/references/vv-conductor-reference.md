@@ -47,7 +47,7 @@ Do not create unnecessary persona files unless the package needs standalone role
 Stop and report when:
 
 - A red action is required.
-- The same gate fails twice.
+- The same must-pass item has failed 3 rounds in a row.
 - Scope expands beyond the authorization card.
 - The task was misclassified.
 - Business meaning is ambiguous and the user must decide.

@@ -217,6 +217,21 @@ AI 實際讀的是 `~/.codex/skills/vv-conductor/`（Claude Code 是 `~/.claude/
 vv 檢查更新
 ```
 
+## 改這包之前（給想自己改的人）
+
+這包的同一條規矩會寫在好幾個檔案裡：`SKILL.md` 給 AI 讀、`指揮家.md` 給人讀、
+`onboarding.md` 是第一次使用的流程。**改其中一份、忘了另一份，規則就會互相矛盾，
+而且不會有任何錯誤訊息**——AI 只是安靜地選到不一樣的做法。
+
+所以改完一定要跑這個：
+
+```bash
+python3 ~/vv-conductor-public/scripts/check-consistency.py
+```
+
+它會掃全部規則檔，檢查跨檔規矩有沒有對不上、該留的東西有沒有被弄丟、檔案引用會不會
+斷掉。不綠就不要發布。
+
 ## 手動使用方式
 
 如果你不想裝 skill，也可以純手動用。先把 `指揮家.md` 複製到你的 home 目錄：
@@ -229,8 +244,14 @@ cp ~/vv-conductor-public/指揮家.md ~/指揮家.md
 
 ```bash
 mkdir -p ~/vv-memory
-cp ~/vv-conductor-public/skills/vv-conductor/memory-templates/*.md ~/vv-memory/
+cp -n ~/vv-conductor-public/skills/vv-conductor/memory-templates/*.md ~/vv-memory/
 ```
+
+⚠️ **那個 `-n` 不能拿掉。** 它的意思是「已經存在的檔案就跳過」。
+
+`~/vv-memory/` 是**你自己**的記憶庫。沒有 `-n` 的話，你哪天再貼一次這行，空白原稿就會把你累積的內容整個蓋掉，而且救不回來。
+
+之後要更新這包，**只要重裝 skill 就好，不用再碰這個資料夾**。
 
 之後在 AI 對話框開頭貼：
 
