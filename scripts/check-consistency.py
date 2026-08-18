@@ -14,8 +14,13 @@ onboarding.md 是首次流程、references/ 是補充）。手改其中一份、
 存在的原因，就是有人這樣驗過然後漏了。
 """
 
+import contextlib
+import io
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -25,9 +30,29 @@ SKILL = ROOT / "skills" / "vv-conductor"
 SELF_EXEMPT = "# leak-pattern"
 
 
+def _is_git_ignored(path: Path) -> bool:
+    """gitignore 掉的檔案永遠不會被發布，掃它只會製造擋不掉的假警報。
+
+    在非 git 環境（例如 self_test() 的暫存資料夾）裡 `git check-ignore`
+    會直接失敗，這時當作「沒被忽略」處理，行為退回舊版（照掃不誤），
+    不會因為抓不到 git 而漏掉真正該擋的東西。
+    """
+    try:
+        result = subprocess.run(
+            ["git", "check-ignore", "-q", str(path)],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return result.returncode == 0
+    except OSError:
+        return False
+
+
 def docs():
-    """規則檔全體（母體），不是「我改過的檔案」。"""
-    return sorted(list(ROOT.glob("*.md")) + list(SKILL.rglob("*.md")))
+    """規則檔全體（母體），不是「我改過的檔案」；跳過 gitignore 掉的本機筆記。"""
+    found = list(ROOT.glob("*.md")) + list(SKILL.rglob("*.md"))
+    return sorted(p for p in found if not _is_git_ignored(p))
 
 
 def scripts():
@@ -196,30 +221,95 @@ def check_refs(failures):
 
 
 def self_test():
-    """反向自檢：腳本壞掉時會全部報綠，看起來像沒問題。
+    """反向自檢：真的跑一遍 check_forbidden／check_must_exist／check_leak／check_refs，
+    不是只測正則字串本身。
 
-    所以四種檢查每一種都餵一個「一定要被抓到」的假樣本，抓不到就代表
-    這支腳本本身壞了，這時候上面的綠燈全部不算數。
+    舊版的做法是拿正則直接對一個字串做 re.search，這只證明正則寫得出來，
+    完全沒證明那個正則真的被掛進 check_* 函式的執行路徑——把 check_forbidden
+    整支換成 `pass`，舊版自檢照樣全線通過。
+
+    新做法：搭一個假規則資料夾（暫存目錄，用完即刪），塞一份「乾淨樣本」和
+    一份「已知踩了全部五類問題的壞樣本」，把全域 ROOT／SKILL 指過去，
+    直接呼叫真正的四個 check_* 函式蒐集 failures，再拆封驗證：
+    乾淨樣本要零 failure、壞樣本五類問題要五個都被點名。
+    任何一個 check_* 被掏空或改壞，這裡都會抓到。
     """
+    global ROOT, SKILL
+
+    orig_root, orig_skill = ROOT, SKILL
+    tmp = Path(tempfile.mkdtemp(prefix="vv-selftest-"))
+    try:
+        skill = tmp / "skills" / "vv-conductor"
+        skill.mkdir(parents=True)
+
+        clean_skill_md = "\n".join(
+            [
+                "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。",
+                "https://goaskvivi.com/",
+                "https://lin.ee/ZgPigfa",
+                "940160605",
+                "Never invent your own questions",
+                "## Vault Location",
+                "### Save the Vault",
+                "## Update Check",
+                "See `README.md` for details.",
+            ]
+        )
+        (skill / "SKILL.md").write_text(clean_skill_md, encoding="utf-8")
+        (tmp / "README.md").write_text("clean readme, nothing to see here.", encoding="utf-8")
+
+        with contextlib.redirect_stdout(io.StringIO()):
+            ROOT, SKILL = tmp, skill
+            clean_failures = []
+            check_forbidden(clean_failures)
+            check_must_exist(clean_failures)
+            check_leak(clean_failures)
+            check_refs(clean_failures)
+
+            # 疊在乾淨樣本上加壞內容、同時拿掉一個必留項，五類問題一次到齊：
+            # 違禁講法、漏防覆蓋、必留項不見、洩漏字串、引用斷鏈。
+            bad_skill_md = clean_skill_md.replace(
+                "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。\n", ""
+            ) + "\n" + "\n".join(
+                [
+                    "這裡寫了自動退版",  # leak-pattern
+                    "路徑是 /Users/someone/x",  # leak-pattern
+                    "See `不存在的檔案.md` for details.",
+                    "cp -R x/memory-templates/*.md ~/vv-memory/",  # leak-pattern
+                ]
+            )
+            (skill / "SKILL.md").write_text(bad_skill_md, encoding="utf-8")
+
+            bad_failures = []
+            check_forbidden(bad_failures)
+            check_must_exist(bad_failures)
+            check_leak(bad_failures)
+            check_refs(bad_failures)
+    finally:
+        ROOT, SKILL = orig_root, orig_skill
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    bad_joined = "\n".join(bad_failures)
     cases = {
-        "跨檔規矩": re.search(FORBIDDEN[0][1], "這裡寫了自動退版") is not None,  # leak-pattern
-        "防覆蓋": bool(COPY_LINE.search("cp -R x/memory-templates/*.md ~/vv-memory/"))
-                   and not NO_CLOBBER.search("cp -R x/memory-templates/*.md ~/vv-memory/")
-                   and bool(NO_CLOBBER.search("cp -n a b"))
-                   and bool(NO_CLOBBER.search("cp --no-clobber a b")),
-        "必留項": "這串必留項一定不存在於 SKILL.md" not in (SKILL / "SKILL.md").read_text(encoding="utf-8"),
-        "洩漏": re.search(LEAK, "路徑是 /Users/someone/x") is not None,  # leak-pattern
-        "斷鏈": not (SKILL / "這個檔案絕對不存在.md").exists(),
+        "跨檔規矩(check_forbidden)": not clean_failures and "退版一律要使用者拍板" in bad_joined,
+        "防覆蓋(check_forbidden)": "複製空白原稿一定要防覆蓋" in bad_joined,
+        "必留項(check_must_exist)": "必留項不見了" in bad_joined,
+        "洩漏(check_leak)": "零洩漏" in bad_joined,
+        "斷鏈(check_refs)": "引用斷鏈" in bad_joined,
     }
     bad = [k for k, v in cases.items() if not v]
     if bad:
         print(f"\n【反向自檢】❌ 這幾種檢查失去作用：{'、'.join(bad)}")
         return False
-    print(f"\n【反向自檢】✅ {len(cases)} 種檢查都確認有效")
+    print(f"\n【反向自檢】✅ {len(cases)} 種檢查都確認有效（跑的是真正的 check_* 函式，不是只測正則）")
     return True
 
 
 def main():
+    if not self_test():
+        print("🔴 腳本自檢沒過，不要相信這支腳本現在的任何結果，先別往下跑")
+        return 2
+
     all_docs = docs()
     if not all_docs:
         print("🔴 找不到任何規則檔，路徑可能錯了")
@@ -231,10 +321,6 @@ def main():
     check_must_exist(failures)
     check_leak(failures)
     check_refs(failures)
-
-    if not self_test():
-        print("\n🔴 腳本自檢沒過，不要相信這次結果")
-        return 2
 
     print()
     if failures:
