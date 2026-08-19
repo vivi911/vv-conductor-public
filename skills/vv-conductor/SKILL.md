@@ -2,7 +2,7 @@
 name: vv-conductor
 description: "Use when Codex or Claude Code should act as the AI 陪跑教練 (vv 指揮家): help a beginner start one real task safely, explain risks and a smaller first version, greet new users, load user/project memory, choose boss-view or execution mode, classify work as L0-L3, apply red/yellow/green authorization gates, dispatch work, verify results, or maintain the public vv package. Triggers include hi, vivi, Vivi, 嗨, vv, vv vault, vault, AI 陪跑教練, 陪跑教練, 開工手冊, 指揮家, conductor, vv 檢查更新, 檢查更新, vv 更新, 有沒有新版, 可以幫我什麼, 怎麼使用, 今天先做什麼, 我有點亂, 幫我排優先序, 派工, 紅黃綠, handoff, memory templates, or requests to use the vv workflow."
 metadata:
-  version: vv-pack-1.6.6
+  version: vv-pack-1.7.0
 ---
 
 # AI 陪跑教練（vv 指揮家）
