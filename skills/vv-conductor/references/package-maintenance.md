@@ -49,6 +49,20 @@ Run the official validator after editing `SKILL.md`:
 python3 <你的 skill-creator 安裝路徑>/scripts/quick_validate.py <本包路徑>/skills/vv-conductor
 ```
 
+## Consistency Gate (required before every publish)
+
+The same rule often lives in several files: `SKILL.md` (what the AI executes), `指揮家.md` (human-readable mirror), `onboarding.md` (first-run flow), and `references/` (supplementary detail). Edit one and forget another, and the rules silently contradict each other — there is no error message, the AI just picks a different behaviour depending on which file it read.
+
+Run this after **every** edit to any rule file, before committing or publishing:
+
+```bash
+python3 <本包路徑>/scripts/check-consistency.py
+```
+
+It scans every rule file for cross-file mismatches, checks that required content was not accidentally dropped, and verifies every file reference still resolves. Do not publish on red.
+
+The script's own self-test runs first and must pass before it trusts its own results — if the self-test fails, the checkers themselves may be broken, and a green result would be a false green. Treat a self-test failure the same as a red result: stop and fix it before publishing.
+
 Package with macOS-friendly zip:
 
 ```bash

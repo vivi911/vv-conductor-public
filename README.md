@@ -241,8 +241,10 @@ python3 ~/vv-conductor-public/scripts/check-consistency.py
 如果你不想裝 skill，也可以純手動用。先把 `指揮家.md` 複製到你的 home 目錄：
 
 ```bash
-cp ~/vv-conductor-public/指揮家.md ~/指揮家.md
+cp -n ~/vv-conductor-public/指揮家.md ~/指揮家.md
 ```
+
+⚠️ **這個 `-n` 也不能拿掉。** 如果你電腦裡已經有一份 `~/指揮家.md`（例如你之前裝過、或自己改過），沒有 `-n` 會直接把它蓋掉。跳過不代表沒裝成功——是保護你原本那份不被覆蓋；如果你就是要換新版，先手動確認舊檔沒有你想留的東西，再自己刪舊檔重貼這行。
 
 再把 `skills/vv-conductor/memory-templates/` 複製到你固定放 AI 記憶的地方。
 
