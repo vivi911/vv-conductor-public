@@ -94,7 +94,7 @@ Then report what was saved and end with one recommended next step:
 
 存到這裡：~/vv-memory/
 - 01_我是誰.md（你的背景與偏好）
-- 02_專案範本.md（你正在跑的事）
+- 專案/（你正在跑的事，一個專案一個檔案，例如 專案/我的第一個專案.md）
 - 03_給AI的工作規則.md（你的禁區）
 
 下次你開新對話打 `hi`，我會先讀這些，不用你重講一次。

@@ -38,6 +38,8 @@ Do not store secrets, access tokens, personal IDs, or customer private data.
 
 ## 02_專案範本.md
 
+This is a blank master to copy, not a file to fill in place. One project = one file, at `~/vv-memory/專案/<short-name>.md`, copied from this master. Never write more than one project into this file itself, and never let a second project overwrite the first.
+
 Each project should include:
 
 - Problem being solved.
