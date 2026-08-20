@@ -1,5 +1,15 @@
 # AI 陪跑教練（vv）vv-pack-1.7.0
 
+<p align="center">
+  <img src="../assets/demo-zh.svg" alt="vv 終端機示範：打 hi，vv 認出上次進度並推薦下一步" width="880">
+</p>
+
+<p align="center">
+  <a href="https://github.com/vivi911/vv-conductor-public/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/vivi911/vv-conductor-public?style=flat-square&color=e8a33d&labelColor=1c202b"></a>
+  <a href="../LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/vivi911/vv-conductor-public?style=flat-square&color=e8a33d&labelColor=1c202b"></a>
+  <img alt="Claude Code 與 Codex 都能用" src="https://img.shields.io/badge/適用-Claude%20Code%20%7C%20Codex-e8a33d?style=flat-square&labelColor=1c202b">
+</p>
+
 English version: [`../README.md`](../README.md)（repo 預設語言）
 
 > 第一次先陪你安全完成一個小任務；之後再接上記憶、派工與驗收。
