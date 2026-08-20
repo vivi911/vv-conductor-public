@@ -1,5 +1,15 @@
 # AI Co-Pilot Coach (vv) vv-pack-1.7.0
 
+<p align="center">
+  <img src="assets/demo-en.svg" alt="vv terminal demo: typing hi, vv recalls where you left off and recommends what to do next" width="880">
+</p>
+
+<p align="center">
+  <a href="https://github.com/vivi911/vv-conductor-public/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/vivi911/vv-conductor-public?style=flat-square&color=e8a33d&labelColor=1c202b"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/github/license/vivi911/vv-conductor-public?style=flat-square&color=e8a33d&labelColor=1c202b"></a>
+  <img alt="Works with Claude Code and Codex" src="https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex-e8a33d?style=flat-square&labelColor=1c202b">
+</p>
+
 繁體中文版請看 [`zh-TW/README.md`](zh-TW/README.md)。
 
 > The first time, it helps you safely finish one small task; after that, memory, dispatch, and verification kick in.
