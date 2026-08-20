@@ -6,13 +6,13 @@ Use this reference when the user wants vv v1.6 to remember who they are, what pr
 
 ```text
 memory-templates/
-├── 00_index.md
-├── 01_who-i-am.md
-├── 02_project-template.md
-└── 03_ai-work-rules.md
+├── 00_索引.md
+├── 01_我是誰.md
+├── 02_專案範本.md
+└── 03_給AI的工作規則.md
 ```
 
-## 00_index.md
+## 00_索引.md
 
 Keep this as the routing table. It should answer: where should AI read the truth?
 
@@ -24,7 +24,7 @@ Include:
 - Conductor rules.
 - Boss-view rules.
 
-## 01_who-i-am.md
+## 01_我是誰.md
 
 Capture:
 
@@ -36,9 +36,9 @@ Capture:
 
 Do not store secrets, access tokens, personal IDs, or customer private data.
 
-## 02_project-template.md
+## 02_專案範本.md
 
-This is a blank master to copy, not a file to fill in place. One project = one file, at `~/vv-memory/projects/<short-name>.md`, copied from this master. Never write more than one project into this file itself, and never let a second project overwrite the first.
+This is a blank master to copy, not a file to fill in place. One project = one file, at `~/vv-memory/專案/<short-name>.md`, copied from this master. Never write more than one project into this file itself, and never let a second project overwrite the first.
 
 Each project should include:
 
@@ -50,7 +50,7 @@ Each project should include:
 - Out-of-scope boundaries.
 - Truth sources.
 
-## 03_ai-work-rules.md
+## 03_給AI的工作規則.md
 
 Capture persistent behavior rules:
 
@@ -72,4 +72,4 @@ Only use this after the user's first safe task or plan, and only when they want 
 6. What tools do you use?
 7. What observable result would prove this AI system is useful?
 
-Mark unknowns as `TBD`; never invent missing facts.
+Mark unknowns as `待補`; never invent missing facts.

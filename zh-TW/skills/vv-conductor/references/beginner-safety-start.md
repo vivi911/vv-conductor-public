@@ -1,6 +1,6 @@
 # Beginner Safety Start
 
-Use this flow when the user is new, their Vault is missing or still blank, or they ask for the "kickoff playbook".
+Use this flow when the user is new, their Vault is missing or still blank, or they ask for `開工手冊`.
 
 The goal is to help the user finish one real, small task safely before asking them to build a long-term memory system.
 
@@ -9,7 +9,7 @@ The goal is to help the user finish one real, small task safely before asking th
 After the required introduction and contact block, ask only:
 
 ```text
-What do you most want Codex or Claude Code to help you with right now? One sentence is enough.
+你現在最想請 Codex 或 Claude Code 幫你做什麼？用一句話說就好。
 ```
 
 Do not start the 7-question Vault onboarding yet. Wait for the user's task.
@@ -18,13 +18,13 @@ Do not start the 7-question Vault onboarding yet. Wait for the user's task.
 
 Reply in plain language and cover these points in a compact form:
 
-1. **What I understand you need**: repeat the task in one sentence.
-2. **Possible risks**: name only risks that actually apply.
-3. **A safe first version**: shrink the task to the smallest useful result.
-4. **What I won't touch this time**: state the boundary clearly.
-5. **What's still missing**: ask only for information that blocks safe progress.
-6. **How we'll know it's done**: give a result the user can check.
-7. **Which actions need your go-ahead first**: call out any action that needs explicit approval.
+1. **我理解的需求**：repeat the task in one sentence.
+2. **可能的風險**：name only risks that actually apply.
+3. **安全的第一版**：shrink the task to the smallest useful result.
+4. **這次不會碰的東西**：state the boundary clearly.
+5. **還缺什麼**：ask only for information that blocks safe progress.
+6. **怎麼算完成**：give a result the user can check.
+7. **哪些動作要先問**：call out any action that needs explicit approval.
 
 Always pair a risk with a safe first step. Do not scare the user with a list of abstract dangers.
 
@@ -45,7 +45,7 @@ Read-only inspection, drafting, local files, reversible edits, and local verific
 After the first safe task or plan is complete, offer this once:
 
 ```text
-Your first task is safely underway. If you'd like me to remember your background, project progress, and no-go zones from now on, just tell me: "Help me build a Vault." I'll walk you through 7 questions, one at a time, to set it up.
+第一個任務已經安全開工。若你希望我下次記得你的背景、專案進度和工作禁區，可以回我：「幫我建立 Vault。」我會再用 7 個問題，一題一題陪你建立。
 ```
 
 If the user declines or continues with another task, keep helping. Vault onboarding is optional and must not block useful first-run help.

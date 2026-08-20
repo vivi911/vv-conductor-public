@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vv — AI Co-Pilot Coach</title>
+<meta name="description" content="vv is an AI co-pilot coach for Codex and Claude Code: it remembers who you are, judges what's safe to automate, and coaches you through the first real task.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    var lang = (navigator.language || 'zh').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-Hant' : 'en');
+  })();
+</script>
+<style>
+  :root{
+    --asphalt:#14171f;
+    --asphalt-2:#1c202b;
+    --asphalt-3:#242939;
+    --paper:#ede7d8;
+    --paper-2:#e3dcc8;
+    --ink:#211c12;
+    --mist:#f4f1e8;
+    --fog:#9aa1b2;
+    --fog-dim:#6b7284;
+    --amber:#e8a33d;
+    --amber-bright:#f3bd63;
+    --hazard:#d6573d;
+    --line:#333a4d;
+    --radius:14px;
+    --maxw:920px;
+    color-scheme: dark;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--asphalt);
+    color:var(--mist);
+    font-family:'Noto Sans TC', 'Noto Sans', system-ui, sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+
+  html[data-lang="en"] .head-en{ font-family:'Oswald', system-ui, sans-serif; }
+  html[data-lang="zh"] .head-zh{ font-family:'Noto Serif TC', 'Noto Serif', serif; }
+  .head-en, .head-zh{ text-wrap:balance; letter-spacing:0.01em; }
+
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, Menlo, monospace; }
+
+  a{ color:var(--amber-bright); }
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(20px,5vw,56px);
+    background:rgba(20,23,31,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .wordmark{
+    font-family:'Oswald', sans-serif;
+    font-weight:700; font-size:1.35rem; letter-spacing:0.06em;
+    color:var(--mist);
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .wordmark small{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.62rem; font-weight:500; letter-spacing:0.14em;
+    color:var(--fog); text-transform:uppercase;
+  }
+
+  .lang-toggle{
+    position:relative;
+    display:inline-flex; align-items:center;
+    width:104px; height:38px;
+    border-radius:999px;
+    background:var(--asphalt-3);
+    border:1px solid var(--line);
+    cursor:pointer;
+    padding:3px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem; font-weight:600; letter-spacing:0.02em;
+    color:var(--fog);
+  }
+  .lang-toggle .knob{
+    position:absolute; top:3px; left:3px;
+    width:48px; height:30px;
+    border-radius:999px;
+    background:linear-gradient(180deg, var(--amber-bright), var(--amber));
+    box-shadow:0 2px 8px rgba(232,163,61,0.4);
+    transition:transform 0.28s cubic-bezier(.65,.05,.36,1);
+  }
+  html[data-lang="en"] .lang-toggle .knob{ transform:translateX(50px); }
+  .lang-toggle .opt{
+    position:relative; z-index:1;
+    width:50px; text-align:center;
+    transition:color 0.2s;
+  }
+  html[data-lang="zh"] .lang-toggle .opt.zh,
+  html[data-lang="en"] .lang-toggle .opt.en{ color:var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:clamp(64px,12vh,120px) clamp(20px,6vw,56px) clamp(56px,8vh,88px);
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(560px 320px at 15% -10%, rgba(232,163,61,0.16), transparent 60%),
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 64px);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; max-width:var(--maxw); margin:0 auto; }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem; font-weight:500; letter-spacing:0.16em;
+    color:var(--amber-bright); text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:""; width:20px; height:1px; background:var(--amber);
+  }
+  .headline{
+    font-size:clamp(2.1rem, 5.4vw, 3.6rem);
+    font-weight:700; line-height:1.16; margin:0 0 24px;
+    color:var(--mist);
+  }
+  .headline .accent{ color:var(--amber-bright); }
+  .sub{
+    max-width:56ch;
+    font-size:clamp(1.02rem,2vw,1.15rem);
+    color:var(--fog); margin:0 0 36px;
+  }
+  .cta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:22px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:14px 26px;
+    border-radius:10px;
+    background:linear-gradient(180deg, var(--amber-bright), var(--amber));
+    color:var(--ink); font-weight:700; font-size:0.95rem;
+    text-decoration:none;
+    box-shadow:0 10px 30px -12px rgba(232,163,61,0.55);
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 14px 34px -10px rgba(232,163,61,0.7); }
+  .link-quiet{
+    font-family:'IBM Plex Mono', monospace; font-size:0.82rem;
+    color:var(--fog); text-decoration:none; letter-spacing:0.02em;
+    border-bottom:1px dashed var(--fog-dim);
+    padding-bottom:2px;
+  }
+  .link-quiet:hover{ color:var(--amber-bright); border-color:var(--amber); }
+
+  .dash{
+    margin-top:56px; display:flex; gap:0; flex-wrap:wrap;
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+    background:var(--asphalt-2);
+  }
+  .dash .gauge{
+    flex:1 1 160px; padding:18px 20px; border-right:1px solid var(--line);
+  }
+  .dash .gauge:last-child{ border-right:none; }
+  .gauge .num{ font-family:'Oswald',sans-serif; font-size:1.7rem; font-weight:600; color:var(--amber-bright); }
+  .gauge .cap{ font-family:'IBM Plex Mono',monospace; font-size:0.66rem; letter-spacing:0.08em; color:var(--fog); text-transform:uppercase; margin-top:4px; }
+
+  /* ---------- route section ---------- */
+  .route{
+    max-width:var(--maxw); margin:0 auto;
+    padding:clamp(64px,10vh,96px) clamp(20px,6vw,56px) 20px;
+  }
+  .route-head{ margin-bottom:56px; }
+  .route-head h2{
+    font-size:clamp(1.6rem,3.2vw,2.2rem); margin:0 0 14px; color:var(--mist);
+  }
+  .route-head p{ color:var(--fog); max-width:60ch; margin:0; }
+
+  .waypoint{
+    position:relative;
+    padding-left:44px;
+    margin-bottom:52px;
+    opacity:0; transform:translateY(18px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .waypoint.in-view{ opacity:1; transform:translateY(0); }
+  .waypoint::before{
+    content:""; position:absolute; left:9px; top:6px; bottom:-52px;
+    width:2px; background:linear-gradient(180deg, var(--amber) 0%, var(--line) 85%);
+  }
+  .waypoint:last-child::before{ display:none; }
+  .waypoint .node{
+    position:absolute; left:0; top:2px;
+    width:20px; height:20px; border-radius:50%;
+    background:var(--asphalt-2); border:2px solid var(--amber);
+    box-shadow:0 0 0 4px rgba(232,163,61,0.12);
+  }
+  .waypoint .node::after{
+    content:""; position:absolute; inset:4px; border-radius:50%; background:var(--amber);
+  }
+  .wp-label{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; font-weight:600;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--amber-bright);
+    margin-bottom:14px; display:block;
+  }
+
+  .flip{
+    display:grid; grid-template-columns:1fr; gap:0;
+    border-radius:var(--radius); overflow:hidden;
+    border:1px solid var(--line);
+  }
+  @media(min-width:760px){ .flip{ grid-template-columns:1fr 1fr; } }
+  .flip .before, .flip .after{ padding:22px 24px; }
+  .flip .before{
+    background:var(--asphalt-2);
+    border-bottom:1px solid var(--line);
+  }
+  @media(min-width:760px){ .flip .before{ border-bottom:none; border-right:1px solid var(--line); } }
+  .flip .after{ background:var(--paper); color:var(--ink); }
+  .tag{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
+    font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+    padding:3px 8px; border-radius:5px; margin-bottom:10px;
+  }
+  .tag.pain{ background:rgba(214,87,61,0.16); color:#f0a390; }
+  .tag.fix{ background:rgba(20,23,31,0.08); color:var(--ink); border:1px solid rgba(33,28,18,0.18); }
+  .flip p{ margin:0; font-size:0.98rem; }
+  .flip .before p{ color:var(--fog); }
+  .flip .after p{ color:var(--ink); font-weight:500; }
+  .flip code{
+    font-family:'IBM Plex Mono',monospace; font-size:0.88em;
+    background:rgba(33,28,18,0.08); padding:1px 6px; border-radius:4px;
+  }
+  .flip .before code{ background:rgba(255,255,255,0.08); color:var(--mist); }
+
+  /* ---------- why ---------- */
+  .why{
+    background:var(--asphalt-2);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:clamp(56px,9vh,88px) clamp(20px,6vw,56px);
+  }
+  .why-inner{
+    max-width:var(--maxw); margin:0 auto;
+    display:grid; gap:40px; grid-template-columns:1fr;
+    align-items:center;
+  }
+  @media(min-width:760px){ .why-inner{ grid-template-columns:1.1fr 0.9fr; } }
+  .why-inner p{ color:var(--fog); font-size:1.02rem; max-width:56ch; }
+  .stat-block{
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px 26px; background:var(--asphalt);
+  }
+  .stat-block .big{
+    font-family:'Oswald',sans-serif; font-weight:700;
+    font-size:clamp(1.6rem,3vw,2.1rem); color:var(--amber-bright);
+    line-height:1.3;
+  }
+  .stat-block .cap{
+    font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.1em;
+    color:var(--fog); text-transform:uppercase; margin-top:10px;
+  }
+
+  /* ---------- install ---------- */
+  .install{
+    max-width:var(--maxw); margin:0 auto;
+    padding:clamp(64px,10vh,96px) clamp(20px,6vw,56px);
+  }
+  .install h2{ font-size:clamp(1.6rem,3.2vw,2.2rem); margin:0 0 14px; color:var(--mist); }
+  .install > p{ color:var(--fog); max-width:60ch; margin:0 0 32px; }
+  .code-box{
+    background:var(--asphalt-2); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 24px; overflow-x:auto;
+  }
+  .code-box pre{ margin:0; font-family:'IBM Plex Mono',monospace; font-size:0.88rem; color:var(--mist); line-height:1.9; }
+  .code-box .c1{ color:var(--fog-dim); }
+  .code-box .c2{ color:var(--amber-bright); }
+  .install-cap{ margin-top:16px; font-size:0.9rem; color:var(--fog); }
+  .install-cap code{ font-family:'IBM Plex Mono',monospace; background:rgba(255,255,255,0.06); padding:1px 7px; border-radius:5px; color:var(--amber-bright); }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:clamp(40px,7vh,56px) clamp(20px,6vw,56px) 60px;
+  }
+  .footer-inner{
+    max-width:var(--maxw); margin:0 auto;
+    display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px;
+  }
+  .footer-about{ max-width:44ch; color:var(--fog); font-size:0.92rem; }
+  .footer-links{ display:flex; flex-direction:column; gap:9px; font-family:'IBM Plex Mono',monospace; font-size:0.82rem; }
+  .footer-links a{ color:var(--fog); text-decoration:none; }
+  .footer-links a:hover{ color:var(--amber-bright); }
+  .footer-links .k{ color:var(--fog-dim); margin-right:8px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wordmark">vv <small data-en="AI CO-PILOT COACH" data-zh="AI 陪跑教練">AI 陪跑教練</small></div>
+  <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language / 切換語言">
+    <span class="opt zh">中文</span>
+    <span class="opt en">EN</span>
+    <span class="knob" aria-hidden="true"></span>
+  </button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">
+        <span data-en="For Codex &amp; Claude Code" data-zh="給 Codex／Claude Code 用">給 Codex／Claude Code 用</span>
+      </div>
+      <h1 class="headline head-en head-zh">
+        <span data-en="You hold the wheel. vv reads the road."
+              data-zh="你握方向盤，<span class=&quot;accent&quot;>vv</span> 幫你看路。">你握方向盤，<span class="accent">vv</span> 幫你看路。</span>
+      </h1>
+      <p class="sub" data-en="Most AI forgets who you are the moment you close the tab. vv remembers — then coaches every session like a co-driver reading pace notes: what's next, what's risky, what's safe to skip."
+                     data-zh="大部分 AI 一關掉視窗就忘了你是誰。vv 會記得——然後像坐在副駕的領航員，每一段對話都幫你唸路書：接下來做什麼、哪裡有風險、哪裡可以放心跳過。">
+        大部分 AI 一關掉視窗就忘了你是誰。vv 會記得——然後像坐在副駕的領航員，每一段對話都幫你唸路書：接下來做什麼、哪裡有風險、哪裡可以放心跳過。
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="https://github.com/vivi911/vv-conductor-public" target="_blank" rel="noopener">
+          <span data-en="Get vv on GitHub" data-zh="到 GitHub 拿這包">到 GitHub 拿這包</span>
+        </a>
+        <a class="link-quiet" href="#route">
+          <span data-en="See 5 real scenarios ↓" data-zh="看 5 個真實情境 ↓">看 5 個真實情境 ↓</span>
+        </a>
+      </div>
+
+      <div class="dash">
+        <div class="gauge">
+          <div class="num">7</div>
+          <div class="cap" data-en="months building this" data-zh="個月踩坑蒸餾">個月踩坑蒸餾</div>
+        </div>
+        <div class="gauge">
+          <div class="num">L0–L3</div>
+          <div class="cap" data-en="task risk tiers" data-zh="任務風險分級">任務風險分級</div>
+        </div>
+        <div class="gauge">
+          <div class="num mono">🟢🟡🔴</div>
+          <div class="cap" data-en="auto / ask / stop" data-zh="自動／先問／停下">自動／先問／停下</div>
+        </div>
+        <div class="gauge">
+          <div class="num mono">hi</div>
+          <div class="cap" data-en="the only word to remember" data-zh="只用記一個字">只用記一個字</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="route" id="route">
+    <div class="route-head">
+      <h2 class="head-en head-zh" data-en="Five moments, before and after vv" data-zh="五個情境，裝 vv 前後">五個情境，裝 vv 前後</h2>
+      <p data-en="Not a tutorial. These are the actual moments vv was built to fix — pick whichever one sounds like your Monday."
+         data-zh="不是教學，是 vv 真正被設計來解決的情境——挑一個聽起來像你這週一的。">
+        不是教學，是 vv 真正被設計來解決的情境——挑一個聽起來像你這週一的。
+      </p>
+    </div>
+
+    <div class="waypoints">
+
+      <article class="waypoint">
+        <span class="node"></span>
+        <span class="wp-label" data-en="New session" data-zh="新對話開場">新對話開場</span>
+        <div class="flip">
+          <div class="before">
+            <span class="tag pain" data-en="Before" data-zh="裝之前">裝之前</span>
+            <p data-en="You open a new chat and start from zero — again. Re-explaining who you are, what you were building, where you left off."
+               data-zh="打開新對話，又要從零開始——重講一次你是誰、在做什麼、上次卡在哪。">打開新對話，又要從零開始——重講一次你是誰、在做什麼、上次卡在哪。</p>
+          </div>
+          <div class="after">
+            <span class="tag fix" data-en="With vv" data-zh="裝了 vv">裝了 vv</span>
+            <p data-en="Type <code>hi</code>. vv pulls your Vault, recaps what's open, and picks up mid-sentence."
+               data-zh="打一個字：<code>hi</code>。vv 讀你的記憶庫，回顧上次進度，直接接著講。">打一個字：<code>hi</code>。vv 讀你的記憶庫，回顧上次進度，直接接著講。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="waypoint">
+        <span class="node"></span>
+        <span class="wp-label" data-en="Monday morning" data-zh="早上不知道先做什麼">早上不知道先做什麼</span>
+        <div class="flip">
+          <div class="before">
+            <span class="tag pain" data-en="Before" data-zh="裝之前">裝之前</span>
+            <p data-en="Six tabs open, three deadlines, no idea which fire to put out first."
+               data-zh="開了六個視窗、三個死線，不知道該先救哪一個。">開了六個視窗、三個死線，不知道該先救哪一個。</p>
+          </div>
+          <div class="after">
+            <span class="tag fix" data-en="With vv" data-zh="裝了 vv">裝了 vv</span>
+            <p data-en="Ask vv what to do today. It scans every project like a boss would, and gives you one recommendation — not a menu."
+               data-zh="問 vv 今天先做什麼。它用老闆視角掃過所有專案，給你一個推薦，不是一堆選項。">問 vv 今天先做什麼。它用老闆視角掃過所有專案，給你一個推薦，不是一堆選項。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="waypoint">
+        <span class="node"></span>
+        <span class="wp-label" data-en="A messy idea" data-zh="想法很亂，還不能施工">想法很亂，還不能施工</span>
+        <div class="flip">
+          <div class="before">
+            <span class="tag pain" data-en="Before" data-zh="裝之前">裝之前</span>
+            <p data-en="You know roughly what you want. No idea how to turn it into a task an AI can safely run."
+               data-zh="你大概知道想要什麼，但不知道怎麼變成 AI 能安全動工的任務。">你大概知道想要什麼，但不知道怎麼變成 AI 能安全動工的任務。</p>
+          </div>
+          <div class="after">
+            <span class="tag fix" data-en="With vv" data-zh="裝了 vv">裝了 vv</span>
+            <p data-en="vv breaks it down: the need, the risk, the smallest safe first version, what it needs from you before it starts."
+               data-zh="vv 幫你拆成：需求、風險、最小安全的第一版、動工前需要你補的資訊。">vv 幫你拆成：需求、風險、最小安全的第一版、動工前需要你補的資訊。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="waypoint">
+        <span class="node"></span>
+        <span class="wp-label" data-en="Can it drive itself?" data-zh="這件事能不能自動做">這件事能不能自動做</span>
+        <div class="flip">
+          <div class="before">
+            <span class="tag pain" data-en="Before" data-zh="裝之前">裝之前</span>
+            <p data-en="You don't know if it's safe to let the AI just run — or if this is the one that quietly breaks something real."
+               data-zh="你不知道能不能放手讓 AI 自己跑，還是這次會悄悄搞壞真的東西。">你不知道能不能放手讓 AI 自己跑，還是這次會悄悄搞壞真的東西。</p>
+          </div>
+          <div class="after">
+            <span class="tag fix" data-en="With vv" data-zh="裝了 vv">裝了 vv</span>
+            <p data-en="vv sorts every action before it moves: 🟢 auto-run, 🟡 ask first, 🔴 stop and wait for you."
+               data-zh="vv 動手前先分紅黃綠：🟢 能自動做、🟡 要先問過、🔴 永遠停下等你拍板。">vv 動手前先分紅黃綠：🟢 能自動做、🟡 要先問過、🔴 永遠停下等你拍板。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="waypoint">
+        <span class="node"></span>
+        <span class="wp-label" data-en="Picking back up" data-zh="專案做到一半想接回來">專案做到一半想接回來</span>
+        <div class="flip">
+          <div class="before">
+            <span class="tag pain" data-en="Before" data-zh="裝之前">裝之前</span>
+            <p data-en="A project's been idle two weeks. You don't remember what's actually done versus what you meant to do."
+               data-zh="專案放了兩週，你已經搞不清楚哪些真的做完、哪些只是打算做。">專案放了兩週，你已經搞不清楚哪些真的做完、哪些只是打算做。</p>
+          </div>
+          <div class="after">
+            <span class="tag fix" data-en="With vv" data-zh="裝了 vv">裝了 vv</span>
+            <p data-en="vv reads the handoff, tells you what's real, what's still mock, and what to do next."
+               data-zh="vv 讀 handoff，告訴你哪些真的接上、哪些還是 mock、下一步先做什麼。">vv 讀 handoff，告訴你哪些真的接上、哪些還是 mock、下一步先做什麼。</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="why-inner">
+      <p data-en="vv is 7 months and 3,000+ hours of working with AI every day, distilled into rules — the mistakes so you don't have to make them: files quietly overwritten, launches that broke, work marked &ldquo;done&rdquo; that was never actually checked."
+         data-zh="vv 是 7 個月、每天 10 小時以上跟 AI 一起工作踩出來的規則——檔案被亂改、上線出事、嘴上說完成其實沒驗證，這些坑都先幫你踩過。">
+        vv 是 7 個月、每天 10 小時以上跟 AI 一起工作踩出來的規則——檔案被亂改、上線出事、嘴上說完成其實沒驗證，這些坑都先幫你踩過。
+      </p>
+      <div class="stat-block">
+        <div class="big" data-en="7 months. 10+ hrs/day. One rulebook." data-zh="7 個月。每天 10+ 小時。濃縮成一套規則。">7 個月。每天 10+ 小時。濃縮成一套規則。</div>
+        <div class="cap" data-en="— Vivi, GoAskVivi founder" data-zh="—— Vivi，GoAskVivi 創辦人">—— Vivi，GoAskVivi 創辦人</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="install" id="install">
+    <h2 class="head-en head-zh" data-en="Two minutes to install" data-zh="兩分鐘裝好">兩分鐘裝好</h2>
+    <p data-en="Works with both Claude Code and Codex — install the one you use, or both." data-zh="Claude Code、Codex 都能裝，裝一個或兩個都行。">Claude Code、Codex 都能裝，裝一個或兩個都行。</p>
+    <div class="code-box">
+      <pre><span class="c1"># </span><span data-en="clone the package" data-zh="下載這包">下載這包</span>
+git clone https://github.com/vivi911/vv-conductor-public
+
+<span class="c1"># Claude Code</span>
+mkdir -p ~/.claude/skills &amp;&amp; cp -R vv-conductor-public/skills/vv-conductor ~/.claude/skills/
+
+<span class="c1"># Codex</span>
+mkdir -p ~/.codex/skills &amp;&amp; cp -R vv-conductor-public/skills/vv-conductor ~/.codex/skills/</pre>
+    </div>
+    <p class="install-cap">
+      <span data-en="Restart your AI tool, then just say" data-zh="重開對話，打一個字">重開對話，打一個字</span>
+      <code>hi</code>.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <p class="footer-about" data-en="Built by Vivi — GoAskVivi founder, 22 years in brand strategy, now an AI practitioner."
+                             data-zh="由 Vivi 打造——GoAskVivi 創辦人，品牌操盤 22 年，現在的 AI 实战派。">
+      由 Vivi 打造——GoAskVivi 創辦人，品牌操盤 22 年，現在的 AI 实战派。
+    </p>
+    <div class="footer-links">
+      <a href="https://goaskvivi.com/" target="_blank" rel="noopener"><span class="k" data-en="Web" data-zh="官網">官網</span>goaskvivi.com</a>
+      <a href="https://lin.ee/ZgPigfa" target="_blank" rel="noopener"><span class="k" data-en="Taiwan" data-zh="台灣">台灣</span>LINE</a>
+      <span><span class="k" data-en="HK / Mainland" data-zh="港澳・大陸">港澳・大陸</span><span data-en="Xiaohongshu ID " data-zh="小紅書號 ">小紅書號 </span>940160605</span>
+      <a href="https://github.com/vivi911/vv-conductor-public" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var i18nEls = document.querySelectorAll('[data-en][data-zh]');
+
+    function applyLang(lang){
+      var root = document.documentElement;
+      root.setAttribute('data-lang', lang);
+      root.setAttribute('lang', lang === 'zh' ? 'zh-Hant' : 'en');
+      i18nEls.forEach(function(el){
+        var val = el.getAttribute(lang === 'zh' ? 'data-zh' : 'data-en');
+        if(val !== null){ el.innerHTML = val; }
+      });
+    }
+
+    // apply once on load so element content matches whatever the <head> detector set
+    applyLang(document.documentElement.getAttribute('data-lang') || 'zh');
+
+    var toggle = document.getElementById('langToggle');
+    toggle.addEventListener('click', function(){
+      var next = document.documentElement.getAttribute('data-lang') === 'zh' ? 'en' : 'zh';
+      applyLang(next);
+    });
+
+    var els = document.querySelectorAll('.waypoint');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.2 });
+      els.forEach(function(el){ io.observe(el); });
+    } else {
+      els.forEach(function(el){ el.classList.add('in-view'); });
+    }
+  })();
+</script>
+
+</body>
+</html>

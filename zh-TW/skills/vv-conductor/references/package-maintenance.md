@@ -1,30 +1,15 @@
 # Package Maintenance
 
-Use this reference when updating, packaging, validating, or installing the `AI Co-Pilot Coach` public package (`vv-conductor`).
+Use this reference when updating, packaging, validating, or installing the `AI 陪跑教練` public package (`vv-conductor`, Traditional Chinese track).
 
 ## Public Package Layout
 
-English is the default track, at the repo root. Traditional Chinese lives one level down, under `zh-TW/`, mirroring the same structure.
+English is the default track, at the repo root. This Traditional Chinese track lives one level down, under `zh-TW/`, mirroring the same structure.
 
 ```text
 vv-conductor-public/
-├── README.md
-├── VERSION
-├── skill-index.md
-├── conductor.md
-├── boss-view.md
-├── skills/
-│   └── vv-conductor/
-│       ├── SKILL.md
-│       ├── VERSION
-│       ├── onboarding.md
-│       ├── agents/openai.yaml
-│       ├── memory-templates/
-│       └── references/
-│           ├── beginner-safety-start.md
-│           ├── memory-template-guide.md
-│           ├── package-maintenance.md
-│           └── vv-conductor-reference.md
+├── README.md          (English, default)
+├── skills/vv-conductor/  (English, default)
 └── zh-TW/
     ├── README.md
     ├── VERSION
@@ -32,23 +17,33 @@ vv-conductor-public/
     ├── 指揮家.md
     ├── vv-老闆視角.md
     └── skills/
-        └── vv-conductor/  (same shape as above)
+        └── vv-conductor/
+            ├── SKILL.md
+            ├── VERSION
+            ├── onboarding.md
+            ├── agents/openai.yaml
+            ├── memory-templates/
+            └── references/
+                ├── beginner-safety-start.md
+                ├── memory-template-guide.md
+                ├── package-maintenance.md
+                └── vv-conductor-reference.md
 ```
 
 Keep the two trees structurally identical — same relative paths, same file roles — so a fix to one track's structure has an obvious counterpart in the other.
 
 ## Install Target
 
-Codex and Claude Code can both install the same `vv-conductor` folder. Only the target directory differs. Point the `cp` source at `skills/vv-conductor` for the English pack, or `zh-TW/skills/vv-conductor` for the Chinese pack — pick one language, not both, since they install to the same target path.
+Codex and Claude Code can both install the same `vv-conductor` folder. Only the target directory differs. Point the `cp` source at `zh-TW/skills/vv-conductor` for this Chinese pack (or `skills/vv-conductor` for the English pack — pick one language, not both, since they install to the same target path).
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R <path to this package>/skills/vv-conductor ~/.codex/skills/
+cp -R <本包路徑>/zh-TW/skills/vv-conductor ~/.codex/skills/
 ```
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R <path to this package>/skills/vv-conductor ~/.claude/skills/
+cp -R <本包路徑>/zh-TW/skills/vv-conductor ~/.claude/skills/
 ```
 
 For any other agent without a skill directory, copy the package docs into its configured rule or project-knowledge area according to that tool's conventions.
@@ -58,7 +53,7 @@ For any other agent without a skill directory, copy the package docs into its co
 Run the official validator after editing `SKILL.md`:
 
 ```bash
-python3 <your skill-creator install path>/scripts/quick_validate.py <path to this package>/skills/vv-conductor
+python3 <你的 skill-creator 安裝路徑>/scripts/quick_validate.py <本包路徑>/zh-TW/skills/vv-conductor
 ```
 
 ## Consistency Gate (required before every publish)
@@ -68,7 +63,7 @@ The same rule often lives in several files, and in two language tracks: `SKILL.m
 Run this after **every** edit to any rule file, before committing or publishing:
 
 ```bash
-python3 <path to this package>/scripts/check-consistency.py
+python3 <本包路徑>/scripts/check-consistency.py
 ```
 
 It scans every rule file in both language tracks for cross-file mismatches, checks that required content was not accidentally dropped, and verifies every file reference still resolves. Do not publish on red.
@@ -78,7 +73,7 @@ The script's own self-test runs first and must pass before it trusts its own res
 Package with macOS-friendly zip:
 
 ```bash
-ditto -c -k --keepParent vv-conductor-v1.7 vv-conductor-v1.7.zip
+ditto -c -k --keepParent vv-conductor-zh-TW-v1.7 vv-conductor-zh-TW-v1.7.zip
 ```
 
 Verify by extracting to `/private/tmp` and counting key files.

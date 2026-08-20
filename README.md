@@ -1,422 +1,444 @@
-# AI 陪跑教練（vv）vv-pack-1.7.0
+# AI Co-Pilot Coach (vv) vv-pack-1.7.0
 
-> 第一次先陪你安全完成一個小任務；之後再接上記憶、派工與驗收。
+繁體中文版請看 [`zh-TW/README.md`](zh-TW/README.md)。
 
-這是一套給「人 + AI」一起工作的公開包。
+> The first time, it helps you safely finish one small task; after that, memory, dispatch, and verification kick in.
 
-## Vivi 老師是誰
+This is a public package for people and AI to work together.
 
-Vivi 老師是 GoAskVivi 的創作者，長期用 Codex、Claude Code 和各種 AI 工具一起做真實專案：寫文件、拆任務、做網站、改流程、整理知識、驗收成果。
+## Who Is Vivi
 
-## 為什麼有 AI 陪跑教練
+Vivi is the creator of GoAskVivi, who has spent a long time working with Codex, Claude Code, and various AI tools on real projects — writing documents, breaking down tasks, building websites, fixing workflows, organizing knowledge, and verifying results.
 
-過去 7 個月，Vivi 老師幾乎每天花 10 小時以上跟 AI 一起工作——寫文件、拆任務、做網站、改流程、上線驗收。中間踩過大量的坑：AI 亂改檔案、忘記你是誰、自己上線出事、把小事做成大工程、嘴上說「完成了」其實根本沒驗證。
+## Why the AI Co-Pilot Coach Exists
 
-AI 陪跑教練就是把這 7 個月、每天 10 小時以上的踩坑經驗，蒸餾成一套規則。原本獨立的「開工手冊」已整合成第一次使用的安全開工流程，背後仍由 vv 指揮家負責記憶、派工與驗收。
+For the past 7 months, Vivi has spent almost every day working with AI more than 10 hours at a stretch — writing documents, breaking down tasks, building websites, fixing workflows, verifying launches. Along the way she hit plenty of potholes: the AI would edit files it shouldn't, forget who she was, break something live on its own, turn a small thing into a huge project, or say "done" when it had never actually verified anything.
 
-它的目標很單純：讓一個剛開始用 AI 的小白，也能像旁邊坐了一個開車教練。你握方向盤（做決定），AI 負責開（做事），vv 幫你看路、提醒、必要時踩剎車——指揮 AI 往你要的方向走，不會讓它亂跑、亂闖、亂出事。
+The AI co-pilot coach is those 7 months and 10+ hours a day of hard-won lessons, distilled into a rulebook. What used to be a standalone "kickoff playbook" has now been folded into the safe first-use flow, still backed by the vv Conductor for memory, dispatch, and verification.
 
-## 怎麼認識 Vivi 老師
+Its goal is simple: give someone brand new to working with AI the feeling of having a driving instructor sitting next to them. You hold the wheel (you decide), the AI drives (it does the work), and vv watches the road, warns you, and hits the brakes when needed — steering the AI where you want it to go, without letting it wander off, crash into something, or cause a mess.
 
-想認識 Vivi 老師和 GoAskVivi 的 AI 工作方法，先看官網——GoAskVivi 是 Vivi 老師分享 AI 實戰、Vibe Coding 心法與線上課程的地方：
+## How to Get to Know Vivi
+
+To learn about Vivi and GoAskVivi's approach to working with AI, start with the website — GoAskVivi is where Vivi shares real-world AI practice, Vibe Coding philosophy, and online courses:
 https://goaskvivi.com/
 
-台灣的朋友，加 Vivi 的 LINE 官方帳號。卡關可以直接問，也會收到 vv 更新通知：
+If you're in Taiwan, add Vivi's LINE official account. You can ask questions directly when you're stuck, and you'll get vv update notifications too:
 https://lin.ee/ZgPigfa
 
-香港・大陸的朋友，打開小紅書 App 搜尋小紅書號「940160605」（帳號：Vivi｜品牌操盤 22 年｜AI 实战派），追蹤後私訊即可。
+If you're in Hong Kong or mainland China, open the Xiaohongshu (RED) app and search ID `940160605` (account: Vivi | 22 years in brand strategy | AI practitioner). Follow and DM.
 
-## 這是啥
+## What This Is
 
-如果你第一次看到這個 repo，可以先把它想成一包「AI 工作教練設定檔」。
+If this is your first time seeing this repo, think of it as a bundle of "AI work-coach configuration files."
 
-它不是一個需要你看懂程式碼的工具，而是一組 `.md` 檔案。`.md` 就是 Markdown 文件，白話說，就是 AI 看得懂、你也看得懂的工作說明書。
+It's not a tool you need to read code to understand — it's a set of `.md` files. `.md` just means Markdown documents — in plain terms, a work manual that both the AI and you can read.
 
-這套 AI 陪跑教練不是單純教你「怎麼問 AI」。第一次使用時，它會先問你想做什麼、講清楚真正風險、把任務縮成安全的第一版；等你完成第一件事後，再由你決定要不要建立長期記憶。
+The AI co-pilot coach isn't just about teaching you "how to prompt AI." The first time you use it, it asks what you want to do, explains the real risk clearly, and shrinks the task down to a safe first version; only after you finish that first thing do you decide whether to set up long-term memory.
 
-下載這包之後，你不是得到一個普通聊天提示詞，而是一套給 Codex 或 Claude Code 使用的安全開工、記憶、派工和驗收規則。
+Once you download this package, you don't just get a generic chat prompt — you get a full set of safe-start, memory, dispatch, and acceptance rules for Codex or Claude Code to work by.
 
-你可以叫它 `vv`，也可以叫它 `vivi`——兩個字效果完全一樣。**vv 就是你自己專屬的 AI 教練**——不是只有第一次才能用，以後每次打開新對話，打 `vv` 或 `vivi` 就能把他叫出來。他會先看你是誰、現在有哪些事在跑，再判斷這件事可以自動做，還是要先停下問你。
+You can call it `vv`, or you can call it `vivi` — both work exactly the same way. **vv is your own personal AI coach** — not a one-time thing. From now on, every time you open a new conversation, type `vv` or `vivi` to call it up. It looks at who you are and what's currently in flight first, then decides whether this can be done automatically or needs to stop and ask you.
 
-它有全域記憶，這個記憶庫就叫 **Vault**。你可以把自己的背景、專案狀態、工作禁區寫進 `~/vv-memory/`（也就是你的 Vault），讓 AI 記得你是誰、專案做到哪、之前跟你協作過什麼、哪些事不能亂碰。
+It has global memory — this memory store is called the **Vault**. You can write your background, project status, and no-go zones into `~/vv-memory/` (your Vault), so the AI remembers who you are, where your projects stand, what you've worked on together before, and what it must never touch.
 
-一般 AI 像失憶症，每次開新對話都要你重講一遍自己是誰；Vault 就是讓 AI「記得你」的那個地方。Vault 是進階的長期陪跑功能，不是第一次開工前的考卷。建立後，每次打 `hi`、`vivi`、`vv` 或 `vv vault`，它會先讀 Vault，再接著上次的進度繼續。
+Most AI feels like it has amnesia — every new conversation, you have to re-explain who you are. The Vault is what lets the AI "remember you." The Vault is an advanced, long-term coaching feature — not a quiz you have to pass before your first task. Once it's set up, every time you type `hi`, `vivi`, `vv`, or `vv vault`, it reads the Vault first and continues from where you left off.
 
-它也有開機規則。以後你打開新對話，只要打 `vv` 或 `vivi`，它就會先抓最新事件和進度接著聊，不用每次重新交代「我是誰、上次做到哪、這個案子卡在哪」。
+It also has a boot-up rule. From now on, when you open a new conversation, just type `vv` or `vivi` and it pulls the latest state and progress before continuing the conversation — no need to re-explain "who I am, where we left off, what's stuck" every single time.
 
-裡面還有一組開發角色 agent，可以把一個專案拆成不同角色來協助你：PM 幫你釐清需求，架構師幫你想資料流和系統設計，UX 幫你看使用者體感，開發幫你落地，測試幫你找問題，發布幫你做上線前檢查。你不用一開始就講得很完整，vv 會幫你把模糊想法一步一步理順成能動工的計畫。
+It also comes with a set of development-role agents that can break a project into different roles to help you: a PM to clarify requirements, an architect to think through data flow and system design, a UX role to check the user experience, a builder to implement it, a tester to find problems, and a release role to run pre-launch checks. You don't need a fully formed idea up front — vv will help you turn a vague thought into a workable plan, step by step.
 
-這一版的重點不是讓 AI 變成萬能助理，而是讓 AI 先知道三件事：
+The point of this version isn't to turn AI into an all-powerful assistant — it's to make sure the AI knows three things first:
 
-1. 你是誰。
-2. 你現在有哪些事在跑。
-3. 哪些事可以自動做，哪些事一定要先停下問你。
+1. Who you are.
+2. What you currently have in flight.
+3. What can be done automatically, and what must always stop and ask you first.
 
-如果你是第一次打開，請照這個順序讀：
+If this is your first time opening this, read in this order:
 
-1. `README.md`：你現在看的這份，先搞懂整包怎麼用。
-2. `指揮家.md`：AI 的主規則，負責判斷任務、派工、授權、驗收。
-3. `vv-老闆視角.md`：每天或每次開工時，讓 AI 先用老闆視角幫你排序。
-4. `skills/vv-conductor/references/beginner-safety-start.md`：第一次使用時的安全開工流程。
-5. `skills/vv-conductor/memory-templates/`：把你的背景、專案、工作規則寫成 AI 看得懂的檔案。
-6. `skills/vv-conductor/onboarding.md`：想讓 AI 長期記得你時，再用 7 題建立 memory。
+1. `README.md`: what you're reading now — get familiar with how the whole package works first.
+2. `conductor.md`: the AI's core rulebook — task judgment, dispatch, authorization, verification.
+3. `boss-view.md`: use this every day or every time you start work, to have the AI prioritize from a boss's vantage point first.
+4. `skills/vv-conductor/references/beginner-safety-start.md`: the safe first-use flow.
+5. `skills/vv-conductor/memory-templates/`: turn your background, projects, and work rules into files the AI can read.
+6. `skills/vv-conductor/onboarding.md`: the 7-question flow to build long-term memory, once you want the AI to remember you long-term.
 
-## 平常對話怎麼用 vv（只要記得一個字：`vv` 或 `vivi`）
+## How to Use vv Day to Day (just remember one word: `vv` or `vivi`)
 
-每次打開新對話，打 `vv` 或 `vivi` 就好——**不用另外記「第一次要打什麼」「想確認記憶要打什麼」，兩個字挑一個記住就夠**。只要你已經建過 Vault，它會自動先讀記憶，回你上次做到哪、下一步是什麼，手上還有哪些專案沒完成，不用你另外問。
+Every time you open a new conversation, just type `vv` or `vivi` — **you don't need to remember "what do I type the first time" vs. "what do I type to check memory," just pick one of the two words and stick with it.** As long as you've already built a Vault, it automatically reads memory first, tells you where you left off, what the next step is, and which projects are still unfinished — you don't have to ask separately.
 
 ```text
 vv
 ```
 
 ```text
-你回來了，上次做到 XX，下一步是 YY。你手上還有 [專案 A] 卡在 [下一步]、[專案 B] 還沒開始——要先接哪一個？
+You're back — last time we got to XX, next step is YY. You've also got [Project A] stuck at [next step] and [Project B] not started yet — which one do you want to pick up?
 ```
 
-`hi`、`vivi`、`指揮家`、`AI 陪跑教練`、`vv vault` 這幾個字也都能叫醒他、效果完全一樣——只是備用說法，你不需要特地記，打 `vv` 或 `vivi` 就好。
+`hi`, `vivi`, `conductor`, `AI co-pilot coach`, `vv vault` all wake it up too, exactly the same way — those are just backup phrasings you don't need to specifically remember; `vv` or `vivi` is enough.
 
-叫醒之後，直接講你要幹嘛就行，例如：
+Once it's awake, just say what you want, for example:
 
 ```text
-vv 我今天該先做什麼？
-vv 幫我把這個想法拆成能施工的卡片。
-vv 這件事能不能自動跑，還是要我拍板？
+vv, what should I do first today?
+vv, help me break this idea into a plan I can start building.
+vv, can this run automatically, or does it need my sign-off?
 ```
 
-一句話：**開對話 → 打 `vv` 或 `vivi` → 講你要做的事**。不用背指令、不用寫複雜提示詞。
+One sentence: **open a conversation → type `vv` or `vivi` → say what you want to do**. No commands to memorize, no complicated prompts to write.
 
-## v1.6 跟 v1.5 差在哪
+## What Changed from v1.5 to v1.6
 
 | v1.5 | v1.6 |
 |---|---|
-| 重點在「執行規則」：任務分級、派工、紅黃綠授權、驗收、停損 | 加上「記憶入口」：先讓 AI 認識你，再開始安全做事 |
-| AI 開工時主要讀 `指揮家.md` | AI 開工時先讀 memory 訊號，再讀 `指揮家.md` |
-| 比較適合已經有固定工作流的人 | 更適合第一次導入 AI 工作中樞的人 |
-| 進度靠 `HANDOFF-LATEST.md` 接棒 | 進度仍靠 handoff，但新增「老闆視角」幫你提醒被遺忘的案 |
+| Focused on "execution rules": task tiers, dispatch, red/yellow/green authorization, verification, stop-loss | Adds a "memory entry point": the AI gets to know you first, then starts working safely |
+| The AI mainly read `conductor.md` when starting work | The AI reads the memory signal first, then `conductor.md` |
+| Better suited to someone who already has a fixed AI workflow | Better suited to someone adopting an AI work hub for the first time |
+| Progress handed off via `HANDOFF-LATEST.md` | Progress still uses handoff, but adds "Boss View" to remind you of forgotten items |
 
-一句話：
+One sentence:
 
-v1.5 是「AI 做事前的安全規則」。
-vv-pack-1.7.0 是「先安全完成第一件事，再決定要不要讓 AI 長期認識你」。
+v1.5 was "safety rules for before the AI acts."
+vv-pack-1.7.0 is "safely finish the first thing, then decide whether to let the AI get to know you long-term."
 
-## 這包適合誰
+## Who This Package Is For
 
-- 創業者、主管、顧問、自由工作者。
-- 手上很多案子，常常忘記哪個做到哪。
-- 想用 Claude Code、Codex 或其他 AI 幫忙拆任務、寫文件、寫 code、驗收成果。
-- 不想每次都重新解釋自己的背景、規則、禁區。
+- Founders, managers, consultants, freelancers.
+- Anyone juggling a lot of projects who often forgets what's where.
+- Anyone who wants Claude Code, Codex, or other AI tools to help break down tasks, write documents, write code, and verify results.
+- Anyone tired of re-explaining their background, rules, and no-go zones every single time.
 
-## 先把這包下載到電腦
+## First, Download This Package to Your Computer
 
-後面所有步驟都是從你電腦裡的這份副本出發，所以第一步先把它抓下來。
+Every step after this starts from the copy on your own computer, so grab it first.
 
-打開「終端機」（Terminal），把下面這段整段貼進去，按 Enter：
+Open "Terminal," paste the whole block below, and hit Enter:
 
 ```bash
 git clone https://github.com/vivi911/vv-conductor-public.git ~/vv-conductor-public
 ```
 
-跑完之後，這包就在你的家目錄底下，路徑是 `~/vv-conductor-public`。`~` 就是你的個人資料夾，不用自己去找它在哪。
+Once it's done, the package will be in your home directory, at `~/vv-conductor-public`. `~` is just your personal folder — you don't need to go find where that is.
 
-之後 README 裡所有指令都會用這個路徑，你直接照貼就好。如果你想放到別的地方，記得後面每一條指令的路徑也要跟著換。
+Every command in this README afterward assumes this path — paste them as-is. If you want to put it somewhere else, remember to change the path in every following command too.
 
-想確認有沒有抓成功，貼這句，會列出這包的檔案：
+To confirm it downloaded successfully, paste this — it'll list the package's files:
 
 ```bash
 ls ~/vv-conductor-public
 ```
 
-## Codex / Claude Code 怎麼用
+## How Codex / Claude Code Use It
 
-這包 Codex 和 Claude Code 都能用。安裝的是同一份 `vv-conductor` skill，只是放的資料夾名字不同。
+Both Codex and Claude Code can use this package. They install the same `vv-conductor` skill — only the folder name differs.
 
-差別不在能不能裝，而在你會拿它們做什麼。
+The difference isn't whether you *can* install it — it's what you'll actually use each one for.
 
-### Codex：比較像會動手施工的工作台
+### Codex: more like a hands-on build bench
 
-Codex 適合拿來做：
+Codex is a good fit for:
 
-- 讀 repo、改檔案、跑測試。
-- 判斷紅黃綠授權，知道哪些事可以自動做、哪些事要先問你。
-- 接手 `HANDOFF-LATEST.md`，不用每次重新交代專案進度。
-- 把一個工程或文件任務拆成可驗收的步驟。
+- Reading the repo, editing files, running tests.
+- Judging red/yellow/green authorization — knowing what can run automatically and what needs to stop and ask first.
+- Picking up `HANDOFF-LATEST.md` so you don't have to re-explain project progress every time.
+- Breaking an engineering or documentation task into verifiable steps.
 
-### Claude Code：比較像會陪你想清楚的策略室
+### Claude Code: more like a strategy room that thinks things through with you
 
-Claude Code 適合拿來做：
+Claude Code is a good fit for:
 
-- 幫你整理想法、寫文案、寫簡報、做策略推演。
-- 用老闆視角幫你排優先順序。
-- 依照你的 memory 和規則，延續同一套工作習慣。
+- Helping you organize ideas, write copy, write decks, work through strategy.
+- Prioritizing from a boss's vantage point (Boss View).
+- Continuing the same working habits, based on your memory and rules.
 
-AI 陪跑教練就是讓兩邊都照同一套工作規則跑。你兩邊都裝也完全沒問題，它們各自讀自己的資料夾，不會打架。
+The AI co-pilot coach makes sure both sides run on the same set of rules. It's completely fine to install it in both — each reads its own folder, they don't conflict.
 
-## 正式 Skill 安裝方式（Codex / Claude Code 二選一或都裝）
+## Official Skill Installation (Codex / Claude Code — pick one, or install both)
 
-安裝之後，vv 才會變成一個固定的按鈕：你打 `hi`、`vivi`、`vv`、`指揮家`，它就自動讀這套規則，不用每次貼檔案。
+Once installed, vv becomes a fixed trigger: type `hi`, `vivi`, `vv`, or `conductor`, and it automatically reads this rulebook — no need to paste the files in every time.
 
-兩邊裝法一模一樣，只有資料夾名字不同。你用哪個就貼哪一段。
+Installation is identical on both sides, only the folder name differs. Paste whichever section matches what you use.
 
-### 如果你用 Codex
+### If you use Codex
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/vv-conductor
 ```
 
-### 如果你用 Claude Code
+### If you use Claude Code
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/vv-conductor
 ```
 
-兩邊都用的話，兩段都貼，各裝各的不會打架。
+If you use both, paste both sections — each installs independently and won't conflict.
 
-裝完**重開** Codex 或 Claude Code，當你說 `hi`、`vivi`、`AI 陪跑教練`、`開工手冊`、`vv`、`指揮家`、`今天先做什麼`、`派工`、`紅黃綠` 或 `handoff`，它就會觸發這個 skill。
+After installing, **restart** Codex or Claude Code. When you say `hi`, `vivi`, `AI co-pilot coach`, `kickoff playbook`, `vv`, `conductor`, `what should I do today`, `dispatch`, `red/yellow/green`, or `handoff`, it'll trigger this skill.
 
-想確認有沒有裝好，貼這句（有列出檔案就是成功）：
+To confirm it installed correctly, paste this (seeing files listed means success):
 
 ```bash
-ls ~/.codex/skills/vv-conductor    # 你用 Codex 的話
-ls ~/.claude/skills/vv-conductor   # 你用 Claude Code 的話
+ls ~/.codex/skills/vv-conductor    # if you use Codex
+ls ~/.claude/skills/vv-conductor   # if you use Claude Code
 ```
 
-## 檢查更新
+## Checking for Updates
 
-vv 不會在背景偷偷自己更新，因為它只是一組 `.md` 規則檔，不是 App。
+vv never silently updates itself in the background — it's just a set of `.md` rule files, not an app.
 
-但你可以請 Codex 或 Claude Code 幫你檢查 GitHub 上有沒有新版：
+But you can ask Codex or Claude Code to check GitHub for a newer version:
 
 ```text
-vv 檢查更新
+vv check for updates
 ```
 
-它會比對本機安裝版和 GitHub 公開包：
+It compares your local install against the public GitHub package:
 
-- GitHub 公開包：`https://github.com/vivi911/vv-conductor-public`
-- 本機安裝的 skill：Codex 是 `~/.codex/skills/vv-conductor/`，Claude Code 是 `~/.claude/skills/vv-conductor/`
-- 版本檔：repo 根目錄的 `VERSION`，以及安裝後那個資料夾裡的 `VERSION`
+- GitHub package: `https://github.com/vivi911/vv-conductor-public`
+- Locally installed skill: `~/.codex/skills/vv-conductor/` for Codex, `~/.claude/skills/vv-conductor/` for Claude Code
+- Version files: the `VERSION` file at the repo root, and the `VERSION` file inside the installed folder
 
-如果 GitHub 有新版，就要重新下載 repo，並覆蓋本機 skill。只看 GitHub 有更新還不夠，因為 AI 真正讀的是你電腦裡那個資料夾。
+If GitHub has a newer version, you need to re-download the repo and overwrite the local skill. Just seeing that GitHub has an update isn't enough — what the AI actually reads is the folder on your own computer.
 
-## 更新 vv
+## Updating vv
 
-新版出來時，兩步：先把 repo 拉成最新，再覆蓋本機安裝版。
+When a new version comes out, it's two steps: pull the repo to the latest version, then overwrite your local install.
 
 ```bash
 cd ~/vv-conductor-public && git pull
 ```
 
 ```bash
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/    # 你用 Codex 的話
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/   # 你用 Claude Code 的話
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/vv-conductor    # if you use Codex
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/vv-conductor   # if you use Claude Code
 ```
 
-AI 實際讀的是 `~/.codex/skills/vv-conductor/`（Claude Code 是 `~/.claude/skills/vv-conductor/`）裡的檔案。只把 repo 拉成最新、沒有覆蓋本機 skill 的話，新對話還是會一直跑舊版。
+What the AI actually reads is the files in `~/.codex/skills/vv-conductor/` (or `~/.claude/skills/vv-conductor/` for Claude Code). If you only pull the repo to the latest version without overwriting the local skill, new conversations will keep running the old version.
 
-如果你不確定自己是不是最新版，直接問：
+If you're not sure whether you're on the latest version, just ask:
 
 ```text
-vv 檢查更新
+vv check for updates
 ```
 
-## 改這包之前（給想自己改的人）
+## Before You Modify This Package (for people who want to customize it)
 
-這包的同一條規矩會寫在好幾個檔案裡：`SKILL.md` 給 AI 讀、`指揮家.md` 給人讀、
-`onboarding.md` 是第一次使用的流程。**改其中一份、忘了另一份，規則就會互相矛盾，
-而且不會有任何錯誤訊息**——AI 只是安靜地選到不一樣的做法。
+The same rule in this package often lives in several files: `SKILL.md` (what the AI reads), `conductor.md` (the human-readable mirror), `onboarding.md` (the first-use flow). **Edit one and forget another, and the rules will silently contradict each other** — the AI just quietly picks a different behavior.
 
-所以改完一定要跑這個：
+So always run this after any edit:
 
 ```bash
 python3 ~/vv-conductor-public/scripts/check-consistency.py
 ```
 
-它會掃全部規則檔，檢查跨檔規矩有沒有對不上、該留的東西有沒有被弄丟、檔案引用會不會
-斷掉。不綠就不要發布。
+It scans every rule file, checking whether cross-file rules line up, whether anything required got dropped, and whether any file references are broken. Don't publish if it isn't green.
 
-## 手動使用方式
+## Manual Usage (Without Installing the Skill)
 
-如果你不想裝 skill，也可以純手動用。先把 `指揮家.md` 複製到你的 home 目錄：
+If you don't want to install it as a skill, you can also use it purely manually. First, copy `conductor.md` to your home directory:
 
 ```bash
-cp -n ~/vv-conductor-public/指揮家.md ~/指揮家.md
+cp -n ~/vv-conductor-public/conductor.md ~/conductor.md
 ```
 
-⚠️ **這個 `-n` 也不能拿掉。** 如果你電腦裡已經有一份 `~/指揮家.md`（例如你之前裝過、或自己改過），沒有 `-n` 會直接把它蓋掉。跳過不代表沒裝成功——是保護你原本那份不被覆蓋；如果你就是要換新版，先手動確認舊檔沒有你想留的東西，再自己刪舊檔重貼這行。
+⚠️ **Don't drop the `-n`.** If you already have a `~/conductor.md` on your computer (say, from a previous install, or one you edited yourself), leaving out `-n` would overwrite it directly. If the command appears to do nothing, that's not a failure — it means your original file was protected from being overwritten. If you genuinely want to switch to the new version, manually check the old file for anything worth keeping first, then delete it and paste this command again.
 
-再把 `skills/vv-conductor/memory-templates/` 複製到你固定放 AI 記憶的地方。
+Then copy `skills/vv-conductor/memory-templates/` to wherever you keep AI memory:
 
 ```bash
 mkdir -p ~/vv-memory
 cp -n ~/vv-conductor-public/skills/vv-conductor/memory-templates/*.md ~/vv-memory/
 ```
 
-⚠️ **那個 `-n` 不能拿掉。** 它的意思是「已經存在的檔案就跳過」。
+⚠️ **Don't drop that `-n` either.** It means "skip any file that already exists."
 
-`~/vv-memory/` 是**你自己**的記憶庫。沒有 `-n` 的話，你哪天再貼一次這行，空白原稿就會把你累積的內容整個蓋掉，而且救不回來。
+`~/vv-memory/` is **your own** memory store. Without `-n`, pasting this command again someday would wipe out everything you've accumulated with the blank template — and you wouldn't be able to get it back.
 
-之後要更新這包，**只要重裝 skill 就好，不用再碰這個資料夾**。
+To update this package later, **you only need to reinstall the skill** — you don't need to touch this folder again.
 
-之後在 AI 對話框開頭貼：
+Then, at the start of an AI conversation, paste:
 
 ```text
-請先讀 ~/指揮家.md，進入 AI 陪跑教練模式。第一次先陪我安全完成一個小任務；我同意建立長期記憶後，再讀 ~/vv-memory/00_索引.md。
+Please read ~/conductor.md first and enter AI co-pilot coach mode. Help me safely finish one small task first; once I agree to set up long-term memory, read ~/vv-memory/00_index.md.
 ```
 
-## 第一次要做什麼
+## What to Do the First Time
 
-安裝後開一個新對話，只要打：
+After installing, open a new conversation and just type:
 
 ```text
 hi
 ```
 
-AI 陪跑教練會先問：「你現在最想請 Codex 或 Claude Code 幫你做什麼？」接著幫你講清楚風險、縮成安全的第一版，不會先丟 7 題考卷。
+The AI co-pilot coach will first ask: "What's the one thing you most want Codex or Claude Code to help you with right now?" Then it'll help you clarify the risk and shrink it to a safe first version — it won't throw a 7-question quiz at you first.
 
-完成第一個安全任務後，如果你希望它下次記得你的背景、進度和工作禁區，再回：
+After you finish that first safe task, if you'd like it to remember your background, progress, and no-go zones next time, just reply:
 
 ```text
-幫我建立 Vault。
+Help me build a Vault.
 ```
 
-這時它才會打開 `onboarding.md`，一題一題問你 7 題。
+Only then will it open `onboarding.md` and walk you through the 7 questions, one at a time.
 
-回答完後，把答案整理進：
+Once you've answered, organize your answers into:
 
-- `~/vv-memory/01_我是誰.md`
-- `~/vv-memory/專案/<專案名>.md`（你提到的每個專案各自一份，複製自 `02_專案範本.md`，不要全部擠進同一個檔案）
-- `~/vv-memory/03_給AI的工作規則.md`
+- `~/vv-memory/01_who-i-am.md`
+- `~/vv-memory/projects/<project-name>.md` (one file per project you mentioned, copied from `02_project-template.md` — don't cram them all into one file)
+- `~/vv-memory/03_ai-work-rules.md`
 
-不需要一次寫很完美。你回答完一題，vv 再問下一題；v1.6 的設計是先有一版，工作一週後再養。
+You don't need to get it perfect on the first pass. vv asks the next question once you've answered the current one; v1.6's design is to get a first version in place, then let it grow over a week of actual work.
 
-## 你可以怎麼叫 vv
+## Ways You Can Talk to vv
 
 ```text
 hi
 vv
 vv vault
-vv 我今天該先做什麼？
-vv 幫我把這個需求拆成能施工的卡片。
-vv 先讀我的 memory，再判斷這件事該不該做。
-vv 幫我看這個專案現在卡在哪。
-vv 這件事能不能自動跑？還是要我拍板？
-vv 檢查更新
+vv, what should I do first today?
+vv, help me break this requirement into something I can start building.
+vv, read my memory first, then judge whether this should be done.
+vv, help me see where this project is currently stuck.
+vv, can this run automatically? Or does it need my sign-off?
+vv check for updates
 ```
 
-如果你剛安裝完，不知道從哪裡開始，也可以直接問：
+If you just installed it and don't know where to start, you can also just ask:
 
 ```text
-vv 可以幫我什麼？
-你可以幫我什麼？
-vv 怎麼使用？
-怎麼用這套 AI 陪跑教練？
-有哪些情境可以用？
-我現在有點亂，vv 你建議我怎麼開始？
+vv, what can you help me with?
+What can you help me with?
+vv, how do I use this?
+How do I use this AI co-pilot coach?
+What situations can I use this for?
+I'm feeling a bit scattered right now — vv, what do you suggest I start with?
 ```
 
-這些問法會讓 vv 先用白話跟你說明它能做什麼，而不是立刻要你看懂所有檔案。
+Any of these will get vv to explain what it can do in plain language, instead of immediately expecting you to understand every file.
 
-## 常見使用情境
+## Common Usage Scenarios
 
-### 1. 新對話開場：直接打 `hi` 或 `vivi`
+### 1. Opening a new conversation: just type `hi` or `vivi`
 
-以後你打開一個新的 Codex 或 Claude Code 對話，可以先打：
+From now on, whenever you open a new Codex or Claude Code conversation, start with:
 
 ```text
 hi
 ```
 
-（打 `vivi` 效果完全一樣。）
+(Typing `vivi` works exactly the same way.)
 
-vv 會先去抓你的全域記憶入口，例如 Vault、`~/vv-memory/`、專案 `HANDOFF-LATEST.md`，找出你最近在做什麼、哪些專案還沒收尾、哪些地方需要你拍板。
+vv will first check your global memory entry points — things like the Vault, `~/vv-memory/`, or a project's `HANDOFF-LATEST.md` — to figure out what you've been working on lately, which projects are still unfinished, and where it needs your sign-off.
 
-如果你是第一次拉下這包、還沒建立 Vault，打 `hi` 或 `vivi` 不會報錯——AI 陪跑教練會先自我介紹，再問你想做什麼，陪你安全完成第一個小任務。只有你想要長期記憶時，才會再用 7 題建立第一版 Vault。
+If this is your first time pulling this package down and you haven't built a Vault yet, typing `hi` or `vivi` won't error out — the AI co-pilot coach will introduce itself, then ask what you want to do, and help you safely finish your first small task. Only if you want long-term memory will it then use the 7 questions to build your first Vault.
 
-如果記憶有接上，它會接著最新進度跟你聊。如果你本來有記憶、這次卻讀不到，它會明講「我現在讀不到記憶」，不會假裝知道。
+If memory is connected, it'll continue the conversation from your latest progress. If you had memory before but it can't be read this time, it will say plainly "I can't read memory right now" — it won't pretend to know.
 
-### 2. 早上不知道先做什麼
-
-```text
-vv 我今天該先做什麼？
-```
-
-vv 會用老闆視角幫你看：哪件事最急、哪件事會卡錢或客戶、哪個專案被放太久、今天最值得先推哪一件。它不會把所有選項丟回給你自己選，而是會先給一個推薦。
-
-### 3. 想法很亂，還不能施工
+### 2. Not sure what to do first thing in the morning
 
 ```text
-vv 幫我把這個想法整理成可以動工的計畫。
+vv, what should I do first today?
 ```
 
-vv 會先幫你拆成需求、卡點、完成條件和驗收方式。如果需要，它會用 PM、架構師、UX、開發、測試、發布這些角色 agent，逐步把模糊想法理順。
+vv will use the Boss View to look at things for you: what's most urgent, what's blocking money or a customer, which project has been sitting too long, and what's most worth pushing first today. It won't dump all the options back on you to pick from — it'll give you one recommendation first.
 
-### 4. 要判斷 AI 能不能自動做
+### 3. Your thinking is a mess and you're not ready to build anything
 
 ```text
-vv 這件事能不能自動跑？還是要我拍板？
+vv, help me turn this idea into a plan I can start building.
 ```
 
-vv 會用紅黃綠規則幫你判斷：純整理、改文件、跑本機測試通常可以自動做；發送訊息、正式上線、金流、刪資料、OAuth、key rotation 這些高風險事會停下來問你。
+vv will help break it down into requirements, blockers, completion criteria, and how to verify it. If needed, it'll use PM, architect, UX, builder, tester, and release role agents to work step by step through a vague idea and turn it into something clear.
 
-### 5. 專案做到一半，想接回來
+### 4. Trying to figure out whether the AI can do it automatically
 
 ```text
-vv 幫我看這個專案現在卡在哪。
+vv, can this run automatically? Or does it need my sign-off?
 ```
 
-vv 會先找 handoff 或專案記憶，幫你整理目前做到哪、真的接上了什麼、哪些還是待補、下一步最適合先做什麼。這就是這包最重要的用途：讓 AI 記得你們一起做過什麼，不用每次重新講一遍。
+vv will use the red/yellow/green rules to judge it: pure organizing, editing documents, and running local tests can usually run automatically; sending messages, going live, payments, deleting data, OAuth, and key rotation are all high-risk and will stop and ask you.
 
-## 檔案結構
+### 5. Picking a project back up partway through
+
+```text
+vv, help me see where this project is currently stuck.
+```
+
+vv will look for a handoff or project memory first, then summarize where things currently stand, what's actually wired up, what's still pending, and what's the best next step. This is the most important thing this package does: it lets the AI remember what you've worked on together, so you never have to re-explain it from scratch.
+
+## File Structure
 
 ```text
 vv-conductor-public/
-├── README.md
+├── README.md                    ← English (default)
 ├── VERSION
 ├── skill-index.md
-├── 指揮家.md
-├── vv-老闆視角.md
-└── skills/
-    └── vv-conductor/
-        ├── SKILL.md
-        ├── VERSION
-        ├── onboarding.md
-        ├── agents/
-        │   └── openai.yaml
-        ├── memory-templates/
-        │   ├── 00_索引.md
-        │   ├── 01_我是誰.md
-        │   ├── 02_專案範本.md
-        │   └── 03_給AI的工作規則.md
-        └── references/
-            ├── memory-template-guide.md
-            ├── beginner-safety-start.md
-            ├── package-maintenance.md
-            └── vv-conductor-reference.md
+├── conductor.md
+├── boss-view.md
+├── skills/
+│   └── vv-conductor/
+│       ├── SKILL.md
+│       ├── VERSION
+│       ├── onboarding.md
+│       ├── agents/
+│       │   └── openai.yaml
+│       ├── memory-templates/
+│       │   ├── 00_index.md
+│       │   ├── 01_who-i-am.md
+│       │   ├── 02_project-template.md
+│       │   └── 03_ai-work-rules.md
+│       └── references/
+│           ├── memory-template-guide.md
+│           ├── beginner-safety-start.md
+│           ├── package-maintenance.md
+│           └── vv-conductor-reference.md
+└── zh-TW/                       ← Traditional Chinese mirror
+    ├── README.md
+    ├── VERSION
+    ├── skill-index.md
+    ├── 指揮家.md
+    ├── vv-老闆視角.md
+    └── skills/
+        └── vv-conductor/
+            ├── SKILL.md
+            ├── VERSION
+            ├── onboarding.md
+            ├── agents/
+            │   └── openai.yaml
+            ├── memory-templates/
+            │   ├── 00_索引.md
+            │   ├── 01_我是誰.md
+            │   ├── 02_專案範本.md
+            │   └── 03_給AI的工作規則.md
+            └── references/
+                ├── memory-template-guide.md
+                ├── beginner-safety-start.md
+                ├── package-maintenance.md
+                └── vv-conductor-reference.md
 ```
 
-`onboarding.md` 和 `memory-templates/` 都放在 skill 資料夾裡面，這樣你安裝之後 AI 才找得到它們。安裝指令只複製 `skills/vv-conductor`，放在外面的東西不會被帶過去。
+`onboarding.md` and `memory-templates/` both live inside the skill folder, so the AI can find them after you install it. The install command only copies `skills/vv-conductor` (or `zh-TW/skills/vv-conductor`) — anything outside that folder doesn't come along.
 
-## 這包現在分三層
+## This Package Currently Has Three Layers
 
-### 1. 人看的公開文件
+### 1. Public documents, for humans to read
 
 - `README.md`
 - `VERSION`
-- `指揮家.md`
-- `vv-老闆視角.md`
+- `conductor.md`
+- `boss-view.md`
 
-### 2. 記憶模板（空白原稿，跟著 skill 一起安裝）
+### 2. Memory templates (blank masters, installed together with the skill)
 
-- `skills/vv-conductor/memory-templates/00_索引.md`
-- `skills/vv-conductor/memory-templates/01_我是誰.md`
-- `skills/vv-conductor/memory-templates/02_專案範本.md`
-- `skills/vv-conductor/memory-templates/03_給AI的工作規則.md`
+- `skills/vv-conductor/memory-templates/00_index.md`
+- `skills/vv-conductor/memory-templates/01_who-i-am.md`
+- `skills/vv-conductor/memory-templates/02_project-template.md`
+- `skills/vv-conductor/memory-templates/03_ai-work-rules.md`
 
-這四份是**空白原稿**，永遠不要直接填在這裡——你更新這包的時候整個資料夾會被覆蓋。要用就先複製到你自己的記憶庫（預設 `~/vv-memory/`），填在那邊。
+These four are **blank masters** — never fill them in directly here, since the whole folder gets overwritten whenever you update the package. Copy them to your own memory store first (default `~/vv-memory/`), and fill them in there.
 
-### 3. 正式 skill
+### 3. The official skill
 
 - `skill-index.md`
 - `skills/vv-conductor/SKILL.md`

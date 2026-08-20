@@ -1,58 +1,59 @@
 # skill-index
 
-這份檔案是「AI 陪跑教練」公開包的 skill 入口索引。技術名稱保留 `vv-conductor`，讓既有安裝與觸發方式繼續可用。
+This file is the skill entry-point index for the "AI Co-Pilot Coach" public package. The technical name stays `vv-conductor`, so existing install and trigger mechanics keep working.
 
-## 目前正式 skill
+## Current official skill
 
-| Skill | 路徑 | 用途 |
+| Skill | Path | Purpose |
 |---|---|---|
-| vv-conductor | `skills/vv-conductor/SKILL.md` | 讓 Codex／Claude Code 先陪新手安全完成第一個任務，再接上記憶、派工、紅黃綠授權、驗收與 handoff |
+| vv-conductor | `skills/vv-conductor/SKILL.md` | Has Codex / Claude Code walk a beginner through safely finishing their first task, then bring in memory, dispatch, red/yellow/green authorization, verification, and handoff |
 
-## 什麼時候會觸發
+## What triggers it
 
-使用者說到以下任一類型時，應使用 `vv-conductor`：
+`vv-conductor` should be used whenever the user says any of the following:
 
 - `vv`
 - `vivi`
-- `AI 陪跑教練`
-- `陪跑教練`
-- `開工手冊`
-- `指揮家`
+- `AI co-pilot coach`
+- `co-pilot coach`
+- `kickoff playbook`
 - `conductor`
-- `派工`
-- `今天先做什麼`
-- `我有點亂`
-- `幫我排優先序`
-- `紅黃綠`
+- `dispatch`
+- `what should I do today`
+- `I'm feeling overwhelmed`
+- `help me prioritize`
+- `red/yellow/green`
 - `handoff`
 - `memory templates`
-- `用 vv v1.6 工作流`
+- `use the vv v1.6 workflow`
 
-## 安裝方式
+## How to install it
 
-Codex 和 Claude Code 都可安裝同一份 `skills/vv-conductor/` 資料夾。差別只有目標目錄。
+Both Codex and Claude Code can install the same `skills/vv-conductor/` folder. Only the target directory differs.
 
-Codex：
+Codex:
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/vv-conductor
 ```
 
-Claude Code：
+Claude Code:
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/
+cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/vv-conductor
 ```
 
-重開之後，`vv-conductor` 會成為可觸發 skill。兩邊都裝也不會互相影響。
+After restarting, `vv-conductor` becomes a triggerable skill. Installing both at once won't cause any conflict.
 
-如果你用的 AI 工具沒有 skill 目錄機制，退而求其次：把 `SKILL.md` 和 `references/` 底下的檔案放進該工具的規則或專案知識裡，並在對話開頭請它先讀。
+**Traditional Chinese version**: the same package also ships in Traditional Chinese under [`zh-TW/`](zh-TW/skill-index.md) (`zh-TW/skills/vv-conductor/`). Both language packages install to the same target folder name (`~/.claude/skills/vv-conductor/` or `~/.codex/skills/vv-conductor/`) — pick the one you want; installing both at once means whichever you copy second overwrites the first.
 
-## 維護規則
+If the AI tool you're using doesn't have a skill-directory mechanism, the fallback is: drop `SKILL.md` and everything under `references/` into that tool's rules or project-knowledge area, and ask it to read them at the start of the conversation.
 
-- `SKILL.md` 保持短，只放觸發、流程、必要判斷。
-- 詳細規則放 `references/`。
-- 改完 `SKILL.md` 要跑 validator。
-- 對外分享前要掃敏感資訊。
+## Maintenance rules
+
+- Keep `SKILL.md` short — only triggers, flow, and the judgment calls that actually matter.
+- Detailed rules live in `references/`.
+- Run the validator after editing `SKILL.md`.
+- Scan for sensitive information before sharing publicly.
