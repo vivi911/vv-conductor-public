@@ -37,7 +37,7 @@
       99.9% { opacity: 1; transform: translateY(0); }
       100% { opacity: 0; }
     }
-    .resp resp0{animation-delay:1.33s;}.resp resp1{animation-delay:1.75s;}.resp resp2{animation-delay:2.17s;}.resp resp3{animation-delay:2.59s;}
+    .resp-line0{animation-delay:1.33s;}.resp-line1{animation-delay:1.75s;}.resp-line2{animation-delay:2.17s;}.resp-line3{animation-delay:2.59s;}
   </style>
 
   <g clip-path="url(#rounded)">
@@ -57,7 +57,7 @@
       <rect class="cursor" x="86" y="126" width="9" height="18" fill="#e8a33d" style="animation-delay:0.93s"/>
 
       <text x="40" y="210" font-size="17" font-weight="700" fill="#e8a33d">vv</text>
-      <text class="resp resp0" x="150" y="210" font-size="17" fill="#f4f1e8">你回來了。落地頁文案寫完了——</text><text class="resp resp1" x="150" y="240" font-size="17" fill="#f4f1e8">下一步是加上定價區塊。</text><text class="resp resp2" x="150" y="270" font-size="17" fill="#f4f1e8">［定價頁］卡在等你審核，</text><text class="resp resp3" x="150" y="300" font-size="17" fill="#f4f1e8">［Q3 規劃］還沒開始。要先接哪一個？</text>
+      <text class="resp resp-line0" x="150" y="210" font-size="17" fill="#f4f1e8">你回來了。落地頁文案寫完了——</text><text class="resp resp-line1" x="150" y="240" font-size="17" fill="#f4f1e8">下一步是加上定價區塊。</text><text class="resp resp-line2" x="150" y="270" font-size="17" fill="#f4f1e8">［定價頁］卡在等你審核，</text><text class="resp resp-line3" x="150" y="300" font-size="17" fill="#f4f1e8">［Q3 規劃］還沒開始。要先接哪一個？</text>
     </g>
   </g>
 </svg>

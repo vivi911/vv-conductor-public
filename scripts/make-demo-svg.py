@@ -93,12 +93,12 @@ def build_svg(cfg: dict) -> str:
     line_h = 30
     for i, line in enumerate(lines):
         delay = resp_start + i * line_gap
-        cls = f"resp resp{i}"
+        line_cls = f"resp-line{i}"
         style_rules.append(
-            f".{cls}{{animation-delay:{delay:.2f}s;}}"
+            f".{line_cls}{{animation-delay:{delay:.2f}s;}}"
         )
         resp_svg_lines.append(
-            f'<text class="{cls}" x="150" y="{y0 + i * line_h}" font-size="17" fill="{MIST}">{esc(line)}</text>'
+            f'<text class="resp {line_cls}" x="150" y="{y0 + i * line_h}" font-size="17" fill="{MIST}">{esc(line)}</text>'
         )
     last_line_end = resp_start + (len(lines) - 1) * line_gap + 0.5
 
