@@ -36,6 +36,7 @@ Codex：
 
 ```bash
 mkdir -p ~/.codex/skills
+rm -rf ~/.codex/skills/vv-conductor
 cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.codex/skills/vv-conductor
 ```
 
@@ -43,6 +44,7 @@ Claude Code：
 
 ```bash
 mkdir -p ~/.claude/skills
+rm -rf ~/.claude/skills/vv-conductor
 cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.claude/skills/vv-conductor
 ```
 

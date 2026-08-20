@@ -104,6 +104,12 @@ FORBIDDEN = [
 COPY_LINE = re.compile(r"^\s*cp\b.*memory-templates.*~/vv-memory")  # leak-pattern
 NO_CLOBBER = re.compile(r"(^|\s)(-[a-zA-Z]*n[a-zA-Z]*|--no-clobber)(\s|$)")
 
+# 安裝 skill 的 cp：目標端必須先被 rm -rf 掉，否則第二次執行（＝更新動作）
+# 在 macOS 上會複製到「已存在的同名資料夾裡面」變成 vv-conductor/vv-conductor，
+# 舊版還在當家而且完全不報錯 —— 使用者以為更新了，其實沒有。2026-08-21 實測踩到。
+INSTALL_CP = re.compile(r"\bcp\s+-[a-zA-Z]*[Rra][a-zA-Z]*\s+.*\bskills/vv-conductor\b.*~/\.(codex|claude)/skills")  # leak-pattern
+RM_TARGET = re.compile(r"\brm\s+-[a-zA-Z]*r[a-zA-Z]*\s+~/\.(codex|claude)/skills/vv-conductor\b")  # leak-pattern
+
 # 兩個語言樹共用的必留項（語言無關：網址、ID、已經是英文的固定小節標題）
 MUST_EXIST_COMMON = {
     "官網": "https://goaskvivi.com/",
@@ -189,6 +195,42 @@ def check_forbidden(failures):
         scan(targets, lambda l: bool(COPY_LINE.search(l)) and not NO_CLOBBER.search(l)),
         "沒有 -n / --no-clobber 的 cp 會把使用者累積的記憶庫換成空白原稿，且救不回來。",
     )
+
+    report(
+        failures,
+        "安裝 skill 的 cp 前面要先 rm -rf 目標端",
+        _unguarded_install_cp(),
+        "macOS 上 cp -R 到「已存在的同名資料夾」會複製進它裡面，變成 "
+        "vv-conductor/vv-conductor。更新動作＝重跑安裝，所以少了 rm -rf 就是"
+        "「使用者以為更新了、其實還在跑舊版」，而且不報錯。",
+    )
+
+
+def _unguarded_install_cp():
+    """找出「前面沒有先 rm -rf 目標端」的安裝 cp 行。
+
+    只看同一個 ``` 程式碼區塊內、這一行之前的內容——rm 寫在別的區塊或別的段落
+    對照著貼的人不會執行到，等於沒有保護。
+    """
+    hits = []
+    for p in docs():
+        try:
+            lines = p.read_text(encoding="utf-8").split("\n")
+        except OSError as e:
+            hits.append((rel(p), f"<讀不到：{e}>"))
+            continue
+        guarded_since_fence = False
+        for i, line in enumerate(lines, 1):
+            if line.lstrip().startswith("```"):
+                guarded_since_fence = False       # 換區塊，保護重新計算
+                continue
+            if SELF_EXEMPT in line:
+                continue
+            if RM_TARGET.search(line):
+                guarded_since_fence = True
+            if INSTALL_CP.search(line) and not guarded_since_fence:
+                hits.append((f"{rel(p)}:{i}", line.strip()[:70]))
+    return hits
 
 
 def _check_must_exist_one(failures, skill_root, label, needles):
@@ -285,8 +327,15 @@ def self_test():
         opening_en = "Hi, I'm vv — the AI co-pilot coach Vivi built for you."
         opening_zh = "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。"
 
-        clean_en_md = "\n".join([opening_en] + common_lines)
-        clean_zh_md = "\n".join([opening_zh] + common_lines)
+        # 乾淨樣本也放一組「有先 rm -rf 才 cp」的安裝指令，證明正確寫法不會被誤報
+        guarded_install = [
+            "```bash",
+            "rm -rf ~/.codex/skills/vv-conductor",
+            "cp -R x/skills/vv-conductor ~/.codex/skills/vv-conductor",
+            "```",
+        ]
+        clean_en_md = "\n".join([opening_en] + common_lines + guarded_install)
+        clean_zh_md = "\n".join([opening_zh] + common_lines + guarded_install)
         (skill_en / "SKILL.md").write_text(clean_en_md, encoding="utf-8")
         (skill_zh / "SKILL.md").write_text(clean_zh_md, encoding="utf-8")
         (tmp / "README.md").write_text("clean readme, nothing to see here.", encoding="utf-8")
@@ -309,6 +358,9 @@ def self_test():
                     "路徑是 /Users/someone/x",  # leak-pattern
                     "See `不存在的檔案.md` for details.",
                     "cp -R x/memory-templates/*.md ~/vv-memory/",  # leak-pattern
+                    "```bash",
+                    "cp -R x/skills/vv-conductor ~/.codex/skills/vv-conductor",  # leak-pattern
+                    "```",
                 ]
             )
             bad_zh_md = clean_zh_md.replace(opening_zh + "\n", "")
@@ -324,12 +376,12 @@ def self_test():
         ROOT, SKILL, ROOT_ZH, SKILL_ZH = orig
         shutil.rmtree(tmp, ignore_errors=True)
 
-    clean_joined = "\n".join(clean_failures)
     bad_joined = "\n".join(bad_failures)
     cases = {
         "乾淨樣本零 failure": not clean_failures,
         "跨檔規矩(check_forbidden)": "退版一律要使用者拍板" in bad_joined,
         "防覆蓋(check_forbidden)": "複製空白原稿一定要防覆蓋" in bad_joined,
+        "安裝cp要先rm(check_forbidden)": "安裝 skill 的 cp 前面要先 rm -rf 目標端" in bad_joined,
         "英文必留項(check_must_exist)": "必留項不見了（英文）" in bad_joined,
         "zh-TW必留項(check_must_exist)": "必留項不見了（zh-TW）" in bad_joined,
         "洩漏(check_leak)": "零洩漏" in bad_joined,

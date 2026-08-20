@@ -181,6 +181,7 @@ Installation is identical on both sides, only the folder name differs. Paste whi
 
 ```bash
 mkdir -p ~/.codex/skills
+rm -rf ~/.codex/skills/vv-conductor
 cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/vv-conductor
 ```
 
@@ -188,6 +189,7 @@ cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/vv-conductor
 
 ```bash
 mkdir -p ~/.claude/skills
+rm -rf ~/.claude/skills/vv-conductor
 cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/vv-conductor
 ```
 
@@ -229,9 +231,13 @@ cd ~/vv-conductor-public && git pull
 ```
 
 ```bash
+rm -rf ~/.codex/skills/vv-conductor
 cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/vv-conductor    # if you use Codex
+rm -rf ~/.claude/skills/vv-conductor
 cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/vv-conductor   # if you use Claude Code
 ```
+
+⚠️ **Keep the `rm -rf` line.** On macOS, copying a folder onto a folder that already exists puts the copy *inside* it, leaving you with `vv-conductor/vv-conductor` and the old version still in charge — with no error message. Deleting the target first is what makes an update actually replace anything. This only removes the installed copy of this package; your own memory Vault lives in `~/vv-memory/` and is never touched.
 
 What the AI actually reads is the files in `~/.codex/skills/vv-conductor/` (or `~/.claude/skills/vv-conductor/` for Claude Code). If you only pull the repo to the latest version without overwriting the local skill, new conversations will keep running the old version.
 

@@ -181,14 +181,16 @@ AI 陪跑教練就是讓兩邊都照同一套工作規則跑。你兩邊都裝�
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.codex/skills/
+rm -rf ~/.codex/skills/vv-conductor
+cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.codex/skills/vv-conductor
 ```
 
 ### 如果你用 Claude Code
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.claude/skills/
+rm -rf ~/.claude/skills/vv-conductor
+cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.claude/skills/vv-conductor
 ```
 
 兩邊都用的話，兩段都貼，各裝各的不會打架。
@@ -229,9 +231,13 @@ cd ~/vv-conductor-public && git pull
 ```
 
 ```bash
-cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.codex/skills/    # 你用 Codex 的話
-cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.claude/skills/   # 你用 Claude Code 的話
+rm -rf ~/.codex/skills/vv-conductor
+cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.codex/skills/vv-conductor    # 你用 Codex 的話
+rm -rf ~/.claude/skills/vv-conductor
+cp -R ~/vv-conductor-public/zh-TW/skills/vv-conductor ~/.claude/skills/vv-conductor   # 你用 Claude Code 的話
 ```
+
+⚠️ **`rm -rf` 那行不能拿掉。** 在 macOS 上，把資料夾複製到一個「已經存在的同名資料夾」上，會變成複製到**它裡面**，結果是 `vv-conductor/vv-conductor`，舊版還在當家——而且完全不會報錯。先刪掉目標，更新才會真的換掉東西。這只會刪掉安裝的這包，你自己的記憶庫在 `~/vv-memory/`，完全不受影響。
 
 AI 實際讀的是 `~/.codex/skills/vv-conductor/`（Claude Code 是 `~/.claude/skills/vv-conductor/`）裡的檔案。只把 repo 拉成最新、沒有覆蓋本機 skill 的話，新對話還是會一直跑舊版。
 

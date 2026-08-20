@@ -41,14 +41,18 @@ Keep the two trees structurally identical — same relative paths, same file rol
 
 Codex and Claude Code can both install the same `vv-conductor` folder. Only the target directory differs. Point the `cp` source at `skills/vv-conductor` for the English pack, or `zh-TW/skills/vv-conductor` for the Chinese pack — pick one language, not both, since they install to the same target path.
 
+⚠️ Remove the destination first. On macOS, `cp -R src dst` where `dst` already exists copies *into* it, producing `vv-conductor/vv-conductor` — so re-running the install (which is exactly what updating does) silently nests instead of replacing, and the user keeps running the old version with no error.
+
 ```bash
 mkdir -p ~/.codex/skills
-cp -R <path to this package>/skills/vv-conductor ~/.codex/skills/
+rm -rf ~/.codex/skills/vv-conductor
+cp -R <path to this package>/skills/vv-conductor ~/.codex/skills/vv-conductor
 ```
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R <path to this package>/skills/vv-conductor ~/.claude/skills/
+rm -rf ~/.claude/skills/vv-conductor
+cp -R <path to this package>/skills/vv-conductor ~/.claude/skills/vv-conductor
 ```
 
 For any other agent without a skill directory, copy the package docs into its configured rule or project-knowledge area according to that tool's conventions.
