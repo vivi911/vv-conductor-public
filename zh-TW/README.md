@@ -1,8 +1,16 @@
 # AI 陪跑教練（vv）vv-pack-1.7.0
 
 <p align="center">
-  <img src="../assets/demo-zh.svg" alt="vv 終端機示範：打 hi，vv 認出上次進度並推薦下一步" width="880">
+  <img src="../assets/demo-compare-zh.svg" alt="左右對比：沒裝 vv 每次都要重打一長串背景，AI 還是要反問；裝了 vv 只打兩個字，直接接上次進度" width="1040">
 </p>
+
+<p align="center"><em>一樣打兩個字，差別是 vv 已經知道你上次做到哪。</em></p>
+
+<p align="center">
+  <img src="../assets/demo-zh.svg" alt="vv 在動到真客人之前先停下來：把名單和文案準備好給你看過，你按過才送出" width="760">
+</p>
+
+<p align="center"><em>會動到真實世界的事，它會先停下來問過你。</em></p>
 
 <p align="center">
   <a href="https://github.com/vivi911/vv-conductor-public/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/vivi911/vv-conductor-public?style=flat-square&color=e8a33d&labelColor=1c202b"></a>

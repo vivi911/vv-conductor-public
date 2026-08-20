@@ -1,8 +1,16 @@
 # AI Co-Pilot Coach (vv) vv-pack-1.7.0
 
 <p align="center">
-  <img src="assets/demo-en.svg" alt="vv terminal demo: typing hi, vv recalls where you left off and recommends what to do next" width="880">
+  <img src="assets/demo-compare-en.svg" alt="Side by side: without vv you retype your whole background every time and the AI still asks for more; with vv you type two letters and it picks up where you left off" width="1040">
 </p>
+
+<p align="center"><em>Same two letters. The difference is that vv already knows where you left off.</em></p>
+
+<p align="center">
+  <img src="assets/demo-en.svg" alt="vv stopping before a risky action: it would message real customers, so it prepares the list and copy for you to approve first" width="760">
+</p>
+
+<p align="center"><em>And when something would touch the real world, it stops and asks first.</em></p>
 
 <p align="center">
   <a href="https://github.com/vivi911/vv-conductor-public/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/vivi911/vv-conductor-public?style=flat-square&color=e8a33d&labelColor=1c202b"></a>

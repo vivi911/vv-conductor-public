@@ -1,63 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 360" width="880" height="360" role="img" aria-label="vv terminal demo">
-  <defs>
-    <clipPath id="rounded"><rect x="0" y="0" width="880" height="360" rx="14" ry="14"/></clipPath>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Terminal demo: asking vv to ship something, and vv stopping to ask first because it would message real customers.">
   <style>
-    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    .chrome-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .fadegroup { animation: cyclefade 9.0s ease-in-out infinite; }
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Noto Sans TC", sans-serif; }
+    .chrome-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif; }
+    .cycle { animation: cyclefade 10.0s linear infinite; }
     @keyframes cyclefade {
       0% { opacity: 1; }
-      86.7% { opacity: 1; }
-      100.0% { opacity: 0; }
+      67.8% { opacity: 1; }
       99.9% { opacity: 0; }
       100% { opacity: 0; }
     }
-    .ch { opacity: 0; animation: charin 9.0s steps(1) infinite; }
-    @keyframes charin {
+    .reveal { opacity: 0; animation: revealin 10.0s ease-out infinite; }
+    @keyframes revealin {
       0% { opacity: 0; }
-      0.3% { opacity: 1; }
+      0.4% { opacity: 1; }
       99.9% { opacity: 1; }
       100% { opacity: 0; }
     }
-    .ch-d600{animation-delay:0.60s;}.ch-d690{animation-delay:0.69s;}
-    .cursor { animation: cursorlife 9.0s steps(1) infinite; animation-delay: 0.78s; }
-    @keyframes cursorlife {
-      0% { opacity: 1; }
-      6.11% { opacity: 1; }
-      6.21% { opacity: 0; }
-      99.9% { opacity: 0; }
-      100% { opacity: 0; }
-    }
-    .resp { opacity: 0; transform: translateY(6px); animation: respin 9.0s ease-out infinite; }
-    @keyframes respin {
-      0% { opacity: 0; transform: translateY(6px); }
-      1% { opacity: 0; transform: translateY(6px); }
-      6% { opacity: 1; transform: translateY(0); }
-      99.9% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; }
-    }
-    .resp-line0{animation-delay:1.33s;}.resp-line1{animation-delay:1.75s;}.resp-line2{animation-delay:2.17s;}.resp-line3{animation-delay:2.59s;}
+    .caret { animation: caretblink 1.05s steps(1) infinite; }
+    @keyframes caretblink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    .styped{animation-delay:0.90s;}
+    .slab{animation-delay:1.90s;}
+    .sr0{animation-delay:1.90s;}
+    .sr1{animation-delay:2.32s;}
+    .sr2{animation-delay:2.74s;}
+    .sr3{animation-delay:3.16s;}
   </style>
-
-  <g clip-path="url(#rounded)">
-    <rect x="0" y="0" width="880" height="360" fill="#14171f"/>
-    <rect x="0" y="0" width="880" height="44" fill="#1c202b"/>
-    <line x1="0" y1="44" x2="880" y2="44" stroke="#333a4d" stroke-width="1"/>
-    <circle cx="26" cy="22" r="6.5" fill="#ff5f56"/>
-    <circle cx="46" cy="22" r="6.5" fill="#ffbd2e"/>
-    <circle cx="66" cy="22" r="6.5" fill="#27c93f"/>
-    <text class="chrome-title" x="440.0" y="27" text-anchor="middle" font-size="13" fill="#9aa1b2">vv — claude</text>
-
-    <g class="fadegroup">
-      <text x="40" y="90" font-size="17" fill="#9aa1b2">$ claude</text>
-
-      <text x="40" y="140" font-size="17" fill="#e8a33d">&gt;</text>
-      <text x="66" y="140" font-size="17" fill="#f4f1e8"><tspan class="ch ch-d600">h</tspan><tspan class="ch ch-d690">i</tspan></text>
-      <rect class="cursor" x="86" y="126" width="9" height="18" fill="#e8a33d" style="animation-delay:0.93s"/>
-
-      <text x="40" y="210" font-size="17" font-weight="700" fill="#e8a33d">vv</text>
-      <text class="resp resp-line0" x="150" y="210" font-size="17" fill="#f4f1e8">You're back. Landing page copy is done —</text><text class="resp resp-line1" x="150" y="240" font-size="17" fill="#f4f1e8">next step: add the pricing section.</text><text class="resp resp-line2" x="150" y="270" font-size="17" fill="#f4f1e8">[Pricing page] is stuck on your review,</text><text class="resp resp-line3" x="150" y="300" font-size="17" fill="#f4f1e8">[Q3 roadmap] hasn't started. Which first?</text>
+  
+    <clipPath id="clip-s"><rect x="0" y="6" width="760" height="288" rx="14" ry="14"/></clipPath>
+    <g clip-path="url(#clip-s)">
+      <rect x="0" y="6" width="760" height="288" fill="#14171f"/>
+      <rect x="0" y="6" width="760" height="40" fill="#1c202b"/>
+      <line x1="0" y1="46" x2="760" y2="46" stroke="#333a4d" stroke-width="1"/>
+      <circle cx="22" cy="26" r="5.5" fill="#ff5f56"/>
+      <circle cx="40" cy="26" r="5.5" fill="#ffbd2e"/>
+      <circle cx="58" cy="26" r="5.5" fill="#27c93f"/>
+      <text class="chrome-title" x="380.0" y="31" text-anchor="middle" font-size="12.5" fill="#9aa1b2">vv — claude</text>
     </g>
+  <g class="cycle">
+    <text x="30" y="80" font-size="16" fill="#6b7284">$ claude</text><text x="30" y="118" font-size="16" fill="#e8a33d">&gt;</text><text class="reveal styped" x="56" y="118" font-size="16" fill="#f4f1e8">vv can I just ship this?</text><text class="reveal slab" x="30" y="178" font-size="16" fill="#e8a33d" font-weight="700">vv</text><text class="reveal sr0" x="86" y="178" font-size="16" fill="#f4f1e8">This one's a red light — it messages real</text><text class="reveal sr1" x="86" y="205" font-size="16" fill="#f4f1e8">customers. I'll prep the list and the copy</text><text class="reveal sr2" x="86" y="232" font-size="16" fill="#f4f1e8">for you to look at; I only send after you</text><text class="reveal sr3" x="86" y="259" font-size="16" fill="#f4f1e8">say go.</text>
   </g>
 </svg>

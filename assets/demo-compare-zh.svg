@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 356" width="1040" height="356" role="img" aria-label="Side by side: without vv you retype your background every time and the AI still asks for more; with vv you type two letters and it picks up where you left off.">
+  <style>
+    text { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Noto Sans TC", sans-serif; }
+    .chrome-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif; }
+    .cycle { animation: cyclefade 11.0s linear infinite; }
+    @keyframes cyclefade {
+      0% { opacity: 1; }
+      62.5% { opacity: 1; }
+      99.9% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    .reveal { opacity: 0; animation: revealin 11.0s ease-out infinite; }
+    @keyframes revealin {
+      0% { opacity: 0; }
+      0.4% { opacity: 1; }
+      99.9% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .caret { animation: caretblink 1.05s steps(1) infinite; }
+    @keyframes caretblink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    .li0{animation-delay:0.90s;}
+    .li1{animation-delay:1.32s;}
+    .li2{animation-delay:1.74s;}
+    .llab{animation-delay:2.71s;}
+    .lr0{animation-delay:2.71s;}
+    .lr1{animation-delay:3.09s;}
+    .rc0{animation-delay:0.90s;}
+    .rc1{animation-delay:1.06s;}
+    .rcaret{animation-delay:0.90s;}
+    .rlab{animation-delay:1.72s;}
+    .rr0{animation-delay:1.72s;}
+    .rr1{animation-delay:2.10s;}
+    .rr2{animation-delay:2.48s;}
+    .rr3{animation-delay:2.86s;}
+  </style>
+  
+    <clipPath id="clip-l"><rect x="0" y="6" width="500" height="344" rx="14" ry="14"/></clipPath>
+    <g clip-path="url(#clip-l)">
+      <rect x="0" y="6" width="500" height="344" fill="#14171f"/>
+      <rect x="0" y="6" width="500" height="40" fill="#1c202b"/>
+      <line x1="0" y1="46" x2="500" y2="46" stroke="#333a4d" stroke-width="1"/>
+      <circle cx="22" cy="26" r="5.5" fill="#ff5f56"/>
+      <circle cx="40" cy="26" r="5.5" fill="#ffbd2e"/>
+      <circle cx="58" cy="26" r="5.5" fill="#27c93f"/>
+      <text class="chrome-title" x="250.0" y="31" text-anchor="middle" font-size="12.5" fill="#6b7284">沒裝 vv</text>
+    </g>
+    <clipPath id="clip-r"><rect x="540" y="6" width="500" height="344" rx="14" ry="14"/></clipPath>
+    <g clip-path="url(#clip-r)">
+      <rect x="540" y="6" width="500" height="344" fill="#14171f"/>
+      <rect x="540" y="6" width="500" height="40" fill="#1c202b"/>
+      <line x1="540" y1="46" x2="1040" y2="46" stroke="#333a4d" stroke-width="1"/>
+      <circle cx="562" cy="26" r="5.5" fill="#ff5f56"/>
+      <circle cx="580" cy="26" r="5.5" fill="#ffbd2e"/>
+      <circle cx="598" cy="26" r="5.5" fill="#27c93f"/>
+      <text class="chrome-title" x="790.0" y="31" text-anchor="middle" font-size="12.5" fill="#e8a33d">裝了 vv</text>
+    </g>
+  <g class="cycle">
+    <text x="24" y="78" font-size="15" fill="#6b7284">$ claude</text><text x="24" y="116" font-size="15" fill="#6b7284">&gt;</text><text class="reveal li0" x="48" y="116" font-size="15" fill="#f4f1e8">我是做電商的，上週在改秋季</text><text class="reveal li1" x="48" y="140" font-size="15" fill="#f4f1e8">檔期文案，改到一半，客戶提案</text><text class="reveal li2" x="48" y="164" font-size="15" fill="#f4f1e8">簡報也還沒做完，你可以幫我…</text><text class="reveal llab" x="24" y="246" font-size="15" fill="#9aa1b2" font-weight="700">AI</text><text class="reveal lr0" x="70" y="246" font-size="15" fill="#9aa1b2">好的，可以再多說一點你的</text><text class="reveal lr1" x="70" y="270" font-size="15" fill="#9aa1b2">產品和客戶背景嗎？</text>
+    <text x="564" y="78" font-size="15" fill="#6b7284">$ claude</text><text x="564" y="116" font-size="15" fill="#e8a33d">&gt;</text><text class="reveal rc0" x="588" y="116" font-size="15" fill="#f4f1e8">v</text><text class="reveal rc1" x="597" y="116" font-size="15" fill="#f4f1e8">v</text><g class="reveal rcaret"><rect class="caret" x="606" y="104" width="8" height="16" fill="#e8a33d"/></g><text class="reveal rlab" x="564" y="246" font-size="15" fill="#e8a33d" font-weight="700">vv</text><text class="reveal rr0" x="610" y="246" font-size="15" fill="#f4f1e8">你回來了。秋季檔期文案寫到</text><text class="reveal rr1" x="610" y="270" font-size="15" fill="#f4f1e8">第 3 版，下一步是排上架時間。</text><text class="reveal rr2" x="610" y="294" font-size="15" fill="#f4f1e8">［客戶提案］還卡在等對方回覆。</text><text class="reveal rr3" x="610" y="318" font-size="15" fill="#f4f1e8">要先接哪一個？</text>
+  </g>
+</svg>
