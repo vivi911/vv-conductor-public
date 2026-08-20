@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """發布前一致性檢查。
 
-這包的同一條規矩會出現在好幾個檔案裡（SKILL.md 給 AI 讀、指揮家.md 給人讀、
-onboarding.md 是首次流程、references/ 是補充）。手改其中一份、忘了另一份，
-規則就會互相矛盾，而且不會有任何錯誤訊息——AI 只是選到不一樣的做法。
+這包的同一條規矩會出現在好幾個檔案裡（SKILL.md 給 AI 讀、conductor.md/指揮家.md 給人讀、
+onboarding.md 是首次流程、references/ 是補充），而且現在有**兩個語言樹**：英文（repo 根目錄，
+預設語言）與 zh-TW（Traditional Chinese，`zh-TW/` 底下）。手改其中一份、忘了另一份 —— 不管是
+忘了同一語言的另一個檔案，還是忘了另一個語言樹 —— 規則就會互相矛盾，而且不會有任何錯誤訊息，
+AI 只是選到不一樣的做法。
 
 這支腳本就是攔這件事的。發布前跑，不綠不推。
 
@@ -24,7 +26,9 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILL = ROOT / "skills" / "vv-conductor"
+SKILL = ROOT / "skills" / "vv-conductor"              # English track (default, repo root)
+ROOT_ZH = ROOT / "zh-TW"
+SKILL_ZH = ROOT_ZH / "skills" / "vv-conductor"          # Traditional Chinese track
 
 # 這一行以下的樣式定義本身含有要偵測的字串，掃自己時要跳過
 SELF_EXEMPT = "# leak-pattern"
@@ -50,8 +54,14 @@ def _is_git_ignored(path: Path) -> bool:
 
 
 def docs():
-    """規則檔全體（母體），不是「我改過的檔案」；跳過 gitignore 掉的本機筆記。"""
-    found = list(ROOT.glob("*.md")) + list(SKILL.rglob("*.md"))
+    """規則檔全體（母體），涵蓋英文（預設，repo 根目錄）與 zh-TW 兩個語言樹；
+    不是「我改過的檔案」；跳過 gitignore 掉的本機筆記。"""
+    found = (
+        list(ROOT.glob("*.md"))
+        + list(SKILL.rglob("*.md"))
+        + list(ROOT_ZH.glob("*.md"))
+        + list(SKILL_ZH.rglob("*.md"))
+    )
     return sorted(p for p in found if not _is_git_ignored(p))
 
 
@@ -59,7 +69,7 @@ def scripts():
     return sorted((ROOT / "scripts").glob("*.py"))
 
 
-# ── 跨檔規矩：同一條規矩，任何檔案都不准出現「舊的／相反的」講法 ──────────────
+# ── 跨檔規矩：同一條規矩，任何檔案（任何語言樹）都不准出現「舊的／相反的」講法 ──
 # 每條 = (規矩名, 禁止出現的 regex, 為什麼這樣寫會出事)
 FORBIDDEN = [
     (
@@ -94,8 +104,8 @@ FORBIDDEN = [
 COPY_LINE = re.compile(r"^\s*cp\b.*memory-templates.*~/vv-memory")  # leak-pattern
 NO_CLOBBER = re.compile(r"(^|\s)(-[a-zA-Z]*n[a-zA-Z]*|--no-clobber)(\s|$)")
 
-MUST_EXIST = {
-    "固定開場白": "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。",
+# 兩個語言樹共用的必留項（語言無關：網址、ID、已經是英文的固定小節標題）
+MUST_EXIST_COMMON = {
     "官網": "https://goaskvivi.com/",
     "台灣 LINE": "https://lin.ee/ZgPigfa",
     "小紅書號": "940160605",
@@ -103,6 +113,13 @@ MUST_EXIST = {
     "Vault 位置章節": "## Vault Location",
     "存檔章節": "### Save the Vault",
     "更新檢查章節": "## Update Check",
+}
+# 各語言樹自己的固定開場白（這句話兩邊必須是各自語言的版本，不是同一句）
+MUST_EXIST_EN_ONLY = {
+    "固定開場白（英文）": "Hi, I'm vv — the AI co-pilot coach Vivi built for you.",
+}
+MUST_EXIST_ZH_ONLY = {
+    "固定開場白（中文）": "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。",
 }
 
 LEAK = (
@@ -115,7 +132,9 @@ LEAK = (
 
 EXTERNAL_REFS = {
     "AGENTS.md", "CLAUDE.md", "HANDOFF-LATEST.md",
-    "SKILL.md", "指揮家.md", "vv-老闆視角.md", "README.md",
+    "SKILL.md", "README.md",
+    "conductor.md", "boss-view.md",       # English track human-readable docs
+    "指揮家.md", "vv-老闆視角.md",         # zh-TW track human-readable docs
 }
 
 # 反引號寫法與 markdown 連結寫法都要抓，只抓一種會漏
@@ -158,7 +177,7 @@ def report(failures, name, hits, why=None):
 
 
 def check_forbidden(failures):
-    print("【跨檔規矩】同一條規矩，有沒有檔案還留著相反的講法")
+    print("【跨檔規矩】同一條規矩，有沒有檔案還留著相反的講法（兩個語言樹一起掃）")
     targets = docs() + scripts()
     for name, pattern, why in FORBIDDEN:
         rx = re.compile(pattern)
@@ -172,20 +191,27 @@ def check_forbidden(failures):
     )
 
 
-def check_must_exist(failures):
-    print("\n【必留項】公開包原本就有的東西，有沒有被改掉或弄丟")
-    path = SKILL / "SKILL.md"
+def _check_must_exist_one(failures, skill_root, label, needles):
+    path = skill_root / "SKILL.md"
     if not path.exists():
         failures.append(f"找不到 {rel(path)}，這不是檢查失敗，是包壞了或路徑錯了")
         print(f"  ❌ 找不到 {rel(path)}")
         return
     text = path.read_text(encoding="utf-8")
-    for name, needle in MUST_EXIST.items():
+    for name, needle in needles.items():
         if needle in text:
-            print(f"  ✅ {name}")
+            print(f"  ✅ [{label}] {name}")
         else:
-            failures.append(f"必留項不見了：{name}")
-            print(f"  ❌ {name}")
+            failures.append(f"必留項不見了（{label}）：{name}")
+            print(f"  ❌ [{label}] {name}")
+
+
+def check_must_exist(failures):
+    print("\n【必留項】公開包原本就有的東西，有沒有被改掉或弄丟（英文＋zh-TW 各自檢查）")
+    en_needles = {**MUST_EXIST_COMMON, **MUST_EXIST_EN_ONLY}
+    zh_needles = {**MUST_EXIST_COMMON, **MUST_EXIST_ZH_ONLY}
+    _check_must_exist_one(failures, SKILL, "英文", en_needles)
+    _check_must_exist_one(failures, SKILL_ZH, "zh-TW", zh_needles)
 
 
 def check_leak(failures):
@@ -198,19 +224,20 @@ def collect_refs(path: Path):
     text = path.read_text(encoding="utf-8")
     for rx in REF_PATTERNS:
         for m in rx.findall(text):
-            if m in EXTERNAL_REFS or m.startswith(("~", "/")) or "YYYY" in m or "待填" in m:
+            if m in EXTERNAL_REFS or m.startswith(("~", "/")) or "YYYY" in m or "待填" in m or "TBD" in m:
                 continue
             yield m
 
 
 def check_refs(failures):
-    print("\n【斷鏈】skill 裝到別台電腦後，檔案引用還找得到嗎")
+    print("\n【斷鏈】skill 裝到別台電腦後，檔案引用還找得到嗎（英文＋zh-TW 各自檢查）")
     bad, total = [], 0
-    for p in SKILL.rglob("*.md"):
-        for ref in collect_refs(p):
-            total += 1
-            if not ((p.parent / ref).exists() or (SKILL / ref).exists()):
-                bad.append((rel(p), ref))
+    for skill_root in (SKILL, SKILL_ZH):
+        for p in skill_root.rglob("*.md"):
+            for ref in collect_refs(p):
+                total += 1
+                if not ((p.parent / ref).exists() or (skill_root / ref).exists()):
+                    bad.append((rel(p), ref))
     if bad:
         failures.append("引用斷鏈：\n     " + "\n     ".join(f"{a} → {b}" for a, b in bad))
         print(f"  ❌ {len(bad)} 條斷鏈（共檢查 {total} 條）")
@@ -228,49 +255,55 @@ def self_test():
     完全沒證明那個正則真的被掛進 check_* 函式的執行路徑——把 check_forbidden
     整支換成 `pass`，舊版自檢照樣全線通過。
 
-    新做法：搭一個假規則資料夾（暫存目錄，用完即刪），塞一份「乾淨樣本」和
-    一份「已知踩了全部五類問題的壞樣本」，把全域 ROOT／SKILL 指過去，
-    直接呼叫真正的四個 check_* 函式蒐集 failures，再拆封驗證：
-    乾淨樣本要零 failure、壞樣本五類問題要五個都被點名。
-    任何一個 check_* 被掏空或改壞，這裡都會抓到。
+    新做法：搭一個假規則資料夾（暫存目錄，用完即刪），塞英文與 zh-TW 兩個語言樹
+    各一份「乾淨樣本」，把全域 ROOT／SKILL／ROOT_ZH／SKILL_ZH 指過去，直接呼叫
+    真正的四個 check_* 函式蒐集 failures，先驗證兩個語言樹的乾淨樣本都是零 failure；
+    再疊上「已知踩了全部五類問題的壞樣本」（並同時拿掉兩個語言樹各自的固定開場白），
+    驗證五類問題＋兩個語言樹的必留項都被點名。任何一個 check_* 被掏空或改壞，這裡都會抓到。
     """
-    global ROOT, SKILL
+    global ROOT, SKILL, ROOT_ZH, SKILL_ZH
 
-    orig_root, orig_skill = ROOT, SKILL
+    orig = (ROOT, SKILL, ROOT_ZH, SKILL_ZH)
     tmp = Path(tempfile.mkdtemp(prefix="vv-selftest-"))
     try:
-        skill = tmp / "skills" / "vv-conductor"
-        skill.mkdir(parents=True)
+        skill_en = tmp / "skills" / "vv-conductor"
+        skill_en.mkdir(parents=True)
+        root_zh = tmp / "zh-TW"
+        skill_zh = root_zh / "skills" / "vv-conductor"
+        skill_zh.mkdir(parents=True)
 
-        clean_skill_md = "\n".join(
-            [
-                "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。",
-                "https://goaskvivi.com/",
-                "https://lin.ee/ZgPigfa",
-                "940160605",
-                "Never invent your own questions",
-                "## Vault Location",
-                "### Save the Vault",
-                "## Update Check",
-                "See `README.md` for details.",
-            ]
-        )
-        (skill / "SKILL.md").write_text(clean_skill_md, encoding="utf-8")
+        common_lines = [
+            "https://goaskvivi.com/",
+            "https://lin.ee/ZgPigfa",
+            "940160605",
+            "Never invent your own questions",
+            "## Vault Location",
+            "### Save the Vault",
+            "## Update Check",
+            "See `README.md` for details.",
+        ]
+        opening_en = "Hi, I'm vv — the AI co-pilot coach Vivi built for you."
+        opening_zh = "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。"
+
+        clean_en_md = "\n".join([opening_en] + common_lines)
+        clean_zh_md = "\n".join([opening_zh] + common_lines)
+        (skill_en / "SKILL.md").write_text(clean_en_md, encoding="utf-8")
+        (skill_zh / "SKILL.md").write_text(clean_zh_md, encoding="utf-8")
         (tmp / "README.md").write_text("clean readme, nothing to see here.", encoding="utf-8")
+        (root_zh / "README.md").write_text("clean readme zh, nothing to see here.", encoding="utf-8")
 
         with contextlib.redirect_stdout(io.StringIO()):
-            ROOT, SKILL = tmp, skill
+            ROOT, SKILL, ROOT_ZH, SKILL_ZH = tmp, skill_en, root_zh, skill_zh
             clean_failures = []
             check_forbidden(clean_failures)
             check_must_exist(clean_failures)
             check_leak(clean_failures)
             check_refs(clean_failures)
 
-            # 疊在乾淨樣本上加壞內容、同時拿掉一個必留項，五類問題一次到齊：
-            # 違禁講法、漏防覆蓋、必留項不見、洩漏字串、引用斷鏈。
-            bad_skill_md = clean_skill_md.replace(
-                "嗨，我是 vv——Vivi 老師為你打造的 AI 陪跑教練。\n", ""
-            ) + "\n" + "\n".join(
+            # 疊在乾淨樣本上加壞內容、同時拿掉兩個語言樹各自的固定開場白，
+            # 六類問題一次到齊：違禁講法、漏防覆蓋、英文必留項不見、zh-TW 必留項
+            # 不見、洩漏字串、引用斷鏈。
+            bad_en_md = clean_en_md.replace(opening_en + "\n", "") + "\n" + "\n".join(
                 [
                     "這裡寫了自動退版",  # leak-pattern
                     "路徑是 /Users/someone/x",  # leak-pattern
@@ -278,7 +311,9 @@ def self_test():
                     "cp -R x/memory-templates/*.md ~/vv-memory/",  # leak-pattern
                 ]
             )
-            (skill / "SKILL.md").write_text(bad_skill_md, encoding="utf-8")
+            bad_zh_md = clean_zh_md.replace(opening_zh + "\n", "")
+            (skill_en / "SKILL.md").write_text(bad_en_md, encoding="utf-8")
+            (skill_zh / "SKILL.md").write_text(bad_zh_md, encoding="utf-8")
 
             bad_failures = []
             check_forbidden(bad_failures)
@@ -286,14 +321,17 @@ def self_test():
             check_leak(bad_failures)
             check_refs(bad_failures)
     finally:
-        ROOT, SKILL = orig_root, orig_skill
+        ROOT, SKILL, ROOT_ZH, SKILL_ZH = orig
         shutil.rmtree(tmp, ignore_errors=True)
 
+    clean_joined = "\n".join(clean_failures)
     bad_joined = "\n".join(bad_failures)
     cases = {
-        "跨檔規矩(check_forbidden)": not clean_failures and "退版一律要使用者拍板" in bad_joined,
+        "乾淨樣本零 failure": not clean_failures,
+        "跨檔規矩(check_forbidden)": "退版一律要使用者拍板" in bad_joined,
         "防覆蓋(check_forbidden)": "複製空白原稿一定要防覆蓋" in bad_joined,
-        "必留項(check_must_exist)": "必留項不見了" in bad_joined,
+        "英文必留項(check_must_exist)": "必留項不見了（英文）" in bad_joined,
+        "zh-TW必留項(check_must_exist)": "必留項不見了（zh-TW）" in bad_joined,
         "洩漏(check_leak)": "零洩漏" in bad_joined,
         "斷鏈(check_refs)": "引用斷鏈" in bad_joined,
     }
@@ -314,7 +352,7 @@ def main():
     if not all_docs:
         print("🔴 找不到任何規則檔，路徑可能錯了")
         return 2
-    print(f"檢查 {len(all_docs)} 份規則檔 + {len(scripts())} 支腳本\n")
+    print(f"檢查 {len(all_docs)} 份規則檔（英文＋zh-TW）+ {len(scripts())} 支腳本\n")
 
     failures = []
     check_forbidden(failures)

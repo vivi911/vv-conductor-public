@@ -1,3 +1,4 @@
 # 這份公開包會跑 leak scan（scripts/check-consistency.py），
-# HANDOFF-LATEST.md 是 Vivi 自己的內部進度筆記，會引用內部路徑，不進 git。
+# HANDOFF-*.md 是 Vivi 自己的內部進度筆記（含快照版本），會引用內部路徑，不進 git。
 HANDOFF-LATEST.md
+HANDOFF-*.md

@@ -1,4 +1,4 @@
 interface:
-  display_name: "AI 陪跑教練"
-  short_description: "先安全完成第一個任務，再接上記憶、派工與驗收。"
-  default_prompt: "請使用 $vv-conductor，以 AI 陪跑教練模式先陪我拆需求、講風險、縮小第一版，再決定是否接上記憶與派工。"
+  display_name: "AI Co-Pilot Coach"
+  short_description: "Finish the first task safely, then connect memory, task dispatch, and verification."
+  default_prompt: "Use $vv-conductor as an AI co-pilot coach: first help me break down the requirement, name the risks, and shrink it to a safe first version, then decide whether to bring in memory and task dispatch."

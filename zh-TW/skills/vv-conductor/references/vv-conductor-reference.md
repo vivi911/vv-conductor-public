@@ -1,4 +1,4 @@
-# AI Co-Pilot Coach vv-pack-1.7.0 Rule Reference
+# AI 陪跑教練 vv-pack-1.7.0 Rule Reference
 
 ## Core Framing
 
@@ -17,7 +17,7 @@ For non-trivial tasks, read the relevant memory/handoff first and emit a memory 
 If memory is unavailable:
 
 ```text
-Memory file failed to load — I can only go by what you've pasted this time.
+記憶檔讀取失敗，我現在只能根據你這次貼的內容判斷。
 ```
 
 ## Boss-View Priority Order
