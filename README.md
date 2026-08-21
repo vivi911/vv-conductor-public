@@ -126,6 +126,72 @@ vv-pack-1.7.0 is "safely finish the first thing, then decide whether to let the 
 - Anyone who wants Claude Code, Codex, or other AI tools to help break down tasks, write documents, write code, and verify results.
 - Anyone tired of re-explaining their background, rules, and no-go zones every single time.
 
+## The Fastest Way: Let Your AI Install It
+
+You already have Claude Code or Codex open — that's what vv runs on. So let it do the install.
+
+Copy everything in the box below, paste it into Claude Code or Codex, and send. It downloads the package, installs it in the right place for whichever tool you're using, and checks the result. You don't have to type a single command yourself.
+
+```text
+Please install the vv AI co-pilot coach. Follow the steps below, report the result when you're done, and do nothing else.
+
+1. Download the package to my computer:
+   - If ~/vv-conductor-public/.git already exists (a normal git folder), run:
+     cd ~/vv-conductor-public && git pull
+   - If ~/vv-conductor-public does not exist, run:
+     git clone https://github.com/vivi911/vv-conductor-public.git ~/vv-conductor-public
+   - If it exists but is not a valid git folder (for example an empty shell left by a
+     failed download), just move it aside — do not delete it:
+     mv ~/vv-conductor-public ~/vv-conductor-public.broken-<today's date>
+     then run the git clone line above.
+
+   ⚠️ If this step fails (no network, for example), stop here and tell me. Do not continue.
+
+2. Work out whether you are Claude Code or Codex, and pick the matching target folder:
+   - You are Claude Code → target is ~/.claude/skills/vv-conductor
+   - You are Codex       → target is ~/.codex/skills/vv-conductor
+
+   Make sure the parent folder exists first (it may not on a fresh machine):
+     mkdir -p <the skills folder that contains the target>
+
+   Wherever a date appears below, use the YYYY-MM-DD format, e.g. 2026-08-22.
+   Never put spaces or slashes in a folder name.
+
+3. Install. First check whether the target folder exists:
+
+   - **If it does not exist**: just copy it over, no renaming needed.
+     cp -R ~/vv-conductor-public/skills/vv-conductor <target folder>
+
+   - **If it already exists** (meaning I installed an older version before):
+     **move the old one aside first — do not delete it** — then copy the new one over.
+     mv <target folder> <target folder>.old-<today's date>
+     cp -R ~/vv-conductor-public/skills/vv-conductor <target folder>
+
+     ⚠️ If that `.old-<today's date>` name is already taken (I already reinstalled today),
+     do not overwrite it. Use an unused name instead, such as appending `-2`, `-3`, until
+     you find a free one. Overwriting it would destroy my previous backup.
+
+   ⚠️ Why the old one must be moved aside: on macOS, copying a folder onto a folder that
+   already exists copies it *inside* (vv-conductor/vv-conductor). The result is that the
+   **old version keeps running and nothing reports an error** — I would think I had
+   updated when I had not.
+
+   ⚠️ Rename rather than delete, so I can put the old version back if something breaks.
+
+4. Do not touch ~/vv-memory/. That is my own memory Vault, not part of this install.
+   Do not create it either, even if it does not exist.
+
+5. When you're done, list the files in the target folder for me and confirm all four of
+   these are there: SKILL.md, onboarding.md, memory-templates/, references/
+   Then tell me: open a new conversation and type "vv" to start it.
+
+Do not modify any other file on my computer beyond the steps above.
+```
+
+If your AI asks for permission to run commands, say yes — it needs that to download the files and put them in place.
+
+Prefer to do it by hand? The manual steps are below.
+
 ## First, Download This Package to Your Computer
 
 Every step after this starts from the copy on your own computer, so grab it first.
