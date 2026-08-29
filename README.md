@@ -105,22 +105,6 @@ vv, can this run automatically, or does it need my sign-off?
 
 One sentence: **open a conversation → type `vv` or `vivi` → say what you want to do**. No commands to memorize, no complicated prompts to write.
 
-## Version history: what changed from v1.5 to v1.6
-
-> Historical version note. The current shipping version is **vv-pack-1.7.0**; the table below records the earlier v1.5 → v1.6 change and is kept for history.
-
-| v1.5 (historical) | v1.6 (historical) |
-|---|---|
-| Focused on "execution rules": task tiers, dispatch, red/yellow/green authorization, verification, stop-loss | Adds a "memory entry point": the AI gets to know you first, then starts working safely |
-| The AI mainly read `conductor.md` when starting work | The AI reads the memory signal first, then `conductor.md` |
-| Better suited to someone who already has a fixed AI workflow | Better suited to someone adopting an AI work hub for the first time |
-| Progress handed off via `HANDOFF-LATEST.md` | Progress still uses handoff, but adds "Boss View" to remind you of forgotten items |
-
-One sentence:
-
-v1.5 was "safety rules for before the AI acts."
-v1.6 was "safely finish the first thing, then decide whether to let the AI get to know you long-term" — the direction the current vv-pack-1.7.0 still follows.
-
 ## Who This Package Is For
 
 - Founders, managers, consultants, freelancers.
