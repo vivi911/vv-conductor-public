@@ -105,9 +105,11 @@ vv, can this run automatically, or does it need my sign-off?
 
 One sentence: **open a conversation → type `vv` or `vivi` → say what you want to do**. No commands to memorize, no complicated prompts to write.
 
-## What Changed from v1.5 to v1.6
+## Version history: what changed from v1.5 to v1.6
 
-| v1.5 | v1.6 |
+> Historical version note. The current shipping version is **vv-pack-1.7.0**; the table below records the earlier v1.5 → v1.6 change and is kept for history.
+
+| v1.5 (historical) | v1.6 (historical) |
 |---|---|
 | Focused on "execution rules": task tiers, dispatch, red/yellow/green authorization, verification, stop-loss | Adds a "memory entry point": the AI gets to know you first, then starts working safely |
 | The AI mainly read `conductor.md` when starting work | The AI reads the memory signal first, then `conductor.md` |
@@ -117,7 +119,7 @@ One sentence: **open a conversation → type `vv` or `vivi` → say what you wan
 One sentence:
 
 v1.5 was "safety rules for before the AI acts."
-vv-pack-1.7.0 is "safely finish the first thing, then decide whether to let the AI get to know you long-term."
+v1.6 was "safely finish the first thing, then decide whether to let the AI get to know you long-term" — the direction the current vv-pack-1.7.0 still follows.
 
 ## Who This Package Is For
 
@@ -378,7 +380,7 @@ Once you've answered, organize your answers into:
 - `~/vv-memory/projects/<project-name>.md` (one file per project you mentioned, copied from `02_project-template.md` — don't cram them all into one file)
 - `~/vv-memory/03_ai-work-rules.md`
 
-You don't need to get it perfect on the first pass. vv asks the next question once you've answered the current one; v1.6's design is to get a first version in place, then let it grow over a week of actual work.
+You don't need to get it perfect on the first pass. vv asks the next question once you've answered the current one; vv-pack-1.7.0's design is to get a first version in place, then let it grow over a week of actual work.
 
 ## Ways You Can Talk to vv
 

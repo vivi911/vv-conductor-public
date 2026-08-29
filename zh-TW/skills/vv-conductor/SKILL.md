@@ -749,7 +749,7 @@ DEPRECATED: "never commit or push without approval". Superseded by the traffic-l
 Read these only when needed:
 
 - `references/beginner-safety-start.md` for a new user, a blank Vault, or an `開工手冊` request.
-- `references/vv-conductor-reference.md` for the compact v1.6 rules.
+- `references/vv-conductor-reference.md` for the compact vv-pack-1.7.0 rules.
 - `references/memory-template-guide.md` when creating or updating user/project memory templates.
 - `references/package-maintenance.md` when packaging, validating, or installing this public skill package.
 - `onboarding.md` for the 7 Vault questions. Use them verbatim; never improvise replacements.

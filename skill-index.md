@@ -25,7 +25,7 @@ This file is the skill entry-point index for the "AI Co-Pilot Coach" public pack
 - `red/yellow/green`
 - `handoff`
 - `memory templates`
-- `use the vv v1.6 workflow`
+- `use the vv v1.7 workflow`
 
 ## How to install it
 
