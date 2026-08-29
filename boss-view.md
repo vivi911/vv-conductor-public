@@ -1,6 +1,6 @@
 # vv Boss View
 
-This file is v1.6's second mode.
+This file is vv-pack-1.7.0's second mode.
 
 `conductor.md` handles "how to do it."
 `boss-view.md` handles "what to do first today."

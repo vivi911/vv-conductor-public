@@ -26,7 +26,7 @@
 - `紅黃綠`
 - `handoff`
 - `memory templates`
-- `用 vv v1.6 工作流`
+- `用 vv v1.7 工作流`
 
 ## 安裝方式
 

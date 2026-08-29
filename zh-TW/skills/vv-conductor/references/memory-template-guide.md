@@ -1,6 +1,6 @@
 # Memory Template Guide
 
-Use this reference when the user wants vv v1.6 to remember who they are, what projects are running, or what AI should never do.
+Use this reference when the user wants vv (vv-pack-1.7.0) to remember who they are, what projects are running, or what AI should never do.
 
 ## Required Files
 
