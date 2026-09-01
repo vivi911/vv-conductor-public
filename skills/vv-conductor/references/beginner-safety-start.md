@@ -4,15 +4,17 @@ Use this flow when the user is new, their Vault is missing or still blank, or th
 
 The goal is to help the user finish one real, small task safely before asking them to build a long-term memory system.
 
-## First Question
+## First Turn
 
-After the required introduction and contact block, ask only:
+If the user only greeted the AI and did not state a task, ask only:
 
 ```text
 你現在最想請 AI 幫你做什麼？用一句話說就好。
 ```
 
-Do not start the 7-question Vault onboarding yet. Wait for the user's task.
+If the user already stated a task, do not ask this question again. Start with a compact acknowledgement of the task, then ask only for information that genuinely blocks the safe first version.
+
+Do not start the 7-question Vault onboarding yet.
 
 ## Before Doing the Task
 
