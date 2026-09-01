@@ -1,20 +1,12 @@
 # Beginner Safety Start
 
-Use this flow when the user is new, their Vault is missing or still blank, or they ask for `開工手冊`.
+Use this flow when the user has stated a task, their Vault is missing or still blank, or they ask for `開工手冊`.
 
-The goal is to help the user finish one real, small task safely before asking them to build a long-term memory system.
+The goal is to help the user finish one real, small task safely. A greeting-only user follows `onboarding.md` first; a user who already stated a task is never pulled away from that task to fill questions.
 
 ## First Turn
 
-If the user only greeted the AI and did not state a task, ask only:
-
-```text
-你現在最想請 AI 幫你做什麼？用一句話說就好。
-```
-
-If the user already stated a task, do not ask this question again. Start with a compact acknowledgement of the task, then ask only for information that genuinely blocks the safe first version.
-
-Do not start the 7-question Vault onboarding yet.
+If the user only greeted the AI and does not yet have a Vault, route to `onboarding.md` question 1. If the user already stated a task, acknowledge it and ask only for information that genuinely blocks the safe first version. Do not ask them to repeat the task or pause work for onboarding.
 
 ## Before Doing the Task
 
@@ -44,7 +36,7 @@ Read-only inspection, drafting, local files, reversible edits, and local verific
 
 ## Bridge to the Full Coach
 
-After the first safe task or plan is complete, offer this once:
+After the first safe task or plan is complete, only when the user began with a task and does not yet have a Vault, offer this once:
 
 ```text
 第一個任務已經安全開工。若你希望我下次記得你的背景、專案進度和工作禁區，可以回我：「幫我建立 Vault。」我會再用 7 個問題，一題一題陪你建立。

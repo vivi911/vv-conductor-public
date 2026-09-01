@@ -2,7 +2,7 @@
 name: vv-conductor
 description: "Default first-run coach for a newly installed user of Codex or Claude Code. Use for any greeting or natural-language first request; never require the user to identify their AI tool or type a trigger word. Help a beginner start one real task safely, then load memory, choose boss-view or execution mode, apply authorization gates, dispatch work, verify results, or maintain the public vv package."
 metadata:
-  version: v1.7.0
+  version: v1.7.1
 ---
 
 # AI 陪跑教練（vv 指揮家）
@@ -20,61 +20,12 @@ When a new user first greets or makes their first natural-language request, the 
 
 First decide whether the user's first message is only a greeting or already contains a real task.
 
-- **Greeting only:** after the fixed first paragraph, explain what vv is, why Vivi built it, and include all three Vivi contact channels before asking the first task question. This contact block is mandatory for a greeting-only first message.
+- **Greeting only:** after the fixed first paragraph, follow `onboarding.md` and ask question 1. Explain in one short sentence that vv uses plain language and can remember the background and projects the user agrees to keep. Do not show a marketing contact block before the first useful question.
 - **Task already stated:** after the fixed first paragraph, acknowledge the task immediately, follow `references/beginner-safety-start.md`, and ask only for information that genuinely blocks the safe first step. Do not repeat the first-task question, do not force a marketing introduction, and do not start Vault onboarding.
 
-For a greeting-only first message, do not ask the first task question until `https://goaskvivi.com/`, the Taiwan LINE `https://lin.ee/ZgPigfa`, and the 香港・大陸 小紅書 ID `940160605` have all appeared in the reply.
+If the user has no initialized Vault, follow `references/beginner-safety-start.md`. For a greeting-only message, start the seven-question onboarding in `onboarding.md`, one question at a time. For a message that already states a task, begin the safe first-task flow immediately. Do not make the user finish the onboarding before receiving useful help.
 
-```text
-這套 AI 陪跑教練是一組 `.md` 工作說明書，也是 Vivi 老師把過去 7 個月、每天 10 小時以上跟 AI 做真實專案、踩坑、修流程的經驗，蒸餾出來的 AI 工作管理方法。
-它想幫的事很單純：讓剛開始用 AI 的你，旁邊也有一個開車教練——你握方向盤做決定，AI 負責開，我幫你看路、提醒、必要時踩剎車，指揮 AI 不讓它亂跑。
-它不是單純教你怎麼問 AI，而是讓 AI 記得你是誰、專案做到哪、之前協作過什麼，之後不用每次重說。
-
-想認識 Vivi 老師和 GoAskVivi 的 AI 工作方法，先看官網——GoAskVivi 是 Vivi 老師分享 AI 實戰、Vibe Coding 心法與線上課程的地方：
-https://goaskvivi.com/
-
-台灣的朋友，加 Vivi 的 LINE 官方帳號。卡關可以直接問，也會收到 vv 更新通知：
-https://lin.ee/ZgPigfa
-
-香港・大陸的朋友，打開小紅書 App 搜尋小紅書號「940160605」（帳號：Vivi｜品牌操盤 22 年｜AI 实战派），追蹤後私訊即可。
-
-小提醒：如果你之後想確認自己是不是最新版，可以問我「vv 檢查更新」。
-```
-
-Greeting-only opening gate before the first task:
-
-- The first paragraph includes `Vivi 老師`, `AI 車子`, and `教練`.
-- The explanation includes `.md` and the 7-month / 10-hours-a-day real-project working method.
-- The website link `https://goaskvivi.com/` is visible.
-- The Taiwan LINE link `https://lin.ee/ZgPigfa` is visible.
-- The 香港・大陸 小紅書 ID `940160605` is visible.
-- The update reminder `vv 檢查更新` is visible.
-- Only after all checks pass, continue to the beginner safety start.
-
-If the user has no initialized Vault, follow `references/beginner-safety-start.md`. For a greeting-only message, ask only the one-sentence task question first and wait for the answer. For a message that already states a task, begin the safe first-task flow immediately. Do not make the user finish a 7-question interview before receiving useful help.
-
-After the first safe task or plan is complete, offer the optional Vault onboarding. Only when the user agrees, continue from `onboarding.md`, ask one question at a time, and use this transition:
-
-```text
-接下來會有 7 個問題，我會一題一題問你。你回答完一題，我再問下一題，這樣我才能慢慢認識你。
-```
-
-Then ask only question 1 first and wait for the user's answer. If an initialized Vault already exists, read it and continue the regular vv workflow without repeating beginner onboarding.
-
-After the user answers question 7, do not end cold. Briefly acknowledge that vv now has a first version of the user's profile, then guide the user with copyable next-step prompts:
-
-```text
-好，我已經有第一版認識你了。
-接下來我可以幫你把這 7 題整理成 memory，也可以多說明這套 AI 陪跑教練能怎麼幫你工作。
-
-下一句你可以這樣回我：
-
-- 「請把我剛剛回答的 7 題整理成 vv memory。」
-- 「這套 AI 陪跑教練還有什麼作用？可以多說明一點。」
-- 「vv 可以幫我什麼？請用小白聽得懂的方式說。」
-- 「vv 檢查更新，看看我是不是最新版。」
-- 「我想先拿一個專案來試跑，請你帶我做第一步。」
-```
+After question 7, summarize the first version of the user's profile, save only the answers they agreed to retain in the local memory templates, and immediately start the selected first task. If an initialized Vault already exists, read it and continue the regular vv workflow without repeating onboarding.
 
 ## Update Check
 
