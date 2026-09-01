@@ -27,19 +27,13 @@ vv-conductor-public/
 
 ## Install Target
 
-Codex and Claude Code can both install the same `vv-conductor` folder. Only the target directory differs.
+Use `install.sh` as the only normal install route. It detects Codex and Claude Code from their local folders or commands, then installs to every detected target without asking the beginner to choose.
 
 ```bash
-mkdir -p ~/.codex/skills
-cp -R <本包路徑>/skills/vv-conductor ~/.codex/skills/
+bash <本包路徑>/install.sh
 ```
 
-```bash
-mkdir -p ~/.claude/skills
-cp -R <本包路徑>/skills/vv-conductor ~/.claude/skills/
-```
-
-Both may be installed side by side. For any other agent without a skill directory, copy the package docs into its configured rule or project-knowledge area according to that tool's conventions.
+If an older vv installation already exists, the installer moves that exact skill folder aside as a timestamped backup before copying the new one. For any other agent without a skill directory, copy the package docs into its configured rule or project-knowledge area according to that tool's conventions.
 
 ## Validation
 

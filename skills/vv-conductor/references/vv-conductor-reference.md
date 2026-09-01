@@ -1,8 +1,11 @@
-# AI 陪跑教練 v1.6.6 Rule Reference
+# AI 陪跑教練 v1.7.0 Rule Reference
 
 ## Core Framing
 
-v1.6.6 = beginner safety layer + memory layer + execution layer.
+v1.7.0 = automatic platform detection + natural-language first run + beginner safety layer + memory layer + execution layer.
+
+- Automatic platform detection: the installer finds Codex and Claude Code itself; it never asks a beginner to choose one.
+- Natural-language first run: after reopening the tool, the user starts by describing the task in plain language, not by memorizing a trigger word.
 
 - Beginner safety layer: understand one real task, name the relevant risk, define the safe first version, and avoid live actions without approval.
 - Memory layer: know who the user is, what projects exist, what is blocked, and what rules cannot be crossed.

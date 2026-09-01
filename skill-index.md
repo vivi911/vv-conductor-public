@@ -29,23 +29,13 @@
 
 ## 安裝方式
 
-Codex 和 Claude Code 都可安裝同一份 `skills/vv-conductor/` 資料夾。差別只有目標目錄。
-
-Codex：
+只要貼一行。它會自動偵測已安裝的 Codex 與 Claude Code，並安裝到所有找到的工具；不要求使用者先回答平台名稱。
 
 ```bash
-mkdir -p ~/.codex/skills
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.codex/skills/
+curl -fsSL https://raw.githubusercontent.com/vivi911/vv-conductor-public/main/install.sh | bash
 ```
 
-Claude Code：
-
-```bash
-mkdir -p ~/.claude/skills
-cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/
-```
-
-重開之後，`vv-conductor` 會成為可觸發 skill。兩邊都裝也不會互相影響。
+重開工具後，使用者直接用白話講第一件事，不需要背觸發詞。聊天工具不能在使用者送出第一句話前自行說話，這是平台限制，不是使用者漏做了設定。
 
 如果你用的 AI 工具沒有 skill 目錄機制，退而求其次：把 `SKILL.md` 和 `references/` 底下的檔案放進該工具的規則或專案知識裡，並在對話開頭請它先讀。
 

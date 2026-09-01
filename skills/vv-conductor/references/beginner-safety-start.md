@@ -9,7 +9,7 @@ The goal is to help the user finish one real, small task safely before asking th
 After the required introduction and contact block, ask only:
 
 ```text
-你現在最想請 Codex 或 Claude Code 幫你做什麼？用一句話說就好。
+你現在最想請 AI 幫你做什麼？用一句話說就好。
 ```
 
 Do not start the 7-question Vault onboarding yet. Wait for the user's task.
