@@ -1,4 +1,4 @@
-# AI Co-Pilot Coach (vv) vv-pack-1.7.0
+# AI Co-Pilot Coach (vv) vv-pack-1.7.2
 
 <p align="center">
   <img src="assets/demo-compare-en.svg" alt="Side by side: without vv you retype your whole background every time and the AI still asks for more; with vv you type two letters and it picks up where you left off" width="1040">
@@ -20,7 +20,7 @@
 
 繁體中文版請看 [`zh-TW/README.md`](zh-TW/README.md)。
 
-> The first time, it helps you safely finish one small task; after that, memory, dispatch, and verification kick in.
+> Install once and the same conversation starts six short questions automatically; question 6 becomes your first small task.
 
 This is a public package for people and AI to work together.
 
@@ -52,17 +52,17 @@ If this is your first time seeing this repo, think of it as a bundle of "AI work
 
 It's not a tool you need to read code to understand — it's a set of `.md` files. `.md` just means Markdown documents — in plain terms, a work manual that both the AI and you can read.
 
-The AI co-pilot coach isn't just about teaching you "how to prompt AI." The first time you use it, it asks what you want to do, explains the real risk clearly, and shrinks the task down to a safe first version; only after you finish that first thing do you decide whether to set up long-term memory.
+The AI co-pilot coach isn't just about teaching you "how to prompt AI." The first time you install it, the same conversation asks six short questions one at a time, saves a first memory, and turns question 6 into your first safe task.
 
 Once you download this package, you don't just get a generic chat prompt — you get a full set of safe-start, memory, dispatch, and acceptance rules for Codex or Claude Code to work by.
 
-You can call it `vv`, or you can call it `vivi` — both work exactly the same way. **vv is your own personal AI coach** — not a one-time thing. From now on, every time you open a new conversation, type `vv` or `vivi` to call it up. It looks at who you are and what's currently in flight first, then decides whether this can be done automatically or needs to stop and ask you.
+**vv is your own personal AI coach** — not a one-time thing. After installation, start later conversations with `vv + what you want to do`, such as `vv, help me organize these meeting notes.` It looks at who you are and what's currently in flight first, then decides whether this can be done automatically or needs to stop and ask you.
 
 It has global memory — this memory store is called the **Vault**. You can write your background, project status, and no-go zones into `~/vv-memory/` (your Vault), so the AI remembers who you are, where your projects stand, what you've worked on together before, and what it must never touch.
 
-Most AI feels like it has amnesia — every new conversation, you have to re-explain who you are. The Vault is what lets the AI "remember you." The Vault is an advanced, long-term coaching feature — not a quiz you have to pass before your first task. Once it's set up, every time you type `hi`, `vivi`, `vv`, or `vv vault`, it reads the Vault first and continues from where you left off.
+Most AI feels like it has amnesia — every new conversation, you have to re-explain who you are. The Vault is what lets the AI "remember you." The six installation questions create its first version; later, `vv + what you want to do` tells the coach to read it and continue from where you left off.
 
-It also has a boot-up rule. From now on, when you open a new conversation, just type `vv` or `vivi` and it pulls the latest state and progress before continuing the conversation — no need to re-explain "who I am, where we left off, what's stuck" every single time.
+It also has a boot-up rule. From now on, when you open a new conversation, start with `vv` and say what you want to do. It pulls the latest state and progress before continuing — no need to re-explain "who I am, where we left off, what's stuck" every single time.
 
 It also comes with a set of development-role agents that can break a project into different roles to help you: a PM to clarify requirements, an architect to think through data flow and system design, a UX role to check the user experience, a builder to implement it, a tester to find problems, and a release role to run pre-launch checks. You don't need a fully formed idea up front — vv will help you turn a vague thought into a workable plan, step by step.
 
@@ -79,11 +79,11 @@ If this is your first time opening this, read in this order:
 3. `boss-view.md`: use this every day or every time you start work, to have the AI prioritize from a boss's vantage point first.
 4. `skills/vv-conductor/references/beginner-safety-start.md`: the safe first-use flow.
 5. `skills/vv-conductor/memory-templates/`: turn your background, projects, and work rules into files the AI can read.
-6. `skills/vv-conductor/onboarding.md`: the 7-question flow to build long-term memory, once you want the AI to remember you long-term.
+6. `skills/vv-conductor/onboarding.md`: the six-question first-install flow that builds the first memory and chooses the first task.
 
-## How to Use vv Day to Day (just remember one word: `vv` or `vivi`)
+## How to Use vv Day to Day (remember `vv + task`)
 
-Every time you open a new conversation, just type `vv` or `vivi` — **you don't need to remember "what do I type the first time" vs. "what do I type to check memory," just pick one of the two words and stick with it.** As long as you've already built a Vault, it automatically reads memory first, tells you where you left off, what the next step is, and which projects are still unfinished — you don't have to ask separately.
+Every time you open a later conversation, type `vv` followed by what you want to do. As long as you've built a Vault, it automatically reads memory first, tells you where you left off, and continues the task.
 
 ```text
 vv
@@ -93,7 +93,7 @@ vv
 You're back — last time we got to XX, next step is YY. You've also got [Project A] stuck at [next step] and [Project B] not started yet — which one do you want to pick up?
 ```
 
-`hi`, `vivi`, `conductor`, `AI co-pilot coach`, `vv vault` all wake it up too, exactly the same way — those are just backup phrasings you don't need to specifically remember; `vv` or `vivi` is enough.
+Older aliases may still work, but beginners only need to remember one pattern: `vv + task`.
 
 Once it's awake, just say what you want, for example:
 
@@ -103,7 +103,7 @@ vv, help me break this idea into a plan I can start building.
 vv, can this run automatically, or does it need my sign-off?
 ```
 
-One sentence: **open a conversation → type `vv` or `vivi` → say what you want to do**. No commands to memorize, no complicated prompts to write.
+One sentence: **first installation starts automatically; later, open a conversation → type `vv + task`**. No complicated prompt to memorize.
 
 ## Who This Package Is For
 
@@ -119,7 +119,7 @@ You already have Claude Code or Codex open — that's what vv runs on. So let it
 Copy everything in the box below, paste it into Claude Code or Codex, and send. It downloads the package, installs it in the right place for whichever tool you're using, and checks the result. You don't have to type a single command yourself.
 
 ```text
-Please install the vv AI co-pilot coach. Follow the steps below, report the result when you're done, and do nothing else.
+Please install the vv AI co-pilot coach. Follow the steps below. After installation and verification, stay in this conversation, read onboarding.md, introduce vv, and immediately ask question 1 of the six-question onboarding. Do not wait for me to type hi, vv, or another trigger.
 
 1. Download the package to my computer:
    - If ~/vv-conductor-public/.git already exists (a normal git folder), run:
@@ -169,7 +169,7 @@ Please install the vv AI co-pilot coach. Follow the steps below, report the resu
 
 5. When you're done, list the files in the target folder for me and confirm all four of
    these are there: SKILL.md, onboarding.md, memory-templates/, references/
-   Then tell me: open a new conversation and type "vv" to start it.
+   Then, in this same conversation, read onboarding.md and ask me question 1. Ask only one question at a time. After question 6, save the first memory and start the small task I selected.
 
 Do not modify any other file on my computer beyond the steps above.
 ```
@@ -225,7 +225,7 @@ The AI co-pilot coach makes sure both sides run on the same set of rules. It's c
 
 ## Official Skill Installation (Codex / Claude Code — pick one, or install both)
 
-Once installed, vv becomes a fixed trigger: type `hi`, `vivi`, `vv`, or `conductor`, and it automatically reads this rulebook — no need to paste the files in every time.
+Once installed, the current conversation starts question 1 automatically. In later conversations, use `vv + task` and it automatically reads this rulebook.
 
 Installation is identical on both sides, only the folder name differs. Paste whichever section matches what you use.
 
@@ -247,7 +247,7 @@ cp -R ~/vv-conductor-public/skills/vv-conductor ~/.claude/skills/vv-conductor
 
 If you use both, paste both sections — each installs independently and won't conflict.
 
-After installing, **restart** Codex or Claude Code. When you say `hi`, `vivi`, `AI co-pilot coach`, `kickoff playbook`, `vv`, `conductor`, `what should I do today`, `dispatch`, `red/yellow/green`, or `handoff`, it'll trigger this skill.
+If you install manually, restart Codex or Claude Code and begin with `vv + what you want to do`. With the AI-driven installation above, no restart or trigger is required before question 1 in the same conversation.
 
 To confirm it installed correctly, paste this (seeing files listed means success):
 
@@ -340,23 +340,9 @@ Then, at the start of an AI conversation, paste:
 Please read ~/conductor.md first and enter AI co-pilot coach mode. Help me safely finish one small task first; once I agree to set up long-term memory, read ~/vv-memory/00_index.md.
 ```
 
-## What to Do the First Time
+## What Happens the First Time
 
-After installing, open a new conversation and just type:
-
-```text
-hi
-```
-
-The AI co-pilot coach will first ask: "What's the one thing you most want Codex or Claude Code to help you with right now?" Then it'll help you clarify the risk and shrink it to a safe first version — it won't throw a 7-question quiz at you first.
-
-After you finish that first safe task, if you'd like it to remember your background, progress, and no-go zones next time, just reply:
-
-```text
-Help me build a Vault.
-```
-
-Only then will it open `onboarding.md` and walk you through the 7 questions, one at a time.
+After the AI installs and verifies vv, it stays in the same conversation, introduces itself, and immediately asks question 1. You do not need to type `hi`, `vv`, or any startup phrase. It asks six questions one at a time; question 6 asks for the first small task you want to complete.
 
 Once you've answered, organize your answers into:
 
@@ -364,7 +350,7 @@ Once you've answered, organize your answers into:
 - `~/vv-memory/projects/<project-name>.md` (one file per project you mentioned, copied from `02_project-template.md` — don't cram them all into one file)
 - `~/vv-memory/03_ai-work-rules.md`
 
-You don't need to get it perfect on the first pass. vv asks the next question once you've answered the current one; vv-pack-1.7.0's design is to get a first version in place, then let it grow over a week of actual work.
+You don't need to get it perfect on the first pass. vv asks the next question once you've answered the current one; vv-pack-1.7.2 gets a first version in place, then lets it grow through actual work.
 
 ## Ways You Can Talk to vv
 
@@ -395,19 +381,17 @@ Any of these will get vv to explain what it can do in plain language, instead of
 
 ## Common Usage Scenarios
 
-### 1. Opening a new conversation: just type `hi` or `vivi`
+### 1. Opening a later conversation: type `vv + task`
 
-From now on, whenever you open a new Codex or Claude Code conversation, start with:
+After onboarding, whenever you open a new Codex or Claude Code conversation, start with:
 
 ```text
-hi
+vv, help me with the next step of my project.
 ```
-
-(Typing `vivi` works exactly the same way.)
 
 vv will first check your global memory entry points — things like the Vault, `~/vv-memory/`, or a project's `HANDOFF-LATEST.md` — to figure out what you've been working on lately, which projects are still unfinished, and where it needs your sign-off.
 
-If this is your first time pulling this package down and you haven't built a Vault yet, typing `hi` or `vivi` won't error out — the AI co-pilot coach will introduce itself, then ask what you want to do, and help you safely finish your first small task. Only if you want long-term memory will it then use the 7 questions to build your first Vault.
+If this is the installation conversation and no Vault exists yet, the AI co-pilot coach starts the six questions by itself and does not wait for this phrase.
 
 If memory is connected, it'll continue the conversation from your latest progress. If you had memory before but it can't be read this time, it will say plainly "I can't read memory right now" — it won't pretend to know.
 

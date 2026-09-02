@@ -1,14 +1,14 @@
-# AI Co-Pilot Coach vv-pack-1.7.0 Rule Reference
+# AI Co-Pilot Coach vv-pack-1.7.2 Rule Reference
 
 ## Core Framing
 
-vv-pack-1.7.0 = beginner safety layer + memory layer + execution layer.
+vv-pack-1.7.2 = six-question onboarding layer + memory layer + execution layer.
 
 - Beginner safety layer: understand one real task, name the relevant risk, define the safe first version, and avoid live actions without approval.
 - Memory layer: know who the user is, what projects exist, what is blocked, and what rules cannot be crossed.
 - Execution layer: classify the task, dispatch work, apply gates, verify, and hand off.
 
-For a new user or blank Vault, read `beginner-safety-start.md` first. Offer the 7-question Vault onboarding only after the first safe task or plan; do not make onboarding a prerequisite for useful help.
+After an AI-driven installation, read `onboarding.md` first and ask its six questions one at a time in the same conversation. Question 6 selects the first small task; then use `beginner-safety-start.md` to begin it safely.
 
 ## Required Opening
 

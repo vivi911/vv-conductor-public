@@ -83,9 +83,14 @@ FORBIDDEN = [
         "四選項跟「只給一個推薦、不列選項」打架，且第四句沒有資訊量。",
     ),
     (
-        "答完 7 題立即存檔",
-        r"請把我剛剛回答的 7 題整理成 vv memory。」",  # leak-pattern
+        "答完 6 題立即存檔",
+        r"請把我剛剛回答的 6 題整理成 vv memory。」",  # leak-pattern
         "使用者已經說過要建立 Vault。問完卻要他再下一次指令，等於什麼都沒建。",
+    ),
+    (
+        "不再詢問替教練改名",
+        r"do you want to rename vv|want to give (?:me|the coach) a name|想幫(?:我|教練)取(?:個)?名字|你想怎麼叫這位陪跑教練",  # leak-pattern
+        "教練固定叫 vv；導入只需要問 AI 應該怎麼稱呼使用者。",
     ),
     (
         "唯一例外是卡住求拍板，不是 onboarding 收尾",
@@ -115,7 +120,7 @@ MUST_EXIST_COMMON = {
     "官網": "https://goaskvivi.com/",
     "台灣 LINE": "https://lin.ee/ZgPigfa",
     "小紅書號": "940160605",
-    "禁止自編 7 題": "Never invent your own questions",
+    "禁止自編 6 題": "Never invent your own questions",
     "Vault 位置章節": "## Vault Location",
     "存檔章節": "### Save the Vault",
     "更新檢查章節": "## Update Check",

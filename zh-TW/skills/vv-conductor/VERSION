@@ -1,5 +1,5 @@
-version: vv-pack-1.7.0
-release_date: 2026-08-19
+version: vv-pack-1.7.2
+release_date: 2026-09-03
 repo: https://github.com/vivi911/vv-conductor-public
 local_repo_path: ~/vv-conductor-public
 installed_skill_path_codex: ~/.codex/skills/vv-conductor/

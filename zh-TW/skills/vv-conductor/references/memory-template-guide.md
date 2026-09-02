@@ -1,6 +1,6 @@
 # Memory Template Guide
 
-Use this reference when the user wants vv (vv-pack-1.7.0) to remember who they are, what projects are running, or what AI should never do.
+Use this reference when vv-pack-1.7.2 saves the six first-install answers into the user's memory.
 
 ## Required Files
 
@@ -62,14 +62,13 @@ Capture persistent behavior rules:
 
 ## Onboarding Flow
 
-Only use this after the user's first safe task or plan, and only when they want persistent memory. Ask or process seven answers, one at a time:
+第一次安裝時，先一題一題問完以下六題，再開始使用者選定的小任務：
 
-1. Who are you?
-2. What tasks or projects do you want AI to help with?
-3. What must AI never do on its own?
-4. What should the coach call you, and do you want to rename vv?
-5. How should AI talk to you?
-6. What tools do you use?
-7. What observable result would prove this AI system is useful?
+1. 先簡單介紹自己，平常在忙什麼？
+2. 陪跑教練該怎麼稱呼你？
+3. AI 熟悉度 0 到 10 分是幾分？最近用 AI 做過什麼？
+4. 平常用哪些 AI 或工作工具？
+5. 有哪些事不希望 AI 自己亂做？
+6. 現在最想完成的第一件小事是什麼？
 
 Mark unknowns as `待補`; never invent missing facts.

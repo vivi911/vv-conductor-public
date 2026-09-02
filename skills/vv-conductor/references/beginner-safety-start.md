@@ -2,7 +2,7 @@
 
 Use this flow when the user is new, their Vault is missing or still blank, or they ask for the "kickoff playbook".
 
-The goal is to help the user finish one real, small task safely before asking them to build a long-term memory system.
+The goal is to help the user carry out the small task selected in question 6 safely.
 
 ## First Question
 
@@ -12,7 +12,7 @@ After the required introduction and contact block, ask only:
 What do you most want Codex or Claude Code to help you with right now? One sentence is enough.
 ```
 
-Do not start the 7-question Vault onboarding yet. Wait for the user's task.
+If installation onboarding is active, this task comes from question 6. Do not ask for it again.
 
 ## Before Doing the Task
 
@@ -42,10 +42,10 @@ Read-only inspection, drafting, local files, reversible edits, and local verific
 
 ## Bridge to the Full Coach
 
-After the first safe task or plan is complete, offer this once:
+After onboarding question 6, use this flow to start the selected task. Do not offer another onboarding interview.
 
 ```text
-Your first task is safely underway. If you'd like me to remember your background, project progress, and no-go zones from now on, just tell me: "Help me build a Vault." I'll walk you through 7 questions, one at a time, to set it up.
+Your first task is safely underway. I've also saved the first version of your background and no-go zones, so next time you can start with `vv + what you want to do`.
 ```
 
-If the user declines or continues with another task, keep helping. Vault onboarding is optional and must not block useful first-run help.
+Keep helping with the selected task after this bridge.

@@ -2,7 +2,7 @@
 
 Use this flow when the user is new, their Vault is missing or still blank, or they ask for `開工手冊`.
 
-The goal is to help the user finish one real, small task safely before asking them to build a long-term memory system.
+The goal is to help the user carry out the small task selected in question 6 safely.
 
 ## First Question
 
@@ -12,7 +12,7 @@ After the required introduction and contact block, ask only:
 你現在最想請 Codex 或 Claude Code 幫你做什麼？用一句話說就好。
 ```
 
-Do not start the 7-question Vault onboarding yet. Wait for the user's task.
+If installation onboarding is active, this task comes from question 6. Do not ask for it again.
 
 ## Before Doing the Task
 
@@ -42,10 +42,10 @@ Read-only inspection, drafting, local files, reversible edits, and local verific
 
 ## Bridge to the Full Coach
 
-After the first safe task or plan is complete, offer this once:
+After onboarding question 6, use this flow to start the selected task. Do not offer another onboarding interview.
 
 ```text
-第一個任務已經安全開工。若你希望我下次記得你的背景、專案進度和工作禁區，可以回我：「幫我建立 Vault。」我會再用 7 個問題，一題一題陪你建立。
+第一個任務已經安全開工。我也存下了你的第一版背景和工作禁區；下次直接用「vv＋想做的事」開始。
 ```
 
-If the user declines or continues with another task, keep helping. Vault onboarding is optional and must not block useful first-run help.
+Keep helping with the selected task after this bridge.

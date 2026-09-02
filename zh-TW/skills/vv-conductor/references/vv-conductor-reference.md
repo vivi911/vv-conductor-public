@@ -1,14 +1,14 @@
-# AI 陪跑教練 vv-pack-1.7.0 Rule Reference
+# AI 陪跑教練 vv-pack-1.7.2 Rule Reference
 
 ## Core Framing
 
-vv-pack-1.7.0 = beginner safety layer + memory layer + execution layer.
+vv-pack-1.7.2 = six-question onboarding layer + memory layer + execution layer.
 
 - Beginner safety layer: understand one real task, name the relevant risk, define the safe first version, and avoid live actions without approval.
 - Memory layer: know who the user is, what projects exist, what is blocked, and what rules cannot be crossed.
 - Execution layer: classify the task, dispatch work, apply gates, verify, and hand off.
 
-For a new user or blank Vault, read `beginner-safety-start.md` first. Offer the 7-question Vault onboarding only after the first safe task or plan; do not make onboarding a prerequisite for useful help.
+AI 自動安裝完成後，先讀 `onboarding.md`，在同一個對話一題一題問完六題。第 6 題選定第一個小任務，再用 `beginner-safety-start.md` 安全開工。
 
 ## Required Opening
 
