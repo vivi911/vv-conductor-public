@@ -953,16 +953,16 @@ Anything needing your sign-off: [yes / no — if yes, one sentence]
 
 ## B13 The Memory Layer: Vault, Memory Signal, Boss View
 
-### The first step when starting: a beginner completes one thing safely first
+### The first step after installation: six short questions, then one safe task
 
-If the Vault doesn't exist, or is still the blank template, read `skills/vv-conductor/references/beginner-safety-start.md` first:
+When an AI-driven installation has just completed, remain in the same conversation and read `skills/vv-conductor/onboarding.md` first:
 
-1. Ask the user one question: "What's the one thing you most want Codex or Claude Code to help you with right now?"
-2. Restate the need in plain language, explain the actual risk, and shrink it to a safe first version.
-3. Clearly state what this round will NOT touch — real accounts, publishing, deletion, payments, or anything outward-facing.
-4. Only after the first safe task or plan is finished does vv ask whether to build the Vault with the 7 questions.
+1. Introduce vv and immediately ask question 1; do not wait for `hi`, `vv`, or another trigger.
+2. Ask the six questions one at a time and save the first Vault after question 6.
+3. Use the answer to question 6 as the selected first task.
+4. Then read `skills/vv-conductor/references/beginner-safety-start.md`, explain the actual risk, and shrink that task to a safe first version.
 
-**A beginner must never be required to finish all 7 questions before getting any help.**
+**The naming question only asks what vv should call the user.**
 
 ### Long-term coaching: reading memory (the Vault)
 
@@ -980,11 +980,11 @@ At the start of every new conversation, vv reads these files first. Together, th
 
 ### A new user's first time (the Vault is still the blank template)
 
-Don't report "read failed" — treat this person as a new user and walk them through the safe start:
+Don't report "read failed" — treat this person as a new user and walk them through the six-question start:
 
 1. Give the fixed opening line first: introduce yourself as "the AI co-pilot coach Vivi built for you," and briefly explain why vv exists.
-2. The website, Taiwan LINE, and Hong Kong/Mainland Xiaohongshu contact channels must all appear before asking the first task question.
-3. Help them safely complete one small task first; only once the user is willing, use the 7 questions in `skills/vv-conductor/onboarding.md` to build the first version of the Vault — use the questions verbatim, never improvise your own.
+2. The website, Taiwan LINE, and Hong Kong/Mainland Xiaohongshu contact channels must all appear before asking question 1.
+3. Use the six questions in `skills/vv-conductor/onboarding.md` verbatim, save the first Vault, then safely begin the task chosen in question 6.
 
 ### Had a Vault before, but can't read it this time
 

@@ -89,8 +89,13 @@ FORBIDDEN = [
     ),
     (
         "不再詢問替教練改名",
-        r"do you want to rename vv|want to give (?:me|the coach) a name|想幫(?:我|教練)取(?:個)?名字|你想怎麼叫這位陪跑教練",  # leak-pattern
+        r"rename vv|want to give (?:me|the coach) a name|想幫(?:我|教練)取(?:個)?名字|替 vv 改名|你想怎麼叫這位陪跑教練",  # leak-pattern
         "教練固定叫 vv；導入只需要問 AI 應該怎麼稱呼使用者。",
+    ),
+    (
+        "導入題數只能是 6 題",
+        r"7[- ]question|7 questions|7 Vault questions|7 題|7 個問題|七題|第 7 題",  # leak-pattern
+        "v1.7.2 的導入題數已定案；任何舊題數殘字都會讓公開說明互相矛盾。",
     ),
     (
         "唯一例外是卡住求拍板，不是 onboarding 收尾",

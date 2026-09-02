@@ -9,7 +9,8 @@ check_tree() {
 
   question_count=$(grep -Ec '^### [1-6]\.' "$onboarding_file")
   [ "$question_count" -eq 6 ]
-  ! grep -Eiq 'do you want to rename vv|want to give (me|the coach) a name|想幫(我|教練)取(個)?名字|你想怎麼叫這位陪跑教練' "$skill_file" "$onboarding_file"
+  ! grep -Eiq 'rename vv|want to give (me|the coach) a name|想幫(我|教練)取(個)?名字|替 vv 改名|你想怎麼叫這位陪跑教練' "$skill_file" "$onboarding_file"
+  ! grep -Eiq '7[- ]question|7 questions|7 Vault questions|7 題|7 個問題|七題|第 7 題' "$skill_file" "$onboarding_file"
   grep -Fq 'question 1' "$skill_file" || grep -Fq '第 1 題' "$skill_file"
   grep -Fq 'question 6' "$skill_file" || grep -Fq '第 6 題' "$skill_file"
 }
