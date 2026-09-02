@@ -4,6 +4,8 @@ set -euo pipefail
 repo_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 skill_file="$repo_dir/skills/vv-conductor/SKILL.md"
 onboarding_file="$repo_dir/onboarding.md"
+installed_onboarding_file="$repo_dir/skills/vv-conductor/onboarding.md"
+readme_file="$repo_dir/README.md"
 
 grep -Fq 'Greeting only:' "$skill_file"
 grep -Fq 'Task already stated:' "$skill_file"
@@ -12,5 +14,13 @@ grep -Fq 'follow `onboarding.md` and ask question 1' "$skill_file"
 grep -Fq '### 1. 先簡單介紹一下你自己，好嗎？' "$onboarding_file"
 grep -Fq '### 7. 我們先從你最想完成的一件小事開始' "$onboarding_file"
 grep -Fq '不是可靠的系統啟動暗號' "$onboarding_file"
+cmp -s "$onboarding_file" "$installed_onboarding_file"
+grep -Fq '安裝與檢查完成後，不要停在安裝報告，也不要等我再打 `hi` 或 `vv`' "$readme_file"
+grep -Fq '直接讀取已安裝的 `onboarding.md`，在同一個對話問第 1 題' "$readme_file"
+grep -Fq '<a id="the-fastest-way-let-your-ai-install-it"></a>' "$readme_file"
+if grep -Fq '這時它才會打開 `onboarding.md`' "$readme_file"; then
+  printf 'FAIL: README still postpones onboarding until after the first task\n' >&2
+  exit 1
+fi
 
-printf 'PASS: greeting starts guided onboarding; stated task is acknowledged without repetition\n'
+printf 'PASS: installer continues directly to question 1; greeting and stated-task branches remain explicit\n'

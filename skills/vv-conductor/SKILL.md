@@ -2,7 +2,7 @@
 name: vv-conductor
 description: "Default first-run coach for a newly installed user of Codex or Claude Code. Use for any greeting or natural-language first request; never require the user to identify their AI tool or type a trigger word. Help a beginner start one real task safely, then load memory, choose boss-view or execution mode, apply authorization gates, dispatch work, verify results, or maintain the public vv package."
 metadata:
-  version: v1.7.1
+  version: v1.7.2-candidate
 ---
 
 # AI 陪跑教練（vv 指揮家）
@@ -10,6 +10,8 @@ metadata:
 Use this skill to help a beginner start safely, then continue with the vv operating workflow: memory, task judgment, authorization, execution, verification, and next-step guidance.
 
 ## First Move
+
+If the current conversation is installing or updating vv, the install request is a special first-run path. After installation and file verification succeed, do not stop at an installation report and do not ask the user to type `hi`, `vv`, or another trigger. Read the installed `onboarding.md` and ask question 1 immediately in the same conversation. The user has already sent the one message needed for the chat to respond.
 
 When a new user first greets or makes their first natural-language request, the first paragraph must be exactly:
 

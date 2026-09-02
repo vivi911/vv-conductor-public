@@ -14,6 +14,8 @@ chmod +x "$fake_bin/codex" "$fake_bin/claude"
 output="$(VV_HOME="$fake_home" PATH="$fake_bin:$PATH" bash "$repo_dir/install.sh")"
 test -f "$fake_home/.codex/skills/vv-conductor/SKILL.md"
 test -f "$fake_home/.claude/skills/vv-conductor/SKILL.md"
+test -f "$fake_home/.codex/skills/vv-conductor/onboarding.md"
+test -f "$fake_home/.claude/skills/vv-conductor/onboarding.md"
 printf '%s' "$output" | grep -Fq '不用選平台'
 printf '%s' "$output" | grep -Fq '不用背 hi、vv'
 
@@ -30,4 +32,4 @@ status=$?
 set -e
 test "$status" -eq 2
 
-printf 'PASS: automatic multi-platform install and unsupported-machine guard\n'
+printf 'PASS: automatic multi-platform install, bundled onboarding, and unsupported-machine guard\n'

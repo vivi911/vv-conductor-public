@@ -1,4 +1,4 @@
 interface:
   display_name: "AI 陪跑教練"
-  short_description: "安裝後直接用白話說事情；先安全完成第一個任務，再接上記憶、派工與驗收。"
+  short_description: "安裝完直接問第 1 題；建立第一版記憶後，立刻接第一個小任務。"
   default_prompt: "我想請 AI 幫我完成一件事。請先用 AI 陪跑教練模式，陪我把需求講清楚、縮成安全第一版，再開始處理。"

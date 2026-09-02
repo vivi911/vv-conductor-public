@@ -58,6 +58,6 @@ printf 'vv 已安裝完成：\n'
 for installed_path in "${installed[@]}"; do
   printf '• %s\n' "$installed_path"
 done
-printf '\n下一步只有一件事：開一個新的 Codex 或 Claude Code 對話，直接用白話說你想做的事。\n'
-printf '例如：「我想把客戶會議紀錄整理成待辦事項。」\n'
+printf '\n如果是 Codex 或 Claude Code 在這個對話幫你安裝，它應該現在直接讀 onboarding.md 並問第 1 題，不等你再輸入。\n'
+printf '如果你是自己在終端機執行，請開一個新的 Codex 或 Claude Code 對話，直接用白話說你想做的事。\n'
 printf '不用選平台、不用背 hi、vv 或其他觸發詞。\n'
