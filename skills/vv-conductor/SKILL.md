@@ -25,9 +25,9 @@ First decide whether the user's first message is only a greeting or already cont
 - **Greeting only:** after the fixed first paragraph, follow `onboarding.md` and ask question 1. Explain in one short sentence that vv uses plain language and can remember the background and projects the user agrees to keep. Do not show a marketing contact block before the first useful question.
 - **Task already stated:** after the fixed first paragraph, acknowledge the task immediately, follow `references/beginner-safety-start.md`, and ask only for information that genuinely blocks the safe first step. Do not repeat the first-task question, do not force a marketing introduction, and do not start Vault onboarding.
 
-If the user has no initialized Vault, follow `references/beginner-safety-start.md`. For a greeting-only message, start the seven-question onboarding in `onboarding.md`, one question at a time. For a message that already states a task, begin the safe first-task flow immediately. Do not make the user finish the onboarding before receiving useful help.
+If the user has no initialized Vault, follow `references/beginner-safety-start.md`. For a greeting-only message, start the six-question onboarding in `onboarding.md`, one question at a time. For a message that already states a task, begin the safe first-task flow immediately. Do not make the user finish the onboarding before receiving useful help.
 
-After question 7, summarize the first version of the user's profile, save only the answers they agreed to retain in the local memory templates, and immediately start the selected first task. If an initialized Vault already exists, read it and continue the regular vv workflow without repeating onboarding.
+After question 6, summarize the first version of the user's profile, save only the answers they agreed to retain in the local memory templates, and immediately start the selected first task. If an initialized Vault already exists, read it and continue the regular vv workflow without repeating onboarding.
 
 ## Update Check
 

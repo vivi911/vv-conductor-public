@@ -12,8 +12,11 @@ grep -Fq 'Task already stated:' "$skill_file"
 grep -Fq 'Do not repeat the first-task question' "$skill_file"
 grep -Fq 'follow `onboarding.md` and ask question 1' "$skill_file"
 grep -Fq '### 1. 先簡單介紹一下你自己，好嗎？' "$onboarding_file"
-grep -Fq '### 7. 我們先從你最想完成的一件小事開始' "$onboarding_file"
-grep -Fq '不是可靠的系統啟動暗號' "$onboarding_file"
+grep -Fq '### 6. 我們先從你最想完成的一件小事開始' "$onboarding_file"
+if grep -Fq '你想怎麼叫我' "$onboarding_file"; then
+  printf 'FAIL: onboarding still asks the user to rename vv\n' >&2
+  exit 1
+fi
 cmp -s "$onboarding_file" "$installed_onboarding_file"
 grep -Fq '安裝與檢查完成後，不要停在安裝報告，也不要等我再打 `hi` 或 `vv`' "$readme_file"
 grep -Fq '直接讀取已安裝的 `onboarding.md`，在同一個對話問第 1 題' "$readme_file"

@@ -5,13 +5,13 @@
 v1.7.2 candidate = automatic platform detection + same-conversation post-install onboarding + natural-language task start + beginner safety layer + memory layer + execution layer.
 
 - Automatic platform detection: the installer finds Codex and Claude Code itself; it never asks a beginner to choose one.
-- Guided first conversation: after an AI-driven install, the installer reads `onboarding.md` and asks question 1 immediately in the same conversation. Outside that install path, a greeting starts the same seven questions and a stated task starts directly without repetition.
+- Guided first conversation: after an AI-driven install, the installer reads `onboarding.md` and asks question 1 immediately in the same conversation. Outside that install path, a greeting starts the same six questions and a stated task starts directly without repetition.
 
 - Beginner safety layer: understand one real task, name the relevant risk, define the safe first version, and avoid live actions without approval.
 - Memory layer: know who the user is, what projects exist, what is blocked, and what rules cannot be crossed.
 - Execution layer: classify the task, dispatch work, apply gates, verify, and hand off.
 
-For an AI-driven first install, read `onboarding.md` immediately after successful verification and complete its seven one-at-a-time questions before starting the small task selected in question 7. Outside the install path, do not interrupt a stated task with onboarding.
+For an AI-driven first install, read `onboarding.md` immediately after successful verification and complete its six one-at-a-time questions before starting the small task selected in question 6. Do not ask the user to rename vv; `vv` is the consistent name taught for later conversations. Outside the install path, do not interrupt a stated task with onboarding.
 
 ## Required Opening
 
