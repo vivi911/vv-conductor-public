@@ -18,6 +18,10 @@ cmp -s "$onboarding_file" "$installed_onboarding_file"
 grep -Fq '安裝與檢查完成後，不要停在安裝報告，也不要等我再打 `hi` 或 `vv`' "$readme_file"
 grep -Fq '直接讀取已安裝的 `onboarding.md`，在同一個對話問第 1 題' "$readme_file"
 grep -Fq '<a id="the-fastest-way-let-your-ai-install-it"></a>' "$readme_file"
+grep -Fq '第一次安裝不用打啟動詞；以後重新開對話時' "$readme_file"
+grep -Fq 'vv，我想做 XXX。' "$readme_file"
+grep -Fq 'vv，請幫我做 XXX。' "$readme_file"
+grep -Fq 'vv，還有哪些沒完成？' "$readme_file"
 if grep -Fq '這時它才會打開 `onboarding.md`' "$readme_file"; then
   printf 'FAIL: README still postpones onboarding until after the first task\n' >&2
   exit 1
