@@ -105,13 +105,11 @@ vv, can this run automatically, or does it need my sign-off?
 
 One sentence: **first installation starts automatically; later, open a conversation → type `vv + task`**. No complicated prompt to memorize.
 
-Forgot to type `vv`? That's fine: the ten global rules saved during install apply in every new conversation on their own (see "Ten Global Rules" below).
+## The Ten-Rule Startup Charter: Read at Every Startup
 
-## Ten Global Rules: Active Without Typing vv
+These ten rules are the charter for how you and your AI work together. During install, vv asks you once whether to save them.
 
-You won't remember to type `vv` every time. So during install, vv asks you once whether to save ten basic rules as your global rules.
-
-Global rules live in the file your AI reads at the start of every new conversation. Once saved, these ten are there even when you never call vv:
+Once saved, your AI reads these ten at the start of every new conversation, then gets to work:
 
 ```text
 1. If you can finish it yourself, don't hand it to me.
@@ -130,8 +128,8 @@ The full version is in `skills/vv-conductor/global-rules.md`.
 
 - **It shows you first and writes only if you reply "save".** Reply "not now" and nothing changes.
 - **Your existing rules are not modified.** The ten rules are appended at the end, after a backup.
-- **To remove them**, tell your AI `vv remove global rules`.
-- **Installed vv earlier and don't have these yet?** After updating, say `vv global rules`.
+- **To remove them**, tell your AI `vv remove charter`.
+- **Installed vv earlier and don't have these yet?** After updating, say `vv charter`.
 - Claude Code and Codex keep their rules separately. If you use both, say it once in each.
 
 ## Who This Package Is For
@@ -200,7 +198,7 @@ Please install the vv AI co-pilot coach. Follow the steps below. After installat
    these are there: SKILL.md, onboarding.md, global-rules.md, memory-templates/, references/
    Then, in this same conversation, read onboarding.md and ask me question 1. Ask only one question at a time. After question 6, save the first memory.
 
-6. After the memory is saved, read global-rules.md, show me its ten global rules in full,
+6. After the memory is saved, read global-rules.md, show me its ten-rule startup charter in full,
    and ask whether to save them.
    - Only if I reply "save" may you append that block to the end of my global rule file
      (you are Claude Code → ~/.claude/CLAUDE.md; you are Codex → ~/.codex/AGENTS.md).
