@@ -129,6 +129,8 @@ MUST_EXIST_COMMON = {
     "Vault 位置章節": "## Vault Location",
     "存檔章節": "### Save the Vault",
     "更新檢查章節": "## Update Check",
+    "全域規則章節": "## Global Rules (always on)",
+    "全域規則寫入前要同意": "never write without a",
 }
 # 各語言樹自己的固定開場白（這句話兩邊必須是各自語言的版本，不是同一句）
 MUST_EXIST_EN_ONLY = {
@@ -332,6 +334,8 @@ def self_test():
             "## Vault Location",
             "### Save the Vault",
             "## Update Check",
+            "## Global Rules (always on)",
+            "never write without a yes",
             "See `README.md` for details.",
         ]
         opening_en = "Hi, I'm vv — the AI co-pilot coach Vivi built for you."

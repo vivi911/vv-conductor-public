@@ -21,6 +21,7 @@ vv-conductor-public/
             ├── SKILL.md
             ├── VERSION
             ├── onboarding.md
+        ├── global-rules.md
             ├── agents/openai.yaml
             ├── memory-templates/
             └── references/

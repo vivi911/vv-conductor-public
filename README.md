@@ -1,4 +1,4 @@
-# AI Co-Pilot Coach (vv) vv-pack-1.7.2
+# AI Co-Pilot Coach (vv) vv-pack-1.7.3
 
 <p align="center">
   <img src="assets/demo-compare-en.svg" alt="Side by side: without vv you retype your whole background every time and the AI still asks for more; with vv you type two letters and it picks up where you left off" width="1040">
@@ -105,6 +105,35 @@ vv, can this run automatically, or does it need my sign-off?
 
 One sentence: **first installation starts automatically; later, open a conversation → type `vv + task`**. No complicated prompt to memorize.
 
+Forgot to type `vv`? That's fine: the ten global rules saved during install apply in every new conversation on their own (see "Ten Global Rules" below).
+
+## Ten Global Rules: Active Without Typing vv
+
+You won't remember to type `vv` every time. So during install, vv asks you once whether to save ten basic rules as your global rules.
+
+Global rules live in the file your AI reads at the start of every new conversation. Once saved, these ten are there even when you never call vv:
+
+```text
+1. If you can finish it yourself, don't hand it to me.
+2. Sending, posting publicly, paying, deleting data, or anything that costs money: stop and ask me first, every time.
+3. Conclusion first, then the key points. Plain words.
+4. When it's done, open it for me. If a screen can explain it, don't use text alone.
+5. When I have to decide, ask one question at a time and give me options.
+6. If it isn't done, say so. When you say "done", attach evidence I can see.
+7. When stuck, try a different way yourself first — the same method at most twice.
+8. "I feel", "for example", "probably" means I'm thinking out loud, not telling you to act.
+9. When I say "something feels off", find the likely causes yourself.
+10. Once I've said yes to something, don't ask a second time.
+```
+
+The full version is in `skills/vv-conductor/global-rules.md`.
+
+- **It shows you first and writes only if you reply "save".** Reply "not now" and nothing changes.
+- **Your existing rules are not modified.** The ten rules are appended at the end, after a backup.
+- **To remove them**, tell your AI `vv remove global rules`.
+- **Installed vv earlier and don't have these yet?** After updating, say `vv global rules`.
+- Claude Code and Codex keep their rules separately. If you use both, say it once in each.
+
 ## Who This Package Is For
 
 - Founders, managers, consultants, freelancers.
@@ -167,9 +196,18 @@ Please install the vv AI co-pilot coach. Follow the steps below. After installat
 4. Do not touch ~/vv-memory/. That is my own memory Vault, not part of this install.
    Do not create it either, even if it does not exist.
 
-5. When you're done, list the files in the target folder for me and confirm all four of
-   these are there: SKILL.md, onboarding.md, memory-templates/, references/
-   Then, in this same conversation, read onboarding.md and ask me question 1. Ask only one question at a time. After question 6, save the first memory and start the small task I selected.
+5. When you're done, list the files in the target folder for me and confirm all five of
+   these are there: SKILL.md, onboarding.md, global-rules.md, memory-templates/, references/
+   Then, in this same conversation, read onboarding.md and ask me question 1. Ask only one question at a time. After question 6, save the first memory.
+
+6. After the memory is saved, read global-rules.md, show me its ten global rules in full,
+   and ask whether to save them.
+   - Only if I reply "save" may you append that block to the end of my global rule file
+     (you are Claude Code → ~/.claude/CLAUDE.md; you are Codex → ~/.codex/AGENTS.md).
+     If the file already exists, back it up first and do not change a single word of what
+     is already in it; read it back to me when you're done.
+   - If I reply "not now", skip this and write nothing.
+   Then start the small task I selected.
 
 Do not modify any other file on my computer beyond the steps above.
 ```
@@ -350,7 +388,7 @@ Once you've answered, organize your answers into:
 - `~/vv-memory/projects/<project-name>.md` (one file per project you mentioned, copied from `02_project-template.md` — don't cram them all into one file)
 - `~/vv-memory/03_ai-work-rules.md`
 
-You don't need to get it perfect on the first pass. vv asks the next question once you've answered the current one; vv-pack-1.7.2 gets a first version in place, then lets it grow through actual work.
+You don't need to get it perfect on the first pass. vv asks the next question once you've answered the current one; vv-pack-1.7.3 gets a first version in place, then lets it grow through actual work.
 
 ## Ways You Can Talk to vv
 
@@ -441,6 +479,7 @@ vv-conductor-public/
 │       ├── SKILL.md
 │       ├── VERSION
 │       ├── onboarding.md
+│       ├── global-rules.md
 │       ├── agents/
 │       │   └── openai.yaml
 │       ├── memory-templates/
@@ -464,6 +503,7 @@ vv-conductor-public/
             ├── SKILL.md
             ├── VERSION
             ├── onboarding.md
+            ├── global-rules.md
             ├── agents/
             │   └── openai.yaml
             ├── memory-templates/
