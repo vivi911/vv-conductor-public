@@ -152,7 +152,7 @@ They take effect from your next new conversation. To change one, just tell me. T
 
 On "not now", write nothing, record it as the contract says, and continue with the user's task.
 
-**Removal:** when the user says `vv remove global rules`, back the file up, delete the two marker lines and everything between them, leave everything else untouched, read it back, and show the result.
+**Removal:** when the user says `vv remove global rules`, back the file up, delete the two marker lines and everything between them, leave everything else untouched, read it back, and show the result. Delete only when there is exactly one start marker and one end marker in the right order; otherwise stop, show the user what you found, and delete nothing.
 
 **Hard limits:** never write without a "save" given in this conversation; never change anything outside the two marker lines; write only the current tool's file; never write a project-level rule file; never reword the ten rules.
 

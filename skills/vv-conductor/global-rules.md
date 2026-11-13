@@ -42,16 +42,16 @@ These are the steps the AI follows. Until the user has clearly replied "save", w
 
 1. **Check whether it is already saved.** Read the current tool's global rule file and look for `vv-global-rules:start`.
    - Found, and the version is `v1`: tell the user it is already saved, show them the block as it stands in their file, and stop.
-   - Found, but the content differs from the block above (the user edited it): do not overwrite. Explain what differs and ask whether to keep theirs or switch to the new version.
+   - Found, but the content differs from the block above (the user edited it): do not overwrite. Explain what differs and ask whether to keep theirs or switch to the new version. If they choose the new version, back up first as in step 3, replace only what is between the two marker lines, and read it back as in step 4.
    - Not found: continue.
-2. **Show all ten rules in full and ask one question.** Use the fixed wording in the "Global Rules" section of SKILL.md, and name the exact file. Ask only "save" or "not now".
+2. **Show all ten rules in full and ask one question.** Use the fixed wording in the "Global Rules" section of SKILL.md, and name the exact file. Ask only "save" or "not now". If the reply is not a clear "save" (for example "hmm" or "maybe later"), ask once more and write nothing.
 3. **Act only after the user replies "save":**
    - The file exists: first copy it to a backup in the same folder, named with the suffix `.vv-backup-YYYY-MM-DD`. If that backup name is taken, use `-2`, `-3`, and so on — never overwrite an earlier backup.
    - The file does not exist: create it (create the parent folder first if needed). No backup is needed.
-   - Append the whole block (both marker lines included) at the end of the file, after one blank line. **Nothing that was already in the file may be changed, deleted, or moved.**
+   - Append the whole block (both marker lines included) at the end of the file, after one blank line. If the file does not end with a line break, add one first; each marker must sit on a line of its own. **Nothing that was already in the file may be changed, deleted, or moved.**
 4. **Read it back and confirm two things:** the new block is complete, and every word of the earlier content is still there. Checking only the new block is how data loss gets reported as success. If anything is wrong, restore from the backup and say plainly what failed.
 5. **Report:** where it was saved, the backup name, the ten rules pasted once more exactly as saved, and that they take effect from the next new conversation.
-6. **If the user replies "not now":** write no file and do not ask again in this conversation. If they have a Vault, add one line at the end of `~/vv-memory/03_ai-work-rules.md` — "Global rules: not now (date)" — and do not bring it up again unless they say `vv global rules`.
+6. **If the user replies "not now":** write no file and do not ask again in this conversation. If they have a Vault, add one line at the end of `~/vv-memory/03_ai-work-rules.md` — "Global rules: not now (date)" — and do not bring it up again unless they say `vv global rules`. If they have no Vault there is nowhere to record it, so offer only when they say `vv global rules` or ask for an update check, and never on your own otherwise.
 
 ### Never
 
@@ -68,7 +68,7 @@ Just tell the AI:
 Please add this to my global rules: [the sentence you keep repeating]. When it's added, paste the whole set back to me.
 ```
 
-The AI edits only what is between the two marker lines.
+The AI backs the file up first, edits only what is between the two marker lines, and reads it back to you.
 
 ## Removing Them
 
@@ -77,6 +77,8 @@ vv remove global rules
 ```
 
 The AI backs the file up first, removes the two marker lines and everything between them, leaves the rest untouched, and shows you the file afterwards.
+
+For the AI: delete only when there is exactly one start marker and exactly one end marker, with start before end. If one is missing, there is more than one pair, or the order is wrong, stop, show the user what you found, and delete nothing.
 
 ## How to Tell They Are Working
 

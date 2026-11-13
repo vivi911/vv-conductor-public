@@ -206,7 +206,7 @@ Please install the vv AI co-pilot coach. Follow the steps below. After installat
      (you are Claude Code → ~/.claude/CLAUDE.md; you are Codex → ~/.codex/AGENTS.md).
      If the file already exists, back it up first and do not change a single word of what
      is already in it; read it back to me when you're done.
-   - If I reply "not now", skip this and write nothing.
+   - If I reply "not now", skip this and leave my global rule file untouched.
    Then start the small task I selected.
 
 Do not modify any other file on my computer beyond the steps above.
