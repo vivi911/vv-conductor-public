@@ -1,6 +1,6 @@
 # Memory Template Guide
 
-Use this reference when vv-pack-1.7.2 saves the six first-install answers into the user's memory.
+Use this reference when vv-pack-1.7.3 saves the six first-install answers into the user's memory.
 
 ## Required Files
 
