@@ -1,8 +1,8 @@
-# Ten Global Rules: Active Without Typing vv
+# The Ten-Rule Startup Charter: Read at Every Startup
 
-vv is a playbook the AI opens when it comes up. If you don't type `vv`, the AI may never read it.
+These ten rules are the charter for how you and your AI work together.
 
-These ten rules are different. They are saved into the file your AI reads at the start of every new conversation (its global rule file). Once saved, they are always there — no trigger word, nothing to memorize.
+They are saved in the file your AI reads at the start of every new conversation (its global rule file). So every time a conversation opens, the AI reads these ten first, then gets to work.
 
 These are the ten rules Vivi uses every day. Take the whole block as is, then make it yours over time.
 
@@ -21,7 +21,7 @@ When writing, the AI copies everything from the `vv-global-rules:start` line to 
 
 ```text
 <!-- vv-global-rules:start v1 -->
-## My Global Rules (vv ten)
+## My Startup Charter (ten rules read at every startup)
 
 1. If you can finish it yourself, don't hand it to me. Testing, looking things up, opening screens, saving files, keeping notes — those are your job. I only handle accounts and permissions.
 2. Sending, posting publicly, paying, deleting data, or anything that costs money: stop and ask me first, every time. Ask first as well before reading things like customer lists or payroll, or installing a new tool.
@@ -51,7 +51,7 @@ These are the steps the AI follows. Until the user has clearly replied "save", w
    - Append the whole block (both marker lines included) at the end of the file, after one blank line. If the file does not end with a line break, add one first; each marker must sit on a line of its own. **Nothing that was already in the file may be changed, deleted, or moved.**
 4. **Read it back and confirm two things:** the new block is complete, and every word of the earlier content is still there. Checking only the new block is how data loss gets reported as success. If anything is wrong, restore from the backup and say plainly what failed.
 5. **Report:** where it was saved, the backup name, the ten rules pasted once more exactly as saved, and that they take effect from the next new conversation.
-6. **If the user replies "not now":** write no file and do not ask again in this conversation. If they have a Vault, add one line at the end of `~/vv-memory/03_ai-work-rules.md` — "Global rules: not now (date)" — and do not bring it up again unless they say `vv global rules`. If they have no Vault there is nowhere to record it, so offer only when they say `vv global rules` or ask for an update check, and never on your own otherwise.
+6. **If the user replies "not now":** write no file and do not ask again in this conversation. If they have a Vault, add one line at the end of `~/vv-memory/03_ai-work-rules.md` — "Startup charter: not now (date)" — and do not bring it up again unless they say `vv charter`. If they have no Vault there is nowhere to record it, so offer only when they say `vv charter` or ask for an update check, and never on your own otherwise.
 
 ### Never
 
@@ -65,7 +65,7 @@ These are the steps the AI follows. Until the user has clearly replied "save", w
 Just tell the AI:
 
 ```text
-Please add this to my global rules: [the sentence you keep repeating]. When it's added, paste the whole set back to me.
+Please add this to my startup charter: [the sentence you keep repeating]. When it's added, paste the whole set back to me.
 ```
 
 The AI backs the file up first, edits only what is between the two marker lines, and reads it back to you.
@@ -73,7 +73,7 @@ The AI backs the file up first, edits only what is between the two marker lines,
 ## Removing Them
 
 ```text
-vv remove global rules
+vv remove charter
 ```
 
 The AI backs the file up first, removes the two marker lines and everything between them, leaves the rest untouched, and shows you the file afterwards.
@@ -82,4 +82,4 @@ For the AI: delete only when there is exactly one start marker and exactly one e
 
 ## How to Tell They Are Working
 
-Open a new conversation, do not type `vv`, and ask for one small thing. Did it give the conclusion first? Did it finish the job itself rather than telling you to do it? It will not announce that it read the rules — you can tell from how it works.
+Open a new conversation and ask for one small thing. Did it give the conclusion first? Did it finish the job itself rather than telling you to do it? It will not announce that it read the rules — you can tell from how it works.

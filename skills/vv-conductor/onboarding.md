@@ -57,7 +57,7 @@ Now choose one small thing you most want to finish, and we'll start there. You c
 
 ## After question 6
 
-After the user answers, say briefly: "Okay, I have a first read on you now." Save only the answers they agreed to retain. Then ask once whether to save the ten global rules (`global-rules.md`; follow the "Global Rules" section of SKILL.md and write only if they say "save"). Then immediately begin the first task they selected. Do not end with a menu of magic phrases.
+After the user answers, say briefly: "Okay, I have a first read on you now." Save only the answers they agreed to retain. Then ask once whether to save the ten-rule startup charter (`global-rules.md`; follow the "Global Rules" section of SKILL.md and write only if they say "save"). Then immediately begin the first task they selected. Do not end with a menu of magic phrases.
 
 ## Honest memory boundary
 
